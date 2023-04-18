@@ -3,11 +3,11 @@ import { rem } from '@mantine/core';
 export const common = {
   primaryShade: { light: 6, dark: 3 },
   white: '#fff',
-  black: '#11181c',
+  black: '#1a1523',
   defaultRadius: 'xs',
   primaryColor: 'blue',
   cursorType: 'pointer',
-  // fontFamily: "Lato, sans-serif",
+  fontFamily: 'Inter, sans-serif',
   // radius: {
   //   xs: rem(5),
   //   sm: rem(8),
@@ -23,14 +23,14 @@ export const common = {
     xl: rem(34),
   },
   headings: {
-    fontFamily: 'Lato, sans-serif',
+    fontFamily: 'Inter, sans-serif',
     sizes: {
-      h1: { fontSize: '1.3333rem', lineHeight: 1, fontWeight: 800 },
+      h1: { fontSize: '1.3333rem', lineHeight: 1, fontWeight: 700 },
       h2: { fontSize: '1.1875rem', lineHeight: 1, fontWeight: 400 },
       h3: { fontSize: '1.1042rem', lineHeight: 1, fontWeight: 400 },
-      h4: { fontSize: '1.0417rem', lineHeight: 1, fontWeight: 800 },
-      h5: { fontSize: '1rem', lineHeight: 1, fontWeight: 800 },
-      h6: { fontSize: '0.9375rem', lineHeight: 1, fontWeight: 800 },
+      h4: { fontSize: '1.0417rem', lineHeight: 1, fontWeight: 700 },
+      h5: { fontSize: '1rem', lineHeight: 1, fontWeight: 700 },
+      h6: { fontSize: '0.9375rem', lineHeight: 1, fontWeight: 700 },
     },
   },
   other: {},

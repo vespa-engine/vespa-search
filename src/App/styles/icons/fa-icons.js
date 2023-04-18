@@ -3,7 +3,7 @@ export {
   faGithub,
   faLinux,
 } from '@fortawesome/free-brands-svg-icons';
-export { faAdd } from '@fortawesome/free-solid-svg-icons';
+export { faAdd, faBug } from '@fortawesome/free-solid-svg-icons';
 export {
   faClipboard,
   faClock as faClockRegular,

@@ -9,10 +9,10 @@ export const borderRadius = rem(2);
 // default opacity for disabled elements
 export const opacity = 0.34;
 
-// Default font weights for text with Lato font
+// Default font weights for all text elements
 export const fontWeightLight = 300;
 export const fontWeightRegular = 400;
-export const fontWeightBold = 700;
+export const fontWeightBold = 600;
 
 // default breakpoint for responsive design - same as theme.breakpoints
 export const breakpoints = {
