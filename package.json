@@ -1,0 +1,29 @@
+{
+  "name": "langchain",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18",
+    "react-dom": "^18"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "@vitejs/plugin-react": "^3",
+    "eslint": "^8",
+    "eslint-plugin-import": "^2",
+    "eslint-plugin-prettier": "^4",
+    "eslint-plugin-react": "^7",
+    "eslint-plugin-react-hooks": "^4",
+    "eslint-plugin-unused-imports": "^2",
+    "lodash": "^4",
+    "prettier": "^2",
+    "vite": "^4"
+  }
+}
