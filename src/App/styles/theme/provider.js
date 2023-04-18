@@ -5,7 +5,7 @@ import { useHotkeys } from '@mantine/hooks';
 import { common } from 'App/styles/theme/common.js';
 import { icons } from 'App/styles/icons';
 import { Colors, useTheme } from 'App/styles/theme';
-import * as components from 'App/styles/default/index.js';
+import * as components from 'App/styles/theme/default';
 import { styles } from 'App/styles/theme/global';
 import {
   mantineColors as darkMantineColors,

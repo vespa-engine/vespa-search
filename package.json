@@ -18,12 +18,14 @@
     "@fortawesome/free-brands-svg-icons": "^6",
     "@fortawesome/free-regular-svg-icons": "^6",
     "@fortawesome/free-solid-svg-icons": "^6",
+    "@fortawesome/react-fontawesome": "^0",
     "@mantine/core": "^6",
     "@mantine/hooks": "^6",
     "@mantine/notifications": "^6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^3",
+    "dayjs": "^1",
     "eslint": "^8",
     "eslint-plugin-import": "^2",
     "eslint-plugin-prettier": "^4",
@@ -32,6 +34,8 @@
     "eslint-plugin-unused-imports": "^2",
     "lodash": "^4",
     "prettier": "^2",
-    "vite": "^4"
+    "react-router-dom": "^6",
+    "vite": "^4",
+    "vitest": "^0"
   }
 }
