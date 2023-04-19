@@ -6,7 +6,6 @@ import { HeaderLinks } from 'App/libs/layout/header-links';
 export function Header() {
   return (
     <MantineHeader
-      height={55}
       sx={(theme) => ({
         display: 'flex',
         alignItems: 'center',
@@ -14,8 +13,9 @@ export function Header() {
         paddingLeft: theme.spacing.md,
         paddingRight: theme.spacing.md,
         background: theme.cr.getAppBackground(),
-        borderBottom: 'none',
       })}
+      height={55}
+      withBorder={false}
     >
       <HeaderLogo />
       <HeaderLinks />
