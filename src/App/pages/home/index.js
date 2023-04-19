@@ -1,11 +1,12 @@
 import React from 'react';
 import { Container } from '@mantine/core';
-import { Link } from 'App/libs/router';
+import { SearchInput } from 'App/pages/search/search-input.js';
+import { ENDPOINT } from 'App/pages/search/index.js';
 
-export default function Home() {
+export function Home() {
   return (
     <Container>
-      <Link to="draft01">draft-01</Link>
+      <SearchInput endpoint={ENDPOINT} />
     </Container>
   );
 }
