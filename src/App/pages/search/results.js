@@ -5,7 +5,7 @@ import { UrlBuilder } from 'App/utils/index.js';
 import { Content, Error, Loading } from 'App/components/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
 
-function Result({ refId, title, content, path }) {
+function Result({ refId, title, content }) {
   return (
     <Content>
       <Text id={`result-${refId}`} weight={fontWeightBold}>

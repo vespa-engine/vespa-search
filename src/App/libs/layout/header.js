@@ -15,7 +15,7 @@ export function Header() {
         background: theme.cr.getAppBackground(),
       })}
       height={55}
-      withBorder={false}
+      // withBorder={false}
     >
       <HeaderLogo />
       <HeaderLinks />

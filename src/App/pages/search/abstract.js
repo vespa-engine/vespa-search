@@ -7,7 +7,7 @@ import { fontWeightBold } from 'App/styles/common.js';
 
 const processors = [
   {
-    regex: /\[([0-9]+)\]/g,
+    regex: /\[([0-9]+)]/g,
     fn: (key, [, refId]) => (
       <React.Fragment key={key}>
         [<Link onClick={() => scrollTo(`#result-${refId}`, 80)}>{refId}</Link>]
