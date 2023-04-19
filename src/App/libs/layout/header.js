@@ -1,9 +1,12 @@
 import React from 'react';
 import { Header as MantineHeader } from '@mantine/core';
+import { useLocation } from 'react-router-dom';
 import { HeaderLogo } from 'App/libs/layout/header-logo';
 import { HeaderLinks } from 'App/libs/layout/header-links';
 
 export function Header() {
+  const location = useLocation();
+  const withBorder = location.pathname !== `/`;
   return (
     <MantineHeader
       sx={(theme) => ({
@@ -14,8 +17,8 @@ export function Header() {
         paddingRight: theme.spacing.md,
         background: theme.cr.getAppBackground(),
       })}
+      withBorder={withBorder}
       height={55}
-      // withBorder={false}
     >
       <HeaderLogo />
       <HeaderLinks />

@@ -2,6 +2,7 @@ export {
   faDocker,
   faGithub,
   faLinux,
+  faSlack,
 } from '@fortawesome/free-brands-svg-icons';
 export {
   faAdd,
@@ -10,6 +11,8 @@ export {
   faMoon,
   faArrowRight,
   faMagnifyingGlass,
+  faBook,
+  faBlog,
 } from '@fortawesome/free-solid-svg-icons';
 export {
   faClipboard,

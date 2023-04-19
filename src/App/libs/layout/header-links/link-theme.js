@@ -14,7 +14,7 @@ export function LinkTheme() {
         color={isDarkMode ? 'yellow' : 'gray'}
         onClick={() => setColorScheme(isDarkMode ? 'light' : 'dark')}
       >
-        <Icon size="xl" name={isDarkMode ? 'sun' : 'moon'} />
+        <Icon size="lg" name={isDarkMode ? 'sun' : 'moon'} />
       </ActionIcon>
     </Tooltip>
   );
