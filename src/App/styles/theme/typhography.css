@@ -17,8 +17,8 @@ html {font-size: 16px;}
 
 body {
   font-size: 1em;
-  max-width: calc(25 * var(--vspace));
-  margin: 0 auto;
+  /*max-width: calc(25 * var(--vspace));*/
+  /*margin: 0 auto;*/
 }
 
 p {

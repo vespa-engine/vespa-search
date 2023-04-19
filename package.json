@@ -33,6 +33,7 @@
     "eslint-plugin-react": "^7",
     "eslint-plugin-react-hooks": "^4",
     "eslint-plugin-unused-imports": "^2",
+    "file-saver": "^2",
     "lodash": "^4",
     "prettier": "^2",
     "react-router-dom": "^6",

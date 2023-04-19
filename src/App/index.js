@@ -5,7 +5,7 @@ import { ThemeProvider } from 'App/styles/theme';
 import { ErrorBoundary, Router, CrashPage } from 'App/libs/router';
 import Home from 'App/pages/home';
 import Search from 'App/pages/search';
-import { Layout } from 'App/libs/layout';
+import { Draft01 } from 'App/pages/draft01/index.js';
 
 export default function App() {
   return (
@@ -13,12 +13,11 @@ export default function App() {
       <ThemeProvider>
         <ErrorBoundary crashPage={CrashPage}>
           <Notifications />
-          <Layout>
-            <Router>
-              <Home path="/" />
-              <Search path="/search" />
-            </Router>
-          </Layout>
+          <Router>
+            <Home path="/" />
+            <Search path="/search" />
+            <Draft01 path="/draft01" />
+          </Router>
         </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>
