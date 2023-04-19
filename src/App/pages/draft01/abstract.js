@@ -1,20 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Text } from '@mantine/core';
-import { Content } from 'App/components/index.js';
+import { Link } from 'App/libs/router';
+import { processString, UrlBuilder } from 'App/utils';
+import { Content } from 'App/components';
 import { fontWeightBold } from 'App/styles/common.js';
 
-export function Abstract() {
+const processors = [
+  {
+    regex: /\[([0-9]+)\]/g,
+    fn: (key, [, refId]) => (
+      <React.Fragment key={key}>
+        [<Link onClick={() => scrollTo(`#result-${refId}`, 80)}>{refId}</Link>]
+      </React.Fragment>
+    ),
+  },
+];
+
+function scrollTo(selector, offset) {
+  const element = document.querySelector(selector);
+  const position = element.getBoundingClientRect().top - offset;
+  window.scrollBy({ top: position, behavior: 'smooth' });
+}
+
+export function Abstract({ endpoint, query }) {
+  const [summary, setSummary] = useState('');
+  const url = new UrlBuilder(endpoint)
+    .add('stream')
+    .queryParam('query', query)
+    .toString();
+  useEffect(() => {
+    setSummary('');
+    const source = new EventSource(url);
+    source.addEventListener('message', (e) =>
+      setSummary((prev) => prev + e.data)
+    );
+    source.addEventListener('error', source.close); // TODO: Display error somewhere?
+    source.addEventListener('close', source.close);
+    return () => source.close();
+  }, [url]);
+
   return (
     <Content>
       <Text weight={fontWeightBold}>Abstract</Text>
-      <Text>
-        To feed data to Vespa, you can use the vespa-feed-client, which uses
-        HTTP/2 for high throughput and is better for streaming feed files.
-        Alternatively, you can use the Vespa document API directly or the Vespa
-        CLI, which also uses the HTTP document API. The data fed to Vespa must
-        match the schema for the document type. <a>[1]</a> <a>[3]</a> <a>[4]</a>{' '}
-        <a>[5]</a> <a>[9]</a>
-      </Text>
+      <Text>{processString(summary, processors)}</Text>
     </Content>
   );
 }
