@@ -7,7 +7,13 @@ import { fontWeightBold } from 'App/styles/common.js';
 
 function Result({ refId, title, content }) {
   return (
-    <Content>
+    <Content
+      sx={(theme) => ({
+        '&:hover': { backgroundColor: theme.cr.getUiElementBackground() },
+      })}
+      borderStyle="dashed"
+      withBorder
+    >
       <Text id={`result-${refId}`} weight={fontWeightBold}>
         [{refId}] {title}
       </Text>
