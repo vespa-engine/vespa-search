@@ -23,7 +23,7 @@ export function SearchInput({ query, size = 'md' }) {
             <Icon name="arrow-right" />
           </ActionIcon>
         }
-        placeholder="Search questions"
+        placeholder="Ask a question about Vespa"
         onChange={(event) => setValue(event.currentTarget.value)}
         value={value}
         size={size}

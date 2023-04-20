@@ -1,5 +1,6 @@
 import React from 'react';
 import { Stack, Text } from '@mantine/core';
+import { parseMarkdown } from 'App/pages/search/md-parser';
 import { useGet } from 'App/libs/fetcher/index.js';
 import { UrlBuilder } from 'App/utils/index.js';
 import { Content, Error, Loading } from 'App/components/index.js';
@@ -17,7 +18,7 @@ function Result({ refId, title, content }) {
       <Text id={`result-${refId}`} weight={fontWeightBold}>
         [{refId}] {title}
       </Text>
-      <Text>{content}</Text>
+      <div>{parseMarkdown(content)}</div>
     </Content>
   );
 }
@@ -32,15 +33,13 @@ export function Results({ endpoint, query }) {
 
   const hits = response.root.children ?? [];
 
-  return (
+  return hits.length === 0 ? (
+    <Text>No matches</Text>
+  ) : (
     <Stack>
-      {hits.length === 0 ? (
-        <Text>No matches</Text>
-      ) : (
-        hits.map((child, i) => (
-          <Result key={i} refId={i + 1} {...child.fields} />
-        ))
-      )}
+      {hits.map((child, i) => (
+        <Result key={i} refId={i + 1} {...child.fields} />
+      ))}
     </Stack>
   );
 }
