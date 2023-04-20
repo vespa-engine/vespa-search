@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { Stack } from '@mantine/core';
 import { Results } from 'App/pages/search/results';
 import { SearchInput } from 'App/pages/search/search-input.js';
 import { Abstract } from 'App/pages/search/abstract.js';
@@ -14,8 +15,10 @@ export function Search() {
 
   return (
     <Container>
-      <SearchInput endpoint={ENDPOINT} query={query} />
-      {query && <Results endpoint={ENDPOINT} query={query} />}
+      <Stack>
+        <SearchInput endpoint={ENDPOINT} query={query} />
+        {query && <Results endpoint={ENDPOINT} query={query} />}
+      </Stack>
       <Aside>{query && <Abstract endpoint={ENDPOINT} query={query} />}</Aside>
     </Container>
   );

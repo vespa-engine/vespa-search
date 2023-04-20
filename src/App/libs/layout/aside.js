@@ -7,9 +7,7 @@ export function Aside({ children, ...props }) {
       sx={(theme) => ({
         paddingLeft: theme.spacing.md,
         paddingRight: theme.spacing.md,
-        backgroundColor: theme.cr.isDarkScheme
-          ? theme.cr.getSubtleBackground()
-          : 'yellow',
+        backgroundColor: theme.cr.getAppBackground(),
       })}
       width={{ base: '50%' }}
       {...props}
