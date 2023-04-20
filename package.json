@@ -2,9 +2,8 @@
   "name": "langchain",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite dev --port 3000",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -23,6 +22,7 @@
     "@mantine/core": "^6",
     "@mantine/hooks": "^6",
     "@mantine/notifications": "^6",
+    "@mantine/prism": "^6",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^3",
@@ -35,7 +35,10 @@
     "eslint-plugin-unused-imports": "^2",
     "file-saver": "^2",
     "lodash": "^4",
+    "marked": "^4",
     "prettier": "^2",
+    "prism-react-renderer": "^1",
+    "prismjs": "^1",
     "react-router-dom": "^6",
     "vite": "^4",
     "vitest": "^0"

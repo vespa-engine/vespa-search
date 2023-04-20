@@ -1,26 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Text } from '@mantine/core';
-import { Link } from 'App/libs/router';
-import { processString, UrlBuilder } from 'App/utils';
+import { parseMarkdown } from 'App/pages/search/md-parser';
+import { UrlBuilder } from 'App/utils';
 import { Content } from 'App/components';
 import { fontWeightBold } from 'App/styles/common.js';
-
-const processors = [
-  {
-    regex: /\[([0-9]+)]/g,
-    fn: (key, [, refId]) => (
-      <React.Fragment key={key}>
-        [<Link onClick={() => scrollTo(`#result-${refId}`, 80)}>{refId}</Link>]
-      </React.Fragment>
-    ),
-  },
-];
-
-function scrollTo(selector, offset) {
-  const element = document.querySelector(selector);
-  const position = element.getBoundingClientRect().top - offset;
-  window.scrollBy({ top: position, behavior: 'smooth' });
-}
 
 export function Abstract({ endpoint, query }) {
   const [summary, setSummary] = useState('');
@@ -42,7 +25,7 @@ export function Abstract({ endpoint, query }) {
   return (
     <Content>
       <Text weight={fontWeightBold}>Abstract</Text>
-      <Text>{processString(summary, processors)}</Text>
+      <div>{parseMarkdown(summary)}</div>
     </Content>
   );
 }
