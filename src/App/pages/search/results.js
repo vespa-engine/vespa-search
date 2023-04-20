@@ -28,7 +28,7 @@ export function Results({ endpoint, query }) {
     new UrlBuilder(endpoint).add('search').queryParam('query', query)
   );
 
-  if (loading) return <Loading />;
+  if (loading) return <Loading message="Loading..." />;
   if (error) return <Error message={error.message} />;
 
   const hits = response.root.children ?? [];

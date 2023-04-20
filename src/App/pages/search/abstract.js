@@ -15,7 +15,7 @@ export function Abstract({ endpoint, query }) {
     setSummary('');
     const source = new EventSource(url);
     source.addEventListener('message', (e) =>
-      setSummary((prev) => prev + e.data)
+      setSummary((prev) => (prev + e.data).replace('<br/>', '\n'))
     );
     source.addEventListener('error', source.close); // TODO: Display error somewhere?
     source.addEventListener('close', source.close);

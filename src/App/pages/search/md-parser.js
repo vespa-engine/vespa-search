@@ -34,10 +34,8 @@ function scrollTo(selector, offset) {
   window.scrollBy({ top: position, behavior: 'smooth' });
 }
 
-function convertTokens({ tokens, text }) {
-  if (!tokens) return text;
-  return tokens.map((token, i) => convert(token, `${token.type}-${i}`));
-}
+const convertTokens = ({ tokens }) =>
+  tokens.map((token, i) => convert(token, `${token.type}-${i}`));
 
 // https://github.com/markedjs/marked/blob/7c1e114f9f7949ba4033366582d2a4ddf09e85af/src/Tokenizer.js
 function convert(token, key) {
@@ -121,7 +119,7 @@ function convert(token, key) {
     case 'paragraph':
       return <p key={key}>{convertTokens(token)}</p>;
     case 'text':
-      return convertTokens(token);
+      return token.tokens ? convertTokens(token) : token.raw;
     case 'ref':
       return [
         '[',
@@ -140,8 +138,7 @@ function convert(token, key) {
 export function parseMarkdown(src) {
   try {
     const opt = { extensions, gfm: true };
-    const lexer = new Lexer(opt);
-    const tokens = lexer.lex(src, opt);
+    const tokens = Lexer.lex(src, opt);
     return convertTokens({ tokens });
   } catch (e) {
     console.error(e);
