@@ -6,7 +6,7 @@ import { UrlBuilder } from 'App/utils/index.js';
 import { Content, Error, Loading } from 'App/components/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
 
-function Result({ refId, title, content }) {
+function Result({ refId, title, content, base_uri, path }) {
   return (
     <Content
       sx={(theme) => ({
@@ -18,7 +18,7 @@ function Result({ refId, title, content }) {
       <Text id={`result-${refId}`} weight={fontWeightBold}>
         [{refId}] {title}
       </Text>
-      <div>{parseMarkdown(content)}</div>
+      <div>{parseMarkdown(content, base_uri + path)}</div>
     </Content>
   );
 }

@@ -34,11 +34,11 @@ function scrollTo(selector, offset) {
   window.scrollBy({ top: position, behavior: 'smooth' });
 }
 
-const convertTokens = ({ tokens }) =>
-  tokens.map((token, i) => convert(token, `${token.type}-${i}`));
+const convertTokens = ({ tokens }, urlResolver) =>
+  tokens.map((token, i) => convert(token, `${token.type}-${i}`, urlResolver));
 
 // https://github.com/markedjs/marked/blob/7c1e114f9f7949ba4033366582d2a4ddf09e85af/src/Tokenizer.js
-function convert(token, key) {
+function convert(token, key, urlResolver) {
   switch (token.type) {
     case 'code':
       return (
@@ -47,11 +47,13 @@ function convert(token, key) {
         </Prism>
       );
     case 'blockquote':
-      return <Blockquote key={key}>{convertTokens(token)}</Blockquote>;
+      return (
+        <Blockquote key={key}>{convertTokens(token, urlResolver)}</Blockquote>
+      );
     case 'heading':
       return (
         <Title key={key} order={token.depth}>
-          {convertTokens(token)}
+          {convertTokens(token, urlResolver)}
         </Title>
       );
     case 'hr':
@@ -60,7 +62,7 @@ function convert(token, key) {
       return (
         <List key={key} type={token.ordered ? 'ordered' : 'unordered'}>
           {token.items.map((item, i) => (
-            <List.Item key={i}>{convertTokens(item)}</List.Item>
+            <List.Item key={i}>{convertTokens(item, urlResolver)}</List.Item>
           ))}
         </List>
       );
@@ -70,7 +72,7 @@ function convert(token, key) {
           <thead>
             <tr>
               {token.header.map((cell, i) => (
-                <td key={i}>{convertTokens(cell)}</td>
+                <td key={i}>{convertTokens(cell, urlResolver)}</td>
               ))}
             </tr>
           </thead>
@@ -78,7 +80,7 @@ function convert(token, key) {
             {token.rows.map((row, i) => (
               <tr key={i}>
                 {row.map((cell, j) => (
-                  <td key={j}>{convertTokens(cell)}</td>
+                  <td key={j}>{convertTokens(cell, urlResolver)}</td>
                 ))}
               </tr>
             ))}
@@ -89,13 +91,13 @@ function convert(token, key) {
     case 'strong':
       return (
         <Text key={key} fw={fontWeightBold} span>
-          {convertTokens(token)}
+          {convertTokens(token, urlResolver)}
         </Text>
       );
     case 'em':
       return (
         <Text key={key} italic span>
-          {convertTokens(token)}
+          {convertTokens(token, urlResolver)}
         </Text>
       );
     case 'codespan':
@@ -105,21 +107,23 @@ function convert(token, key) {
     case 'del':
       return (
         <Text key={key} strikethrough span>
-          {convertTokens(token)}
+          {convertTokens(token, urlResolver)}
         </Text>
       );
     case 'link':
       return (
-        <Link key={key} to={token.href}>
-          {convertTokens(token)}
+        <Link key={key} to={urlResolver(token.href)}>
+          {convertTokens(token, urlResolver)}
         </Link>
       );
     case 'image':
-      return <Image key={key} src={token.href} alt={token.title} />;
+      return (
+        <Image key={key} src={urlResolver(token.href)} alt={token.title} />
+      );
     case 'paragraph':
-      return <p key={key}>{convertTokens(token)}</p>;
+      return <div key={key}>{convertTokens(token, urlResolver)}</div>;
     case 'text':
-      return token.tokens ? convertTokens(token) : token.raw;
+      return token.tokens ? convertTokens(token, urlResolver) : token.raw;
     case 'ref':
       return [
         '[',
@@ -135,11 +139,14 @@ function convert(token, key) {
   }
 }
 
-export function parseMarkdown(src) {
+export function parseMarkdown(src, baseUrl) {
   try {
+    const urlResolver = baseUrl
+      ? (href) => new URL(href, baseUrl).href
+      : (href) => href;
     const opt = { extensions, gfm: true };
     const tokens = Lexer.lex(src, opt);
-    return convertTokens({ tokens });
+    return convertTokens({ tokens }, urlResolver);
   } catch (e) {
     console.error(e);
     return src;
