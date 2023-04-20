@@ -13,6 +13,11 @@ export {
   faMagnifyingGlass,
   faBook,
   faBlog,
+  faThumbsUp,
+  faThumbsDown,
+  faExpand,
+  faExternalLink,
+  faExternalLinkSquare,
 } from '@fortawesome/free-solid-svg-icons';
 export {
   faClipboard,

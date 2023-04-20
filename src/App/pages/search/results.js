@@ -5,20 +5,24 @@ import { useGet } from 'App/libs/fetcher/index.js';
 import { UrlBuilder } from 'App/utils/index.js';
 import { Content, Error, Loading } from 'App/components/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
+import { ResultActions } from 'App/pages/search/result-actions';
 
 function Result({ refId, title, content, base_uri, path }) {
   return (
     <Content
-      sx={(theme) => ({
-        '&:hover': { backgroundColor: theme.cr.getUiElementBackground() },
+      sxBox={(theme) => ({
+        '&:hover': { borderColor: theme.cr.getHoveredUiElementBorder() },
       })}
       borderStyle="dashed"
       withBorder
     >
-      <Text id={`result-${refId}`} weight={fontWeightBold}>
-        [{refId}] {title}
-      </Text>
-      <div>{parseMarkdown(content, base_uri + path)}</div>
+      <Stack>
+        <Text id={`result-${refId}`} weight={fontWeightBold}>
+          [{refId}] {title}
+        </Text>
+        <div>{parseMarkdown(content, base_uri + path)}</div>
+      </Stack>
+      <ResultActions />
     </Content>
   );
 }

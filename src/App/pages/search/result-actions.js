@@ -3,7 +3,7 @@ import { useToggle } from '@mantine/hooks';
 import { Button, Group } from '@mantine/core';
 import { Icon } from 'App/components/index.js';
 
-function Source({ icon, name, type }) {
+function Action({ icon, name, type }) {
   const [value, toggle] = useToggle();
 
   return (
@@ -20,13 +20,13 @@ function Source({ icon, name, type }) {
   );
 }
 
-export function SearchSources() {
+export function ResultActions() {
   return (
-    <Group position="center">
-      <Source name="All" icon="magnifying-glass" />
-      <Source name="Documentation" icon="book" />
-      <Source name="Blogs" icon="blog" />
-      <Source name="Slack" icon="slack" type="brands" />
+    <Group spacing="xs">
+      <Action name="Looks good" icon="thumbs-up" />
+      <Action name="Looks not so good" icon="thumbs-down" />
+      <Action name="Expand" icon="expand" />
+      <Action name="Open in new tab" icon="external-link" />
     </Group>
   );
 }
