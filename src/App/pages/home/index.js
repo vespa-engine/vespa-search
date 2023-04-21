@@ -9,7 +9,7 @@ export function Home() {
     <Container size="sm">
       <Space h={55} />
       <Stack>
-        <SearchInput endpoint={ENDPOINT} size="lg" />
+        <SearchInput endpoint={ENDPOINT} size="lg" autofocus />
         <SearchSources />
       </Stack>
     </Container>

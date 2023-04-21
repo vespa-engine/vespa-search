@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useState } from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { ActionIcon, Autocomplete, Group, Text } from '@mantine/core';
 import { useNavigate } from 'react-router-dom';
 import { UrlBuilder } from 'App/utils';
@@ -17,11 +17,17 @@ const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
   );
 });
 
-export function SearchInput({ endpoint, query = '', size = 'md' }) {
+export function SearchInput({
+  endpoint,
+  query = '',
+  size = 'md',
+  autofocus = false,
+}) {
   const navigate = useNavigate();
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [value, setValue] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
+  const inputRef = useRef(null);
 
   // Update search input if we go back/forward in history
   useEffect(() => setValue(query), [query]);
@@ -51,11 +57,19 @@ export function SearchInput({ endpoint, query = '', size = 'md' }) {
   }, [endpoint, value]);
 
   const onSubmit = ({ value, url }) => {
+    inputRef.current?.blur();
     url ? (location.href = url) : navigate(url ?? `/search?q=${value}`);
   };
 
   return (
-    <form onSubmit={() => onSubmit({ value })}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        inputRef.current?.blur();
+        onSubmit({ value });
+        return false;
+      }}
+    >
       <Autocomplete
         styles={(theme) => ({
           input: {
@@ -77,6 +91,11 @@ export function SearchInput({ endpoint, query = '', size = 'md' }) {
             marginTop: -10,
           },
         })}
+        ref={(ref) => {
+          if (!ref) return;
+          inputRef.current = ref;
+          if (autofocus) ref.focus();
+        }}
         onDropdownOpen={() => setDropdownOpened(true)}
         onDropdownClose={() => setDropdownOpened(false)}
         icon={<Icon name="magnifying-glass" />}
