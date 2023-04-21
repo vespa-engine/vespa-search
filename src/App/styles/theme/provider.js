@@ -9,18 +9,18 @@ import * as components from 'App/styles/theme/default';
 import { styles } from 'App/styles/theme/global';
 import {
   mantineColors as darkMantineColors,
-  radixColors as darkRadixColors,
+  crColors as darkCrColors,
 } from 'App/styles/theme/colors/dark';
 import {
   mantineColors as lightMantineColors,
-  radixColors as lightRadixColors,
+  crColors as lightCrColors,
 } from 'App/styles/theme/colors/light';
 
 const stylesResolver = (theme) => {
   if (!theme.cr)
     theme.cr = new Colors(
       theme,
-      theme.colorScheme === 'dark' ? darkRadixColors : lightRadixColors
+      theme.colorScheme === 'dark' ? darkCrColors : lightCrColors
     );
   return styles(theme);
 };

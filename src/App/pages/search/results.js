@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Text } from '@mantine/core';
+import { Box, Stack, Text } from '@mantine/core';
 import { parseMarkdown } from 'App/pages/search/md-parser';
 import { useGet } from 'App/libs/fetcher/index.js';
 import { UrlBuilder } from 'App/utils/index.js';
@@ -11,16 +11,22 @@ function Result({ refId, title, content, base_uri, path }) {
   return (
     <Content
       sxBox={(theme) => ({
-        '&:hover': { borderColor: theme.cr.getHoveredUiElementBorder() },
+        '&:hover': { borderColor: theme.cr.getUiElementBorderAndFocus() },
       })}
       borderStyle="dashed"
       withBorder
     >
       <Stack>
-        <Text id={`result-${refId}`} weight={fontWeightBold}>
+        <Text
+          sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
+          id={`result-${refId}`}
+          weight={fontWeightBold}
+        >
           [{refId}] {title}
         </Text>
-        <div>{parseMarkdown(content, base_uri + path)}</div>
+        <Box sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
+          {parseMarkdown(content, base_uri + path)}
+        </Box>
       </Stack>
       <ResultActions />
     </Content>

@@ -1,7 +1,7 @@
 import { rem } from '@mantine/core';
 
 export const common = {
-  primaryShade: { light: 6, dark: 3 },
+  primaryShade: { light: 6, dark: 6 }, // TODO: review this in order to match the design on dark mode
   white: '#fff',
   black: '#1a1523',
   defaultRadius: 'xs',
