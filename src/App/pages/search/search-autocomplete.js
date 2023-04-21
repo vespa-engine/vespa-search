@@ -4,14 +4,18 @@ import { useNavigate } from 'react-router-dom';
 import { Icon, Keyboard } from 'App/components/index.js';
 import { Link } from 'App/libs/router';
 
-const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => (
-  <div ref={ref} {...props}>
-    <Group position="apart" noWrap>
-      <Text>{value}</Text>
-      {type && <Link to={url}>{type}</Link>}
-    </Group>
-  </div>
-));
+const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
+  console.log('AutoCompleteItem', { value, type, url, props, ref });
+
+  return (
+    <div ref={ref} {...props}>
+      <Group position="apart" noWrap>
+        <Text>{value}</Text>
+        {type && <Link to={url}>{type}</Link>}
+      </Group>
+    </div>
+  );
+});
 
 export function SearchAutocomplete({ query, size = 'md' }) {
   const navigate = useNavigate();
@@ -30,7 +34,7 @@ export function SearchAutocomplete({ query, size = 'md' }) {
     <Keyboard onEnter={doSearch}>
       <Autocomplete
         icon={<Icon name="magnifying-glass" />}
-        imteComponent={AutoCompleteItem}
+        itemComponent={AutoCompleteItem}
         rightSection={
           <ActionIcon
             onClick={doSearch}
