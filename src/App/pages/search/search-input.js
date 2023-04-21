@@ -17,11 +17,14 @@ const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
   );
 });
 
-export function SearchInput({ endpoint, query, size = 'md' }) {
+export function SearchInput({ endpoint, query = '', size = 'md' }) {
   const navigate = useNavigate();
   const [dropdownOpened, setDropdownOpened] = useState(false);
-  const [value, setValue] = useState(query ?? '');
+  const [value, setValue] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
+
+  // Update search input if we go back/forward in history
+  useEffect(() => setValue(query), [query]);
 
   useEffect(() => {
     const alive = { current: true };
@@ -52,50 +55,52 @@ export function SearchInput({ endpoint, query, size = 'md' }) {
   };
 
   return (
-    <Autocomplete
-      styles={(theme) => ({
-        input: {
-          ...(dropdownOpened &&
-            suggestions.length > 0 && {
-              borderBottomLeftRadius: 0,
-              borderBottomRightRadius: 0,
-              '&:focus, &:focus-within': {
-                borderBottomColor: 'transparent',
-              },
-            }),
-        },
-        dropdown: {
-          ...theme.focusRingStyles.inputStyles(theme),
-          borderBottomLeftRadius: theme.radius.xl,
-          borderBottomRightRadius: theme.radius.xl,
-          borderTop: 'none',
-          overflow: 'hidden',
-          marginTop: -10,
-        },
-      })}
-      onDropdownOpen={() => setDropdownOpened(true)}
-      onDropdownClose={() => setDropdownOpened(false)}
-      icon={<Icon name="magnifying-glass" />}
-      itemComponent={AutoCompleteItem}
-      rightSection={
-        <ActionIcon
-          onClick={() => onSubmit({ value })}
-          variant="filled"
-          color="blue"
-          radius="xl"
-          size="lg"
-        >
-          <Icon name="arrow-right" />
-        </ActionIcon>
-      }
-      placeholder="Ask a question about Vespa"
-      data={suggestions}
-      onChange={setValue}
-      onItemSubmit={onSubmit}
-      value={value}
-      size={size}
-      filter={() => true}
-      radius="xl"
-    />
+    <form onSubmit={() => onSubmit({ value })}>
+      <Autocomplete
+        styles={(theme) => ({
+          input: {
+            ...(dropdownOpened &&
+              suggestions.length > 0 && {
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                '&:focus, &:focus-within': {
+                  borderBottomColor: 'transparent',
+                },
+              }),
+          },
+          dropdown: {
+            ...theme.focusRingStyles.inputStyles(theme),
+            borderBottomLeftRadius: theme.radius.xl,
+            borderBottomRightRadius: theme.radius.xl,
+            borderTop: 'none',
+            overflow: 'hidden',
+            marginTop: -10,
+          },
+        })}
+        onDropdownOpen={() => setDropdownOpened(true)}
+        onDropdownClose={() => setDropdownOpened(false)}
+        icon={<Icon name="magnifying-glass" />}
+        itemComponent={AutoCompleteItem}
+        rightSection={
+          <ActionIcon
+            type="submit"
+            variant="filled"
+            color="blue"
+            radius="xl"
+            size="lg"
+          >
+            <Icon name="arrow-right" />
+          </ActionIcon>
+        }
+        placeholder="Ask a question about Vespa"
+        data={suggestions}
+        onChange={setValue}
+        onItemSubmit={onSubmit}
+        value={value}
+        size={size}
+        filter={() => true}
+        radius="xl"
+      />
+    </form>
   );
 }
