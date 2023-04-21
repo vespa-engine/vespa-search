@@ -69,6 +69,7 @@ export function SearchInput({ endpoint, query, size = 'md' }) {
           borderBottomLeftRadius: theme.radius.xl,
           borderBottomRightRadius: theme.radius.xl,
           borderTop: 'none',
+          overflow: 'hidden',
           marginTop: -10,
         },
       })}
