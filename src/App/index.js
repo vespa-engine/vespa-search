@@ -6,6 +6,7 @@ import { ErrorBoundary, Router, CrashPage } from 'App/libs/router';
 import { Layout } from 'App/libs/layout';
 import { Home } from 'App/pages/home';
 import { Search } from 'App/pages/search';
+import { Md } from 'App/pages/md';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
             <Router>
               <Home path="/" />
               <Search path="/search" />
+              <Md path="/md" />
             </Router>
           </Layout>
         </ErrorBoundary>
