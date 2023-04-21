@@ -44,7 +44,7 @@ export function SearchAutocomplete({ query, size = 'md' }) {
         }
         placeholder="Ask a question about Vespa"
         data={data}
-        onChange={(event) => setValue(event.currentTarget.value)}
+        onChange={setValue}
         value={value}
         size={size}
         radius="xl"
