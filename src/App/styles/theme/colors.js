@@ -1,5 +1,3 @@
-import { get } from 'lodash';
-
 export const SHADE = Object.freeze({
   APP_BACKGROUND: 0,
   SUBTLE_BACKGROUND: 1,
@@ -23,13 +21,21 @@ export class Colors {
     this.primaryColors = this.colors.primary;
   }
 
+  _shade(shade) {
+    return this.isDarkScheme ? 9 - shade : shade;
+  }
+
   themeColor(color, shade) {
     if (typeof color === 'number' && shade == null)
-      return this.primaryColors[color];
+      return this.primaryColors[this._shade(color)];
 
     if (typeof color === 'string') {
-      if (color.includes('.')) return get(this.colors, color);
-      if (typeof shade === 'number') return this.colors[color][shade];
+      if (color.includes('.')) {
+        [color, shade] = color.split('.');
+        shade = parseInt(shade);
+      }
+      if (typeof shade === 'number')
+        return this.colors[color][this._shade(shade)];
     }
 
     throw new Error(
@@ -100,12 +106,12 @@ export class Colors {
   getLowContrastText(color) {
     return color
       ? this.themeColor(color, SHADE.LOW_CONTRAST_TEXT)
-      : this.colors.gray[SHADE.LOW_CONTRAST_TEXT];
+      : this.colors.gray[this._shade(SHADE.LOW_CONTRAST_TEXT)];
   }
 
   getHighContrastText(color) {
     return color
       ? this.themeColor(color, SHADE.HIGH_CONTRAST_TEXT)
-      : this.colors.gray[SHADE.HIGH_CONTRAST_TEXT];
+      : this.colors.gray[this._shade(SHADE.HIGH_CONTRAST_TEXT)];
   }
 }
