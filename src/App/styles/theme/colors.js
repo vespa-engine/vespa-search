@@ -1,12 +1,12 @@
+import { get } from 'lodash';
+
 export const SHADE = Object.freeze({
   APP_BACKGROUND: 0,
   SUBTLE_BACKGROUND: 1,
   UI_ELEMENT_BACKGROUND: 2,
   HOVERED_UI_ELEMENT_BACKGROUND: 3,
-  // ACTIVE_SELECTED_UI_ELEMENT_BACKGROUND: 4,
   SUBTLE_BORDER_AND_SEPARATOR: 4,
   UI_ELEMENT_BORDER_AND_FOCUS: 5,
-  // HOVERED_UI_ELEMENT_BORDER: 7,
   SOLID_BACKGROUND: 6,
   HOVERED_SOLID_BACKGROUND: 7,
   LOW_CONTRAST_TEXT: 8,
@@ -21,21 +21,13 @@ export class Colors {
     this.primaryColors = this.colors.primary;
   }
 
-  _shade(shade) {
-    return this.isDarkScheme ? 9 - shade : shade;
-  }
-
   themeColor(color, shade) {
     if (typeof color === 'number' && shade == null)
-      return this.primaryColors[this._shade(color)];
+      return this.primaryColors[color];
 
     if (typeof color === 'string') {
-      if (color.includes('.')) {
-        [color, shade] = color.split('.');
-        shade = parseInt(shade);
-      }
-      if (typeof shade === 'number')
-        return this.colors[color][this._shade(shade)];
+      if (color.includes('.')) return get(this.colors, color);
+      if (typeof shade === 'number') return this.colors[color][shade];
     }
 
     throw new Error(
@@ -67,12 +59,6 @@ export class Colors {
       : this.themeColor(SHADE.HOVERED_UI_ELEMENT_BACKGROUND);
   }
 
-  // getActiveSelectedUiElementBackground(color) {
-  //   return color
-  //     ? this.themeColor(color, SHADE.ACTIVE_SELECTED_UI_ELEMENT_BACKGROUND)
-  //     : this.themeColor(SHADE.ACTIVE_SELECTED_UI_ELEMENT_BACKGROUND);
-  // }
-
   getSubtleBorderAndSeparator(color) {
     return color
       ? this.themeColor(color, SHADE.SUBTLE_BORDER_AND_SEPARATOR)
@@ -84,12 +70,6 @@ export class Colors {
       ? this.themeColor(color, SHADE.UI_ELEMENT_BORDER_AND_FOCUS)
       : this.themeColor(SHADE.UI_ELEMENT_BORDER_AND_FOCUS);
   }
-
-  // getHoveredUiElementBorder(color) {
-  //   return color
-  //     ? this.themeColor(color, SHADE.HOVERED_UI_ELEMENT_BORDER)
-  //     : this.themeColor(SHADE.HOVERED_UI_ELEMENT_BORDER);
-  // }
 
   getSolidBackground(color) {
     return color
@@ -106,12 +86,12 @@ export class Colors {
   getLowContrastText(color) {
     return color
       ? this.themeColor(color, SHADE.LOW_CONTRAST_TEXT)
-      : this.colors.gray[this._shade(SHADE.LOW_CONTRAST_TEXT)];
+      : this.colors.gray[SHADE.LOW_CONTRAST_TEXT];
   }
 
   getHighContrastText(color) {
     return color
       ? this.themeColor(color, SHADE.HIGH_CONTRAST_TEXT)
-      : this.colors.gray[this._shade(SHADE.HIGH_CONTRAST_TEXT)];
+      : this.colors.gray[SHADE.HIGH_CONTRAST_TEXT];
   }
 }
