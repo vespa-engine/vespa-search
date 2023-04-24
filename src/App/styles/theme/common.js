@@ -1,7 +1,8 @@
 import { rem } from '@mantine/core';
+import { variant } from 'App/styles/theme/variant';
 
 export const common = {
-  primaryShade: { light: 6, dark: 6 }, // TODO: review this in order to match the design on dark mode
+  primaryShade: { light: 6, dark: 3 },
   white: '#fff',
   black: '#1a1523',
   defaultRadius: 'xs',
@@ -33,6 +34,6 @@ export const common = {
       h6: { fontSize: '0.9375rem', lineHeight: 1, fontWeight: 700 },
     },
   },
-  other: {},
+  other: { variant },
   fn: {},
 };

@@ -1,34 +1,34 @@
 // prettier-ignore
 export const crColors = {
-  primary:["#e7f5ff", "#d0ebff", "#a5d8ff", "#74c0fc", "#4dabf7", "#339af0", "#228be6", "#1c7ed6", "#1971c2", "#1864ab"],
-  blue:   ["#e7f5ff", "#d0ebff", "#a5d8ff", "#74c0fc", "#4dabf7", "#339af0", "#228be6", "#1c7ed6", "#1971c2", "#1864ab"],
-  cyan:   ["#e3fafc", "#c5f6fa", "#99e9f2", "#66d9e8", "#3bc9db", "#22b8cf", "#15aabf", "#1098ad", "#0c8599", "#0b7285"],
-  grape:  ["#f8f0fc", "#f3d9fa", "#eebefa", "#e599f7", "#da77f2", "#cc5de8", "#be4bdb", "#ae3ec9", "#9c36b5", "#862e9c"],
-  gray:   ["#f8f9fa", "#f1f3f5", "#e9ecef", "#dee2e6", "#ced4da", "#adb5bd", "#868e96", "#495057", "#343a40", "#212529"],
-  green:  ["#ebfbee", "#d3f9d8", "#b2f2bb", "#8ce99a", "#69db7c", "#51cf66", "#40c057", "#37b24d", "#2f9e44", "#2b8a3e"],
-  indigo: ["#edf2ff", "#dbe4ff", "#bac8ff", "#91a7ff", "#748ffc", "#5c7cfa", "#4c6ef5", "#4263eb", "#3b5bdb", "#364fc7"],
-  lime:   ["#f4fce3", "#e9fac8", "#d8f5a2", "#c0eb75", "#a9e34b", "#94d82d", "#82c91e", "#74b816", "#66a80f", "#5c940d"],
-  orange: ["#fff4e6", "#ffe8cc", "#ffd8a8", "#ffc078", "#ffa94d", "#ff922b", "#fd7e14", "#f76707", "#e8590c", "#d9480f"],
-  pink:   ["#fff0f6", "#ffdeeb", "#fcc2d7", "#faa2c1", "#f783ac", "#f06595", "#e64980", "#d6336c", "#c2255c", "#a61e4d"],
-  red:    ["#fff5f5", "#ffe3e3", "#ffc9c9", "#ffa8a8", "#ff8787", "#ff6b6b", "#fa5252", "#f03e3e", "#e03131", "#c92a2a"],
-  teal:   ["#e6fcf5", "#c3fae8", "#96f2d7", "#63e6be", "#38d9a9", "#20c997", "#12b886", "#0ca678", "#099268", "#087f5b"],
-  violet: ["#f3f0ff", "#e5dbff", "#d0bfff", "#b197fc", "#9775fa", "#845ef7", "#7950f2", "#7048e8", "#6741d9", "#5f3dc4"],
-  yellow: ["#fff9db", "#fff3bf", "#ffec99", "#ffe066", "#ffd43b", "#fcc419", "#fab005", "#f59f00", "#f08c00", "#e67700"]
+  primary:['#fbfcfd','#f8f9fa','#f1f3f5','#eceef0','#e6e8eb','#dfe3e6','#d7dbdf','#c1c8cd','#889096','#7e868c'],
+  blue:   ['#edf6ff','#e1f0ff','#cee7fe','#b7d9f8','#96c7f2','#5eb0ef','#0091ff','#0081f1','#006adc','#00254d'],
+  cyan:   ['#e7f9fb','#d8f3f6','#c4eaef','#aadee6','#84cdda','#3db9cf','#05a2c2','#0894b3','#0c7792','#04313c'],
+  grape:  ['#fceffc','#f9e5f9','#f3d9f4','#ebc8ed','#dfafe3','#cf91d8','#ab4aba','#a43cb4','#9c2bad','#340c3b'],
+  gray:   ['#f1f3f5','#eceef0','#e6e8eb','#dfe3e6','#d7dbdf','#c1c8cd','#889096','#7e868c','#687076','#11181c'],
+  green:  ['#e9f9ee','#ddf3e4','#ccebd7','#b4dfc4','#92ceac','#5bb98c','#30a46c','#299764','#18794e','#153226'],
+  indigo: ['#f0f4ff','#e6edfe','#d9e2fc','#c6d4f9','#aec0f5','#8da4ef','#3e63dd','#3a5ccc','#3451b2','#101d46'],
+  lime:   ['#eefadc','#e4f7c7','#d7f2b0','#c9e894','#b1d16a','#94ba2c','#99d52a','#93c926','#5d770d','#263209'],
+  orange: ['#fff1e7','#ffe8d7','#ffdcc3','#ffcca7','#ffb381','#fa934e','#f76808','#ed5f00','#bd4b00','#451e11'],
+  pink:   ['#feeef8','#fce5f3','#f9d8ec','#f3c6e2','#ecadd4','#e38ec3','#d6409f','#d23197','#cd1d8d','#3b0a2a'],
+  red:    ['#ffefef','#ffe5e5','#fdd8d8','#f9c6c6','#f3aeaf','#eb9091','#e5484d','#dc3d43','#cd2b31','#381316'],
+  teal:   ['#e7f9f5','#d9f3ee','#c7ebe5','#afdfd7','#8dcec3','#53b9ab','#12a594','#0e9888','#067a6f','#10302b'],
+  violet: ['#f5f2ff','#ede9fe','#e4defc','#d7cff9','#c4b8f3','#aa99ec','#6e56cf','#644fc1','#5746af','#20134b'],
+  yellow: ['#fffbd1','#fff8bb','#fef2a4','#f9e68c','#efd36c','#ebbc00','#f5d90a','#f7ce00','#946800','#35290f']
 };
 
 // prettier-ignore
 export const mantineColors = {
-  blue:   ["#e7f5ff", "#d0ebff", "#a5d8ff", "#74c0fc", "#4dabf7", "#339af0", "#228be6", "#1c7ed6", "#1971c2", "#1864ab"],
-  cyan:   ["#e3fafc", "#c5f6fa", "#99e9f2", "#66d9e8", "#3bc9db", "#22b8cf", "#15aabf", "#1098ad", "#0c8599", "#0b7285"],
-  grape:  ["#f8f0fc", "#f3d9fa", "#eebefa", "#e599f7", "#da77f2", "#cc5de8", "#be4bdb", "#ae3ec9", "#9c36b5", "#862e9c"],
-  gray:   ["#f8f9fa", "#f1f3f5", "#e9ecef", "#dee2e6", "#ced4da", "#adb5bd", "#868e96", "#495057", "#343a40", "#212529"],
-  green:  ["#ebfbee", "#d3f9d8", "#b2f2bb", "#8ce99a", "#69db7c", "#51cf66", "#40c057", "#37b24d", "#2f9e44", "#2b8a3e"],
-  indigo: ["#edf2ff", "#dbe4ff", "#bac8ff", "#91a7ff", "#748ffc", "#5c7cfa", "#4c6ef5", "#4263eb", "#3b5bdb", "#364fc7"],
-  lime:   ["#f4fce3", "#e9fac8", "#d8f5a2", "#c0eb75", "#a9e34b", "#94d82d", "#82c91e", "#74b816", "#66a80f", "#5c940d"],
-  orange: ["#fff4e6", "#ffe8cc", "#ffd8a8", "#ffc078", "#ffa94d", "#ff922b", "#fd7e14", "#f76707", "#e8590c", "#d9480f"],
-  pink:   ["#fff0f6", "#ffdeeb", "#fcc2d7", "#faa2c1", "#f783ac", "#f06595", "#e64980", "#d6336c", "#c2255c", "#a61e4d"],
-  red:    ["#fff5f5", "#ffe3e3", "#ffc9c9", "#ffa8a8", "#ff8787", "#ff6b6b", "#fa5252", "#f03e3e", "#e03131", "#c92a2a"],
-  teal:   ["#e6fcf5", "#c3fae8", "#96f2d7", "#63e6be", "#38d9a9", "#20c997", "#12b886", "#0ca678", "#099268", "#087f5b"],
-  violet: ["#f3f0ff", "#e5dbff", "#d0bfff", "#b197fc", "#9775fa", "#845ef7", "#7950f2", "#7048e8", "#6741d9", "#5f3dc4"],
-  yellow: ["#fff9db", "#fff3bf", "#ffec99", "#ffe066", "#ffd43b", "#fcc419", "#fab005", "#f59f00", "#f08c00", "#e67700"]
+  blue:  ['#edf6ff','#e1f0ff','#cee7fe','#b7d9f8','#96c7f2','#5eb0ef','#0091ff','#0081f1','#006adc','#00254d'],
+  cyan:  ['#e7f9fb','#d8f3f6','#c4eaef','#aadee6','#84cdda','#3db9cf','#05a2c2','#0894b3','#0c7792','#04313c'],
+  grape: ['#fceffc','#f9e5f9','#f3d9f4','#ebc8ed','#dfafe3','#cf91d8','#ab4aba','#a43cb4','#9c2bad','#340c3b'],
+  gray:  ['#f1f3f5','#eceef0','#e6e8eb','#dfe3e6','#d7dbdf','#c1c8cd','#889096','#7e868c','#687076','#11181c'],
+  green: ['#e9f9ee','#ddf3e4','#ccebd7','#b4dfc4','#92ceac','#5bb98c','#30a46c','#299764','#18794e','#153226'],
+  indigo:['#f0f4ff','#e6edfe','#d9e2fc','#c6d4f9','#aec0f5','#8da4ef','#3e63dd','#3a5ccc','#3451b2','#101d46'],
+  lime:  ['#eefadc','#e4f7c7','#d7f2b0','#c9e894','#b1d16a','#94ba2c','#99d52a','#93c926','#5d770d','#263209'],
+  orange:['#fff1e7','#ffe8d7','#ffdcc3','#ffcca7','#ffb381','#fa934e','#f76808','#ed5f00','#bd4b00','#451e11'],
+  pink:  ['#feeef8','#fce5f3','#f9d8ec','#f3c6e2','#ecadd4','#e38ec3','#d6409f','#d23197','#cd1d8d','#3b0a2a'],
+  red:   ['#ffefef','#ffe5e5','#fdd8d8','#f9c6c6','#f3aeaf','#eb9091','#e5484d','#dc3d43','#cd2b31','#381316'],
+  teal:  ['#e7f9f5','#d9f3ee','#c7ebe5','#afdfd7','#8dcec3','#53b9ab','#12a594','#0e9888','#067a6f','#10302b'],
+  violet:['#f5f2ff','#ede9fe','#e4defc','#d7cff9','#c4b8f3','#aa99ec','#6e56cf','#644fc1','#5746af','#20134b'],
+  yellow:['#fffbd1','#fff8bb','#fef2a4','#f9e68c','#efd36c','#ebbc00','#f5d90a','#f7ce00','#946800','#35290f']
 };
