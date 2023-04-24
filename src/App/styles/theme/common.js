@@ -1,4 +1,5 @@
 import { rem } from '@mantine/core';
+import { variant } from 'App/styles/theme/variant';
 
 export const common = {
   primaryShade: { light: 6, dark: 3 },
@@ -33,6 +34,6 @@ export const common = {
       h6: { fontSize: '0.9375rem', lineHeight: 1, fontWeight: 700 },
     },
   },
-  other: {},
+  other: { variant },
   fn: {},
 };
