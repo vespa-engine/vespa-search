@@ -7,6 +7,7 @@ import { Layout } from 'App/libs/layout';
 import { Home } from 'App/pages/home';
 import { Search } from 'App/pages/search';
 import { Md } from 'App/pages/md';
+import { Testcomp } from 'App/pages/testcomp';
 
 export default function App() {
   return (
@@ -19,6 +20,7 @@ export default function App() {
               <Home path="/" />
               <Search path="/search" />
               <Md path="/md" />
+              <Testcomp path="/testcomp" />
             </Router>
           </Layout>
         </ErrorBoundary>
