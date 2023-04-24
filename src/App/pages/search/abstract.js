@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Text } from '@mantine/core';
+import { Stack, Title } from '@mantine/core';
 import { parseMarkdown } from 'App/pages/search/md-parser';
 import { UrlBuilder } from 'App/utils';
 import { Content } from 'App/components';
-import { fontWeightBold } from 'App/styles/common.js';
+import { typography } from 'App/styles/theme/typography';
 
 export function Abstract({ endpoint, query }) {
   const [summary, setSummary] = useState('');
@@ -23,9 +23,9 @@ export function Abstract({ endpoint, query }) {
   }, [url]);
 
   return (
-    <Content>
-      <Text weight={fontWeightBold}>Abstract</Text>
-      <div>{parseMarkdown(summary)}</div>
+    <Content sx={typography()}>
+      <Title order={4}>Abstract</Title>
+      <Stack>{parseMarkdown(summary)}</Stack>
     </Content>
   );
 }

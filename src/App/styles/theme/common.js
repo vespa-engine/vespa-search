@@ -4,18 +4,12 @@ import { variant } from 'App/styles/theme/variant';
 export const common = {
   primaryShade: { light: 6, dark: 3 },
   white: '#fff',
-  black: '#1a1523',
+  black: '#151718',
   defaultRadius: 'xs',
   primaryColor: 'blue',
   cursorType: 'pointer',
+  lineHeight: 1.62,
   fontFamily: 'Inter, sans-serif',
-  // radius: {
-  //   xs: rem(5),
-  //   sm: rem(8),
-  //   md: rem(13),
-  //   lg: rem(21),
-  //   xl: rem(34),
-  // },
   spacing: {
     xs: rem(5),
     sm: rem(8),

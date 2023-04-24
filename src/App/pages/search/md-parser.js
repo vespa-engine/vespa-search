@@ -68,11 +68,11 @@ function convert(token, key, urlResolver) {
       );
     case 'table':
       return (
-        <Table key={key}>
+        <Table key={key} fontSize="xs">
           <thead>
             <tr>
               {token.header.map((cell, i) => (
-                <td key={i}>{convertTokens(cell, urlResolver)}</td>
+                <th key={i}>{convertTokens(cell, urlResolver)}</th>
               ))}
             </tr>
           </thead>
@@ -121,7 +121,7 @@ function convert(token, key, urlResolver) {
         <Image key={key} src={urlResolver(token.href)} alt={token.title} />
       );
     case 'paragraph':
-      return <div key={key}>{convertTokens(token, urlResolver)}</div>;
+      return <Text key={key}>{convertTokens(token, urlResolver)}</Text>;
     case 'text':
       return token.tokens ? convertTokens(token, urlResolver) : token.raw;
     case 'ref':

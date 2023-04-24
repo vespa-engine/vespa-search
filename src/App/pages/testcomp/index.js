@@ -25,6 +25,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
+import { Prism } from '@mantine/prism';
 import { Content, Icon } from 'App/components';
 
 function DemoActionIcon() {
@@ -359,6 +360,25 @@ function DemoBadgeGradients() {
   );
 }
 
+function DemoPrism() {
+  const demoCode = `import { Button } from '@mantine/core';
+
+function Demo() {
+  return 
+    <>
+      <Button>Hello</Button>
+      // <Button>Hello</Button>
+    </>
+}`;
+
+  return (
+    <Stack>
+      <Prism language="markup">{demoCode}</Prism>
+      <Prism language="tsx">{demoCode}</Prism>
+    </Stack>
+  );
+}
+
 function DemoMiscs() {
   return (
     <Stack>
@@ -437,6 +457,7 @@ export function Testcomp() {
         <DemoBadge />
         <DemoBadgeGradients />
         <DemoMiscs />
+        <DemoPrism />
       </Stack>
     </Container>
   );
