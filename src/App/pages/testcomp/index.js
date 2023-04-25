@@ -17,6 +17,7 @@ import {
   Rating,
   SegmentedControl,
   Select,
+  Skeleton,
   Slider,
   Space,
   Stack,
@@ -379,6 +380,20 @@ function Demo() {
   );
 }
 
+function DemoSkeleton() {
+  return (
+    <Stack>
+      <Skeleton height={21} radius="xl" />
+      <Stack spacing="xs">
+        <Skeleton height={8} radius="xl" />
+        <Skeleton height={8} radius="xl" />
+        <Skeleton height={8} radius="xl" />
+      </Stack>
+      <Skeleton height={8} radius="xl" width="55%" />
+    </Stack>
+  );
+}
+
 function DemoMiscs() {
   return (
     <Stack>
@@ -456,8 +471,9 @@ export function Testcomp() {
         <DemoAccordion />
         <DemoBadge />
         <DemoBadgeGradients />
-        <DemoMiscs />
         <DemoPrism />
+        <DemoSkeleton />
+        <DemoMiscs />
       </Stack>
     </Container>
   );
