@@ -24,8 +24,15 @@ export function Abstract({ endpoint, query }) {
 
   return (
     <Content sx={typography()}>
-      <Title order={4}>Abstract</Title>
-      <Stack>{parseMarkdown(summary)}</Stack>
+      <Title
+        sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
+        order={4}
+      >
+        Abstract
+      </Title>
+      <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
+        {parseMarkdown(summary)}
+      </Stack>
     </Content>
   );
 }

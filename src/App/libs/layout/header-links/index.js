@@ -8,7 +8,7 @@ export function HeaderLinks() {
   return (
     <Group noWrap spacing="lg">
       <Link to="https://github.com/vespa-engine/vespa">
-        <Icon name="github" type="brands" size="lg" color="gray" />
+        <Icon name="github" type="brands" size="lg" color="gray.8" />
       </Link>
       <LinkTheme />
     </Group>

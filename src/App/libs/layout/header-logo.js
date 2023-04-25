@@ -1,16 +1,16 @@
 import React from 'react';
 import { Image, useMantineTheme } from '@mantine/core';
 import { Link } from 'react-router-dom';
-import { VespaLogoDarkNoColor, VespaLogoWhiteNoColor } from 'App/assets';
+import { VespaLogoDark, VespaLogoWhite } from 'App/assets';
 
 export function HeaderLogo() {
   const { cr } = useMantineTheme();
   return (
     <Link to="/">
       {cr.isDarkScheme ? (
-        <Image height={34} width="auto" src={VespaLogoWhiteNoColor} />
+        <Image height={34} width="auto" src={VespaLogoWhite} />
       ) : (
-        <Image height={34} width="auto" src={VespaLogoDarkNoColor} />
+        <Image height={34} width="auto" src={VespaLogoDark} />
       )}
     </Link>
   );

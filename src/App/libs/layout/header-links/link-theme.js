@@ -11,7 +11,7 @@ export function LinkTheme() {
     <Tooltip label="Change appearance" position="bottom">
       <ActionIcon
         variant="transparent"
-        color={isDarkMode ? 'yellow' : 'gray'}
+        color={isDarkMode ? 'yellow' : 'gray.8'}
         onClick={() => setColorScheme(isDarkMode ? 'light' : 'dark')}
       >
         <Icon size="lg" name={isDarkMode ? 'sun' : 'moon'} />

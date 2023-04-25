@@ -77,6 +77,8 @@ export function SearchInput({
               suggestions.length > 0 && {
                 borderBottomLeftRadius: 0,
                 borderBottomRightRadius: 0,
+                borderTopLeftRadius: theme.radius.lg,
+                borderTopRightRadius: theme.radius.lg,
                 '&:focus, &:focus-within': {
                   borderBottomColor: 'transparent',
                 },
@@ -84,12 +86,13 @@ export function SearchInput({
           },
           dropdown: {
             ...theme.focusRingStyles.inputStyles(theme),
-            borderBottomLeftRadius: theme.radius.xl,
-            borderBottomRightRadius: theme.radius.xl,
+            borderBottomLeftRadius: theme.radius.lg,
+            borderBottomRightRadius: theme.radius.lg,
             borderTop: 'none',
             overflow: 'hidden',
             marginTop: -10,
           },
+          item: { color: theme.cr.getLowContrastText() },
         })}
         ref={(ref) => {
           if (!ref) return;
