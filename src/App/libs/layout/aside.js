@@ -9,7 +9,7 @@ export function Aside({ children, ...props }) {
         paddingRight: theme.spacing.md,
         backgroundColor: theme.cr.getAppBackground(),
       })}
-      width={{ base: '33%' }}
+      width={{ base: '33vw' }}
       {...props}
     >
       {children}
