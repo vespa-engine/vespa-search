@@ -17,6 +17,7 @@ import {
   Rating,
   SegmentedControl,
   Select,
+  Skeleton,
   Slider,
   Space,
   Stack,
@@ -25,6 +26,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
+import { Prism } from '@mantine/prism';
 import { Content, Icon } from 'App/components';
 
 function DemoActionIcon() {
@@ -359,6 +361,39 @@ function DemoBadgeGradients() {
   );
 }
 
+function DemoPrism() {
+  const demoCode = `import { Button } from '@mantine/core';
+
+function Demo() {
+  return 
+    <>
+      <Button>Hello</Button>
+      // <Button>Hello</Button>
+    </>
+}`;
+
+  return (
+    <Stack>
+      <Prism language="markup">{demoCode}</Prism>
+      <Prism language="tsx">{demoCode}</Prism>
+    </Stack>
+  );
+}
+
+function DemoSkeleton() {
+  return (
+    <Stack>
+      <Skeleton height={21} radius="xl" />
+      <Stack spacing="xs">
+        <Skeleton height={8} radius="xl" />
+        <Skeleton height={8} radius="xl" />
+        <Skeleton height={8} radius="xl" />
+      </Stack>
+      <Skeleton height={8} radius="xl" width="55%" />
+    </Stack>
+  );
+}
+
 function DemoMiscs() {
   return (
     <Stack>
@@ -436,6 +471,8 @@ export function Testcomp() {
         <DemoAccordion />
         <DemoBadge />
         <DemoBadgeGradients />
+        <DemoPrism />
+        <DemoSkeleton />
         <DemoMiscs />
       </Stack>
     </Container>

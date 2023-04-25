@@ -4,8 +4,6 @@ import '@fontsource/inter/latin-500.css';
 import '@fontsource/inter/latin-600.css';
 import '@fontsource/inter/latin-700.css';
 
-import './typhography.css';
-
 export const styles = (theme) => ({
   '#root': {
     height: '100%',
