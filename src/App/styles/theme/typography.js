@@ -1,6 +1,6 @@
 import { rem } from '@mantine/core';
 
-export const typography = () => (theme) => ({
+export const typography = (theme) => ({
   ...theme.fn.fontStyles(),
   color: theme.cr.getLowContrastText(),
   fontSize: theme.fontSizes.sm,

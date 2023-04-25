@@ -5,11 +5,12 @@ export function Aside({ children, ...props }) {
   return (
     <MantineAside
       sx={(theme) => ({
-        paddingLeft: theme.spacing.md,
-        paddingRight: theme.spacing.md,
         backgroundColor: theme.cr.getAppBackground(),
+        padding: theme.spacing.md,
+        maxWidth: '33vw',
       })}
       width={{ base: '33vw' }}
+      withBorder={false}
       {...props}
     >
       {children}
