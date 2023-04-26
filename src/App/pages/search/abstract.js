@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Stack, Title } from '@mantine/core';
 import { parseMarkdown } from 'App/pages/search/md-parser';
 import { UrlBuilder } from 'App/utils';
-import { Content } from 'App/components';
 import { typography } from 'App/styles/theme/typography';
 
 export function Abstract({ endpoint, query }) {
@@ -23,9 +22,12 @@ export function Abstract({ endpoint, query }) {
   }, [url]);
 
   return (
-    <Content sx={typography()}>
+    <Stack sx={typography}>
       <Title
-        sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
+        sx={(theme) => ({
+          color: theme.cr.getHighContrastText(),
+          paddingTop: theme.spacing.md,
+        })}
         order={4}
       >
         Abstract
@@ -33,6 +35,6 @@ export function Abstract({ endpoint, query }) {
       <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
         {parseMarkdown(summary)}
       </Stack>
-    </Content>
+    </Stack>
   );
 }

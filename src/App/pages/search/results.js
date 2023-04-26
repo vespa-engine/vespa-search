@@ -16,7 +16,7 @@ function Result({ refId, title, content, base_uri, path }) {
       withBorder
     >
       <Spoiler maxHeight={233} showLabel="Show more" hideLabel="Show less">
-        <Stack sx={typography()}>
+        <Stack sx={typography}>
           <Title
             sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
             id={`result-${refId}`}

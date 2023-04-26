@@ -9,6 +9,7 @@ import {
   Chip,
   CloseButton,
   Container,
+  Divider,
   FileInput,
   Group,
   HoverCard,
@@ -403,7 +404,6 @@ function DemoMiscs() {
       <Badge color="yellow">text</Badge>
       <Icon color="blue" name="bug" />
       <Icon color="yellow" name="bug" />
-
       <HoverCard width={280} shadow="md">
         <HoverCard.Target>
           <Button>Hover to reveal the card</Button>
@@ -442,6 +442,167 @@ function DemoMiscs() {
       >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
+      </Content>
+      <Divider />
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getAppBackground(),
+        })}
+        withBorder
+      >
+        getAppBackground
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getAppBackground('blue'),
+        })}
+        withBorder
+      >
+        getAppBackground
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getSubtleBackground(),
+        })}
+        withBorder
+      >
+        getSubtleBackground
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getSubtleBackground('blue'),
+        })}
+        withBorder
+      >
+        getSubtleBackground
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getUiElementBackground(),
+        })}
+        withBorder
+      >
+        getUiElementBackground
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getUiElementBackground('blue'),
+        })}
+        withBorder
+      >
+        getUiElementBackground
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getHoveredUiElementBackground(),
+        })}
+        withBorder
+      >
+        getHoveredUiElementBackground
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getHoveredUiElementBackground('blue'),
+        })}
+        withBorder
+      >
+        getHoveredUiElementBackground
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getSubtleBorderAndSeparator(),
+        })}
+        withBorder
+      >
+        getSubtleBorderAndSeparator
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getSubtleBorderAndSeparator('blue'),
+        })}
+        withBorder
+      >
+        getSubtleBorderAndSeparator
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getUiElementBorderAndFocus(),
+        })}
+        withBorder
+      >
+        getUiElementBorderAndFocus
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getUiElementBorderAndFocus('blue'),
+        })}
+        withBorder
+      >
+        getUiElementBorderAndFocus
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getSolidBackground(),
+        })}
+        withBorder
+      >
+        getSolidBackground
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getSolidBackground('blue'),
+        })}
+        withBorder
+      >
+        getSolidBackground
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getHoveredSolidBackground(),
+        })}
+        withBorder
+      >
+        getHoveredSolidBackground
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getHoveredSolidBackground('blue'),
+        })}
+        withBorder
+      >
+        getHoveredSolidBackground
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getLowContrastText(),
+        })}
+        withBorder
+      >
+        getLowContrastText
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getLowContrastText('blue'),
+        })}
+        withBorder
+      >
+        getLowContrastText
+      </Content>
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getHighContrastText(),
+        })}
+        withBorder
+      >
+        getHighContrastText
+      </Content>{' '}
+      <Content
+        sx={(theme) => ({
+          backgroundColor: theme.cr.getHighContrastText('blue'),
+        })}
+        withBorder
+      >
+        getHighContrastText
       </Content>
     </Stack>
   );

@@ -3,6 +3,7 @@ import { Header as MantineHeader } from '@mantine/core';
 import { useLocation } from 'react-router-dom';
 import { HeaderLogo } from 'App/libs/layout/header-logo';
 import { HeaderLinks } from 'App/libs/layout/header-links';
+import { Container } from 'App/components';
 
 export function Header() {
   const location = useLocation();
@@ -20,8 +21,12 @@ export function Header() {
       withBorder={withBorder}
       height={55}
     >
-      <HeaderLogo />
-      <HeaderLinks />
+      <Container
+        sx={{ gridAutoFlow: 'column', justifyContent: 'space-between' }}
+      >
+        <HeaderLogo />
+        <HeaderLinks />
+      </Container>
     </MantineHeader>
   );
 }
