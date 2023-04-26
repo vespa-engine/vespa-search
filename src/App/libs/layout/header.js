@@ -16,7 +16,7 @@ export function Header() {
         justifyContent: 'space-between',
         paddingLeft: theme.spacing.md,
         paddingRight: theme.spacing.md,
-        background: theme.cr.getAppBackground(),
+        background: withBorder ? theme.cr.getAppBackground() : 'transparent',
       })}
       withBorder={withBorder}
       height={55}
