@@ -18,9 +18,9 @@ export function Layout({ children }) {
                 'repeating-linear-gradient(90deg, rgb(16, 36, 62) 0px, rgb(16, 36, 62) 1px, transparent 1px, transparent 6px),\n' +
                 'linear-gradient(90deg, rgb(21, 23, 24), rgb(21, 23, 24));'
               : 'radial-gradient(circle at center center, transparent 0%, rgb(251, 252, 253) 99%),\n' +
-                'repeating-linear-gradient(0deg, rgb(237, 246, 255) 0px, rgb(237, 246, 255) 1px, transparent 1px, transparent 6px),\n' +
-                'repeating-linear-gradient(90deg, rgb(237, 246, 255) 0px, rgb(237, 246, 255) 1px, transparent 1px, transparent 6px),\n' +
-                'linear-gradient(90deg, rgb(251, 252, 253), rgb(251, 252, 253));',
+                'repeating-linear-gradient(0deg, rgb(225, 240, 255) 0px, rgb(225, 240, 255) 1px, transparent 1px, transparent 6px),\n' +
+                'repeating-linear-gradient(90deg, rgb(225, 240, 255) 0px, rgb(225, 240, 255) 1px, transparent 1px, transparent 6px),\n' +
+                'linear-gradient(90deg, rgb(251, 252, 253), rgb(251, 252, 253))',
           }),
         },
       })}

@@ -7,7 +7,7 @@ import { SearchSources } from 'App/pages/home/search-sources.js';
 export function Home() {
   return (
     <Container sx={{ width: '100%' }} size="sm">
-      <Space h={55} />
+      <Space h={89} />
       <Stack>
         <SearchInput endpoint={ENDPOINT} size="lg" autofocus />
         <SearchSources />
