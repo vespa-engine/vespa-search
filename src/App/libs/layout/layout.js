@@ -6,7 +6,7 @@ import { Container } from 'App/components';
 export function Layout({ children }) {
   return (
     <AppShell header={<Header />}>
-      <Container withMaxWidth>{children}</Container>
+      <Container>{children}</Container>
     </AppShell>
   );
 }

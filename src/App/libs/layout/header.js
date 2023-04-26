@@ -23,7 +23,6 @@ export function Header() {
     >
       <Container
         sx={{ gridAutoFlow: 'column', justifyContent: 'space-between' }}
-        withMaxWidth
       >
         <HeaderLogo />
         <HeaderLinks />
