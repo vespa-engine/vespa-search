@@ -21,7 +21,7 @@ export function Search() {
     <Container>
       <Stack
         sx={(theme) => ({
-          maxWidth: `calc(100vw - calc(var(--mantine-aside-width, 0px) + (2 * ${theme.spacing.md})))`,
+          maxWidth: `calc(100vw - calc(var(--mantine-aside-width, 0px) + (3 * ${theme.spacing.md})))`,
           paddingTop: theme.spacing.md,
           width: '100%',
         })}
