@@ -5,15 +5,16 @@ import {
   Code,
   Divider,
   Image,
-  Table,
-  Title,
-  Text,
   List,
+  Table,
+  Text,
+  Title,
 } from '@mantine/core';
 import { Prism } from '@mantine/prism';
 import PrismRenderer from 'prism-react-renderer/prism';
 import { Link } from 'App/libs/router';
-import { fontWeightBold } from 'App/styles/common.js';
+import { LinkReference } from 'App/pages/search/link-reference';
+import { fontWeightBold } from 'App/styles/common';
 
 window.Prism = PrismRenderer;
 import('prismjs/components/prism-java');
@@ -27,12 +28,6 @@ const extensions = Object.freeze({
     },
   ],
 });
-
-function scrollTo(selector, offset) {
-  const element = document.querySelector(selector);
-  const position = element.getBoundingClientRect().top - offset;
-  window.scrollBy({ top: position, behavior: 'smooth' });
-}
 
 const convertTokens = ({ tokens }, urlResolver) =>
   tokens.map((token, i) => convert(token, `${token.type}-${i}`, urlResolver));
@@ -125,13 +120,7 @@ function convert(token, key, urlResolver) {
     case 'text':
       return token.tokens ? convertTokens(token, urlResolver) : token.raw;
     case 'ref':
-      return [
-        '[',
-        <Link key={key} onClick={() => scrollTo(`#result-${token.text}`, 80)}>
-          {token.text}
-        </Link>,
-        ']',
-      ];
+      return ['[', <LinkReference key={key} token={token} />, ']'];
     default:
     case 'html':
     case 'space':

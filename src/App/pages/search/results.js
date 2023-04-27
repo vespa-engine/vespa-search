@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Spoiler, Stack, Text, Title } from '@mantine/core';
 import { parseMarkdown } from 'App/pages/search/md-parser';
 import { useGet } from 'App/libs/fetcher/index.js';
@@ -6,28 +6,39 @@ import { UrlBuilder } from 'App/utils/index.js';
 import { Content, Error, LoadingResult } from 'App/components';
 import { ResultActions } from 'App/pages/search/result-actions';
 import { typography } from 'App/styles/theme/typography';
+import { AppContext } from 'App/libs/provider';
 
 function Result({ refId, title, content, base_uri, path }) {
+  const { reference } = useContext(AppContext);
+  const scrollTo = reference === refId;
+
   return (
     <Content
       sxBox={(theme) => ({
-        '&:hover': { borderColor: theme.cr.getSolidBackground() },
+        ...(scrollTo && { borderColor: theme.cr.getSolidBackground('blue') }),
+        '&:hover': {
+          borderColor: scrollTo
+            ? theme.cr.getSolidBackground('blue')
+            : theme.cr.getSolidBackground(),
+        },
       })}
       withBorder
     >
       <Spoiler maxHeight={233} showLabel="Show more" hideLabel="Show less">
-        <Stack sx={typography}>
-          <Title
-            sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
-            id={`result-${refId}`}
-          >
-            [{refId}] {title}
-          </Title>
-          <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
-            {parseMarkdown(content, base_uri + path)}
+        <Stack>
+          <Stack sx={typography}>
+            <Title
+              sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
+              id={`result-${refId}`}
+            >
+              [{refId}] {title}
+            </Title>
+            <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
+              {parseMarkdown(content, base_uri + path)}
+            </Stack>
           </Stack>
+          <ResultActions />
         </Stack>
-        <ResultActions />
       </Spoiler>
     </Content>
   );
