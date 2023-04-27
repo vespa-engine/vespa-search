@@ -8,6 +8,7 @@ import { Home } from 'App/pages/home';
 import { Search } from 'App/pages/search';
 import { Md } from 'App/pages/md';
 import { Testcomp } from 'App/pages/testcomp';
+import { AppProvider } from 'App/libs/provider';
 
 export default function App() {
   return (
@@ -15,14 +16,16 @@ export default function App() {
       <ThemeProvider>
         <ErrorBoundary crashPage={CrashPage}>
           <Notifications />
-          <Layout>
-            <Router>
-              <Home path="/" />
-              <Search path="/search" />
-              <Md path="/md" />
-              <Testcomp path="/testcomp" />
-            </Router>
-          </Layout>
+          <AppProvider>
+            <Layout>
+              <Router>
+                <Home path="/" />
+                <Search path="/search" />
+                <Md path="/md" />
+                <Testcomp path="/testcomp" />
+              </Router>
+            </Layout>
+          </AppProvider>
         </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>
