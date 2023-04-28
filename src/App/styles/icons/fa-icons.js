@@ -22,4 +22,5 @@ export {
 export {
   faClipboard,
   faClock as faClockRegular,
+  faFileLines,
 } from '@fortawesome/free-regular-svg-icons';
