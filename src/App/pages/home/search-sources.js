@@ -23,10 +23,8 @@ function Source({ icon, name, type }) {
 export function SearchSources() {
   return (
     <Group position="center">
-      <Source name="All" icon="magnifying-glass" />
       <Source name="Documentation" icon="book" />
       <Source name="Blogs" icon="blog" />
-      <Source name="Slack" icon="slack" type="brands" />
     </Group>
   );
 }
