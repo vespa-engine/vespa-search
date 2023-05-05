@@ -28,7 +28,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
   useEffect(() => setValue(query), [query]);
 
   useEffect(() => {
-    const alive = { current: true };
+    let cancelled = false;
     if (value.length === 0) {
       setSuggestions([]);
       return;
@@ -39,20 +39,20 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         .add('suggest')
         .queryParam('query', value)
     )
-      .then((response) =>
-        setSuggestions(
-          (response?.root?.children ?? []).map((item) => ({
-            value: item.fields.term,
-            type: item.fields.type,
-            url: item.fields.url,
-          }))
-        )
+      .then(
+        (response) =>
+          !cancelled &&
+          setSuggestions(
+            (response?.root?.children ?? []).map((item) => ({
+              value: item.fields.term,
+              type: item.fields.type,
+              url: item.fields.url,
+            }))
+          )
       )
-      .catch(() => setSuggestions([]));
+      .catch(() => !cancelled && setSuggestions([]));
 
-    return () => {
-      alive.current = false;
-    };
+    return () => (cancelled = false);
   }, [value]);
 
   const onSubmit = ({ value, url }) => {

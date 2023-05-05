@@ -50,7 +50,11 @@ function _preReducer(state, action, data) {
     }
 
     case ACTION.TOGGLE_NAMESPACE: {
-      const namespaces = toggleOption(ALL_NAMESPACES, state.namespaces, data);
+      let namespaces = toggleOption(ALL_NAMESPACES, state.namespaces, data);
+      if (namespaces.length === 0)
+        namespaces = ALL_NAMESPACES.map(({ id }) => id).filter(
+          (id) => id !== data
+        );
       return _preReducer(state, ACTION.SET_NAMESPACES, namespaces);
     }
 
