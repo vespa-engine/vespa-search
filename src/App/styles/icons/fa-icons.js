@@ -23,4 +23,5 @@ export {
   faClipboard,
   faClock as faClockRegular,
   faFileLines,
+  faCircleQuestion,
 } from '@fortawesome/free-regular-svg-icons';
