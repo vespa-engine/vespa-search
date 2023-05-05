@@ -24,7 +24,9 @@ export function variant({ theme, variant, color }) {
       return {
         border: theme.cr.getSolidBackground(color),
         background: 'transparent',
-        color: theme.cr.getSolidBackground(color),
+        color: theme.cr.isDarkScheme
+          ? theme.cr.getLowContrastText(color)
+          : theme.cr.getSolidBackground(color),
         hover: theme.cr.getSubtleBackground(color),
       };
     }

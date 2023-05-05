@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { opacity } from 'App/styles/common';
+import { mergeSx, opacity } from 'App/styles/common';
 
 function resolveIconName(name, maybeType) {
   if (name.startsWith('fa') && name.charAt(3) === '-') {
@@ -28,14 +28,17 @@ function resolveIconName(name, maybeType) {
   return `fa-${name} fa-${maybeType ?? 'solid'}`;
 }
 
-export function Icon({ name, type, color, disabled, ...rest }) {
+export function Icon({ name, type, color, disabled, sx, ...rest }) {
   const icon = resolveIconName(name, type);
   return (
     <Box
-      sx={(theme) => ({
-        ...(color && { color: theme.cr.getSolidBackground(color) }),
-        ...(disabled && { pointerEvents: 'none', opacity }),
-      })}
+      sx={mergeSx(
+        (theme) => ({
+          ...(color && { color: theme.cr.getSolidBackground(color) }),
+          ...(disabled && { pointerEvents: 'none', opacity }),
+        }),
+        sx
+      )}
       component={FontAwesomeIcon}
       icon={icon}
       {...rest}
