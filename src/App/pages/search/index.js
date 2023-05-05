@@ -1,22 +1,13 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
 import { Stack } from '@mantine/core';
-import { Redirect } from 'App/libs/router';
 import { Results } from 'App/pages/search/results';
 import { SearchInput } from 'App/pages/search/search-input';
 import { Abstract } from 'App/pages/search/abstract';
 import { Container } from 'App/components/index.js';
-import { SearchSources } from 'App/pages/home/search-sources';
+import { SearchSources } from 'App/pages/search/search-sources';
 import { Aside } from 'App/libs/layout';
 
-export const ENDPOINT = 'https://llmsearch.inference.workers.dev';
-
 export function Search() {
-  const location = useLocation();
-  const query = new URLSearchParams(location.search).get('q');
-
-  if (!query) return <Redirect to="/" replace />;
-
   return (
     <Container>
       <Stack
@@ -28,13 +19,13 @@ export function Search() {
         spacing="lg"
       >
         <Stack>
-          <SearchInput endpoint={ENDPOINT} query={query} />
+          <SearchInput />
           <SearchSources />
         </Stack>
-        <Results endpoint={ENDPOINT} query={query} />
+        <Results />
       </Stack>
       <Aside>
-        <Abstract endpoint={ENDPOINT} query={query} />
+        <Abstract />
       </Aside>
     </Container>
   );

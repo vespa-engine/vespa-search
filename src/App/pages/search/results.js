@@ -1,31 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Badge, Group, Spoiler, Stack, Text, Title } from '@mantine/core';
+import { NAMESPACES_BY_ID, useSearchContext } from 'App/libs/provider';
 import { parseMarkdown } from 'App/pages/search/md-parser';
-import { useGet } from 'App/libs/fetcher/index.js';
-import { UrlBuilder } from 'App/utils/index.js';
 import { Content, Error, Icon, LoadingResult } from 'App/components';
 import { typography } from 'App/styles/theme/typography';
-import { AppContext } from 'App/libs/provider';
 import { Link } from 'App/libs/router';
 
-const NAMESPACES = {
-  'open-p': 'Documentation',
-  'cloud-p': 'Vespa Cloud Documentation',
-  'vespaapps-p': 'Vespa Sample Applications',
-  'blog-p': 'Vespa Blog',
-};
-
 function Result({ refId, title, content, base_uri, path, namespace }) {
-  const { reference } = useContext(AppContext);
-  const scrollTo = reference === refId;
-  const titleLink = `${base_uri}${path}`;
+  const isSelected = useSearchContext((ctx) => ctx.selectedHit === refId);
+  const ref = useRef();
+  const titleLink = base_uri + path;
+  const namespaceMeta = NAMESPACES_BY_ID[namespace];
+
+  useEffect(() => {
+    if (!isSelected || !ref.current) return;
+    const position = ref.current.getBoundingClientRect().top - 80;
+    window.scrollBy({ top: position, behavior: 'smooth' });
+  }, [ref, isSelected]);
 
   return (
     <Content
       sxBox={(theme) => ({
-        ...(scrollTo && { borderColor: theme.cr.getSolidBackground('blue') }),
+        ...(isSelected && { borderColor: theme.cr.getSolidBackground('blue') }),
         '&:hover': {
-          borderColor: scrollTo
+          borderColor: isSelected
             ? theme.cr.getSolidBackground('blue')
             : theme.cr.getSolidBackground(),
         },
@@ -33,6 +31,7 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
       withBorder
     >
       <Spoiler
+        ref={ref}
         styles={(theme) => ({
           control: {
             ...theme.fn.hover({ textDecoration: 'none' }),
@@ -66,12 +65,14 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
                 size="2xs"
               />
             </Title>
-            {Object.keys(NAMESPACES).includes(namespace) && (
-              <Badge size="xs">{NAMESPACES[namespace]}</Badge>
+            {namespaceMeta && (
+              <Badge leftSection={<Icon name={namespaceMeta.icon} />} size="xs">
+                {namespaceMeta.name}
+              </Badge>
             )}
           </Group>
           <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
-            {parseMarkdown(content, base_uri + path)}
+            {parseMarkdown(content, titleLink)}
           </Stack>
         </Stack>
       </Spoiler>
@@ -79,22 +80,18 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
   );
 }
 
-export function Results({ endpoint, query }) {
-  const { loading, error, response } = useGet(
-    new UrlBuilder(endpoint).add('search').queryParam('query', query)
-  );
+export function Results() {
+  const { loading, error, hits } = useSearchContext('hits');
 
   if (loading) return <LoadingResult />;
   if (error) return <Error message={error.message} />;
-
-  const hits = response.root.children ?? [];
 
   return hits.length === 0 ? (
     <Text>No matches</Text>
   ) : (
     <Stack spacing="lg">
       {hits.map((child, i) => (
-        <Result key={i} refId={i + 1} {...child.fields} />
+        <Result key={child.id} refId={i + 1} {...child.fields} />
       ))}
     </Stack>
   );

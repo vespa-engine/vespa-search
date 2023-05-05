@@ -7,6 +7,7 @@ export {
 export {
   faAdd,
   faBug,
+  faCloud,
   faSun,
   faMoon,
   faArrowRight,
@@ -15,6 +16,7 @@ export {
   faBlog,
   faThumbsUp,
   faThumbsDown,
+  faVial,
   faExpand,
   faExternalLink,
   faExternalLinkSquare,

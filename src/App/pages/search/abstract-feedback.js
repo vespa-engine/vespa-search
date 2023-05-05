@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Group } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { Icon } from 'App/components/index.js';
 
 function Action({ icon, name, type }) {
@@ -18,10 +18,5 @@ function Action({ icon, name, type }) {
 }
 
 export function AbstractFeedback() {
-  return (
-    <Group spacing="xs">
-      <Action name="Looks good" icon="thumbs-up" />
-      <Action name="Looks not so good" icon="thumbs-down" />
-    </Group>
-  );
+  return <Action name="Looks good" icon="thumbs-up" />;
 }

@@ -8,7 +8,7 @@ import { Home } from 'App/pages/home';
 import { Search } from 'App/pages/search';
 import { Md } from 'App/pages/md';
 import { Testcomp } from 'App/pages/testcomp';
-import { AppProvider } from 'App/libs/provider';
+import { SearchContextProvider } from 'App/libs/provider';
 
 export default function App() {
   return (
@@ -16,7 +16,7 @@ export default function App() {
       <ThemeProvider>
         <ErrorBoundary crashPage={CrashPage}>
           <Notifications />
-          <AppProvider>
+          <SearchContextProvider>
             <Layout>
               <Router>
                 <Home path="/" />
@@ -25,7 +25,7 @@ export default function App() {
                 <Testcomp path="/testcomp" />
               </Router>
             </Layout>
-          </AppProvider>
+          </SearchContextProvider>
         </ErrorBoundary>
       </ThemeProvider>
     </BrowserRouter>

@@ -1,17 +1,10 @@
-import React, {
-  forwardRef,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { ActionIcon, Autocomplete, Group, Text } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
+import { ACTION, dispatch, useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
 import { Icon } from 'App/components/index.js';
 import { Link } from 'App/libs/router';
-import { AppContext } from 'App/libs/provider';
 
 const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
   return (
@@ -24,18 +17,12 @@ const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
   );
 });
 
-export function SearchInput({
-  endpoint,
-  query = '',
-  size = 'md',
-  autofocus = false,
-}) {
-  const navigate = useNavigate();
+export function SearchInput({ size = 'md', autofocus = false }) {
+  const query = useSearchContext('query');
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [value, setValue] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
-  const { setReference } = useContext(AppContext);
 
   // Update search input if we go back/forward in history
   useEffect(() => setValue(query), [query]);
@@ -47,7 +34,11 @@ export function SearchInput({
       return;
     }
 
-    Get(new UrlBuilder(endpoint).add('suggest').queryParam('query', value))
+    Get(
+      new UrlBuilder(import.meta.env.VITE_ENDPOINT)
+        .add('suggest')
+        .queryParam('query', value)
+    )
       .then((response) =>
         setSuggestions(
           (response?.root?.children ?? []).map((item) => ({
@@ -62,12 +53,11 @@ export function SearchInput({
     return () => {
       alive.current = false;
     };
-  }, [endpoint, value]);
+  }, [value]);
 
   const onSubmit = ({ value, url }) => {
-    setReference(null);
     inputRef.current?.blur();
-    url ? (location.href = url) : navigate(url ?? `/search?q=${value}`);
+    url ? (location.href = url) : dispatch(ACTION.SET_QUERY, value);
   };
 
   return (
