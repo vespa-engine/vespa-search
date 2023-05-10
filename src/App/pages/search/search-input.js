@@ -19,6 +19,9 @@ const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
 
 export function SearchInput({ size = 'md', autofocus = false }) {
   const query = useSearchContext('query');
+  const filters = useSearchContext((ctx) =>
+    ctx.namespaces.map((n) => `+namespace:${n}`).join(' ')
+  );
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [value, setValue] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
@@ -38,6 +41,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
       new UrlBuilder(import.meta.env.VITE_ENDPOINT)
         .add('suggest')
         .queryParam('query', value)
+        .queryParam('filters', filters)
     )
       .then(
         (response) =>
@@ -53,7 +57,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
       .catch(() => !cancelled && setSuggestions([]));
 
     return () => (cancelled = false);
-  }, [value]);
+  }, [filters, value]);
 
   const onSubmit = ({ value, url }) => {
     inputRef.current?.blur();

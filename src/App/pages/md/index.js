@@ -1,9 +1,6 @@
 import React from 'react';
 import { Stack } from '@mantine/core';
 import { parseMarkdown } from 'App/pages/search/md-parser';
-import { typography } from 'App/styles/theme/typography';
-
-export const ENDPOINT = 'https://llmsearch.inference.workers.dev';
 
 const md = `
 # Heading1
@@ -38,7 +35,7 @@ public class MySearcher extends Searcher {
 }
 \`\`\`
 
-In this example, \`MySearcher\` extends the \`Searcher\` class [method](google.com) takes in a \`Query\` object and an \`Execution\` object, which is used to execute the query.
+In this example, \`<MySearcher>\` extends the \`Searcher\` class [method](google.com) takes in a \`Query\` object and an \`Execution\` object, which is used to execute the query.
 The method then processes the query and executes it using the \`Execution\` object. Finally, it processes the result and returns it.
 This is just a basic example, and the actual processing logic will depend on the specific use case. Developers can provide their own searchers and inject them into the query chain to customize the search behavior. [1][2]
 
@@ -59,5 +56,5 @@ This is just a basic example, and the actual processing logic will depend on the
     - Indented item
 `;
 export function Md() {
-  return <Stack sx={typography()}>{parseMarkdown(md)}</Stack>;
+  return <Stack>{parseMarkdown(md)}</Stack>;
 }

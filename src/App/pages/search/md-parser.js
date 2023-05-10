@@ -96,7 +96,9 @@ function convert(token, key, urlResolver) {
         </Text>
       );
     case 'codespan':
-      return <Code key={key}>{token.text}</Code>;
+      return (
+        <Code key={key}>{token.raw.substring(1, token.raw.length - 1)}</Code>
+      );
     case 'br':
       return '\n';
     case 'del':

@@ -52,6 +52,7 @@ export function SearchContextProvider({ children }) {
   }, [navigate, value.query, value.namespaces]);
 
   useLayoutEffect(() => {
+    if (value.query.length === 0) return;
     const filters = value.namespaces.map((n) => `+namespace:${n}`).join(' ');
 
     const streamUrl = new UrlBuilder(endpoint)
