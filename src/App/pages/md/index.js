@@ -35,8 +35,8 @@ public class MySearcher extends Searcher {
 }
 \`\`\`
 
-In this example, \`<MySearcher>\` extends the \`Searcher\` class [method](google.com) takes in a \`Query\` object and an \`Execution\` object, which is used to execute the query.
-The method then processes the query and executes it using the \`Execution\` object. Finally, it processes the result and returns it.
+In this example, \`<MySearcher>\` extends the \`Searcher\` class [relative](./test.html) takes in a \`Query\` object and an \`Execution\` object, which is used to execute the query.
+The method then processes the query and [absolute](https://yahoo.com) it using the \`Execution\` object. Finally, it processes the result and returns it.
 This is just a basic example, and the actual processing logic will depend on the specific use case. Developers can provide their own searchers and inject them into the query chain to customize the search behavior. [1][2]
 
 ---
