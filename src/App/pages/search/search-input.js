@@ -31,6 +31,11 @@ export function SearchInput({ size = 'md', autofocus = false }) {
   useEffect(() => setValue(query), [query]);
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = '';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+
     let cancelled = false;
     if (value.length === 0) {
       setSuggestions([]);
@@ -68,7 +73,6 @@ export function SearchInput({ size = 'md', autofocus = false }) {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        inputRef.current?.blur();
         onSubmit({ value });
         return false;
       }}
@@ -76,6 +80,10 @@ export function SearchInput({ size = 'md', autofocus = false }) {
       <Autocomplete
         styles={(theme) => ({
           input: {
+            overflowY: 'hidden',
+            lineHeight: 1,
+            paddingTop: '15px',
+            paddingBottom: '15px',
             ...(dropdownOpened &&
               suggestions.length > 0 && {
                 borderBottomLeftRadius: 0,
@@ -125,6 +133,12 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         size={size}
         filter={() => true}
         radius="xl"
+        component="textarea"
+        onKeyDown={(e) => {
+          if (e.key !== 'Enter') return;
+          e.preventDefault();
+          onSubmit({ value });
+        }}
       />
     </form>
   );
