@@ -58,7 +58,7 @@ export function SearchContextProvider({ children }) {
     const streamUrl = new UrlBuilder(endpoint)
       .add('stream')
       .queryParam('query', value.query)
-      .queryParam('filter', filters)
+      .queryParam('filters', filters)
       .toString();
     const source = new EventSource(streamUrl);
     source.addEventListener('message', (e) =>
@@ -71,7 +71,7 @@ export function SearchContextProvider({ children }) {
     const searchUrl = new UrlBuilder(endpoint)
       .add('search')
       .queryParam('query', value.query)
-      .queryParam('filter', filters);
+      .queryParam('filters', filters);
     Get(searchUrl)
       .then(
         (result) =>
