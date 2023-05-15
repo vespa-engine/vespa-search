@@ -16,7 +16,7 @@ function resolveIconName(name, maybeType) {
       case 's':
         return `fa-${name} fa-solid`;
       case 'b':
-        return `fa-${name} fa-brand`;
+        return `fa-${name} fa-brands`;
       case 'r':
         return `fa-${name} fa-regular`;
       case 'c':

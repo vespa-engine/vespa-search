@@ -2,6 +2,7 @@ export {
   faDocker,
   faGithub,
   faLinux,
+  faPython,
   faSlack,
 } from '@fortawesome/free-brands-svg-icons';
 export {
