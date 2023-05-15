@@ -1,8 +1,8 @@
 import React from 'react';
 import { Group } from '@mantine/core';
 import { LinkTheme } from 'App/libs/layout/header-links/link-theme';
-import { Icon } from 'App/components/index.js';
-import { Link } from 'App/libs/router/index.js';
+import { Icon } from 'App/components';
+import { Link } from 'App/libs/router';
 
 export function HeaderLinks() {
   return (

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lexer } from 'marked';
+import { Lexer, walkTokens } from 'marked';
 import {
   Blockquote,
   Code,
@@ -145,6 +145,17 @@ export function parseMarkdown(src, options = {}) {
     const opt = { extensions, gfm: true };
     const tokens = Lexer.lex(src, opt);
     return convertTokens({ tokens }, options);
+  } catch (e) {
+    console.error(e);
+    return src;
+  }
+}
+
+export function parseTokens(src) {
+  try {
+    const opt = { extensions, gfm: true };
+    const tokens = Lexer.lex(src, opt);
+    return walkTokens(tokens, (t) => t);
   } catch (e) {
     console.error(e);
     return src;

@@ -1,4 +1,5 @@
-import { isEqual } from 'lodash';
+import { isEqual, shuffle, sortedUniq } from 'lodash';
+import { parseMarkdown, parseTokens } from 'App/pages/search/md-parser';
 import { ALL_NAMESPACES } from 'App/libs/provider/namespaces';
 
 function toggleOption(allOptions, current, item) {
@@ -26,7 +27,8 @@ export const ACTION = Object.freeze({
   SET_NAMESPACES: 2,
 
   TOGGLE_NAMESPACE: 12,
-  APPEND_SUMMARY: 20,
+  SUMMARY_APPEND: 20,
+  SUMMARY_COMPLETE: 21,
 
   SET_HITS: 50,
   SELECT_HIT: 51,
@@ -58,11 +60,22 @@ function _preReducer(state, action, data) {
       return _preReducer(state, ACTION.SET_NAMESPACES, namespaces);
     }
 
-    case ACTION.APPEND_SUMMARY: {
-      return {
-        ...state,
-        summary: (state.summary + data).replace('<br/>', '\n'),
-      };
+    case ACTION.SUMMARY_APPEND: {
+      const raw = (state.summary.raw + data).replace('<br/>', '\n');
+      const element = parseMarkdown(raw);
+      return { ...state, summary: { raw, element } };
+    }
+    case ACTION.SUMMARY_COMPLETE: {
+      const questions = shuffle(
+        sortedUniq(
+          parseTokens(state.summary.raw)
+            .filter(({ type }) => type === 'ref')
+            .map(({ text }) => state.hits.hits?.[parseInt(text) - 1])
+            .flatMap((hit) => hit?.fields?.questions ?? [])
+            .sort()
+        )
+      ).slice(0, 3);
+      return { ...state, questions };
     }
 
     case ACTION.SET_HITS:
@@ -84,7 +97,8 @@ function _postReducer(state, result) {
   // Reset hits and summary if the query has changed
   if (state.query !== result.query || state.namespaces !== result.namespaces) {
     result.hits = { loading: true };
-    result.summary = '';
+    result.summary = { raw: '' };
+    delete result.questions;
   }
 
   return result;
