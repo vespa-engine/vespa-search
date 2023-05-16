@@ -35,7 +35,7 @@ export function Abstract() {
       </Group>
       <AbstractContent />
       <AbstractFeedback />
-      <Questions />
+      <AbstractQuestions />
     </Stack>
   );
 }
@@ -49,8 +49,8 @@ function AbstractContent() {
   );
 }
 
-function Questions() {
-  const questions = useSearchContext('questions');
+function AbstractQuestions() {
+  const questions = useSearchContext((ctx) => ctx.summary.questions);
   if (!(questions?.length > 0)) return null;
 
   return (

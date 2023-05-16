@@ -1,4 +1,5 @@
 import { isEqual, shuffle, sortedUniq } from 'lodash';
+import { UrlBuilder } from 'App/utils';
 import { createUrlParams } from 'App/libs/provider/url-params';
 import { parseMarkdown, parseTokens } from 'App/pages/search/md-parser';
 import { ALL_NAMESPACES } from 'App/libs/provider/namespaces';
@@ -67,21 +68,28 @@ function _preReducer(state, action, data) {
       return { ...state, summary: { raw, element } };
     }
     case ACTION.SUMMARY_COMPLETE: {
+      const refs = parseTokens(state.summary.raw)
+        .filter(({ type }) => type === 'ref')
+        .map(({ text }) => state.hits.hits?.[parseInt(text) - 1]);
       const questions = shuffle(
-        sortedUniq(
-          parseTokens(state.summary.raw)
-            .filter(({ type }) => type === 'ref')
-            .map(({ text }) => state.hits.hits?.[parseInt(text) - 1])
-            .flatMap((hit) => hit?.fields?.questions ?? [])
-            .sort()
-        )
+        sortedUniq(refs.flatMap((hit) => hit?.fields?.questions ?? []).sort())
       )
         .slice(0, 3)
         .map((query) => ({
           text: query,
           url: createUrlParams({ query, namespaces: state.namespaces }),
         }));
-      return { ...state, questions };
+      const docIds = sortedUniq(refs.flatMap((hit) => hit.id).sort()).join(',');
+      const feedbackUrl = new UrlBuilder(import.meta.env.VITE_ENDPOINT)
+        .add('search')
+        .queryParam('query', state.query)
+        .queryParam('abstract', state.summary.raw)
+        .queryParam('docids', docIds)
+        .toString();
+      return {
+        ...state,
+        summary: { ...state.summary, questions, feedbackUrl },
+      };
     }
 
     case ACTION.SET_HITS:
@@ -104,7 +112,6 @@ function _postReducer(state, result) {
   if (state.query !== result.query || state.namespaces !== result.namespaces) {
     result.hits = { loading: true };
     result.summary = { raw: '' };
-    delete result.questions;
   }
 
   return result;

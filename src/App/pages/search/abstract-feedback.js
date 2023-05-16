@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@mantine/core';
+import { Get } from 'App/libs/fetcher';
+import { useSearchContext } from 'App/libs/provider';
 import { Icon } from 'App/components/index.js';
 
-function Action({ icon, name, type }) {
+function Action({ icon, name, type, ...props }) {
   return (
     <Button
       leftIcon={<Icon name={icon} type={type} />}
@@ -11,6 +13,7 @@ function Action({ icon, name, type }) {
       onClick={() => {}}
       radius="xl"
       size="xs"
+      {...props}
     >
       {name}
     </Button>
@@ -18,5 +21,21 @@ function Action({ icon, name, type }) {
 }
 
 export function AbstractFeedback() {
-  return <Action name="Looks good" icon="thumbs-up" />;
+  const feedbackUrl = useSearchContext((ctx) => ctx.summary.feedbackUrl);
+  const [state, setState] = useState(0);
+  if (!feedbackUrl || state > 1) return null;
+
+  const onClick = () => {
+    setState(1);
+    Get(feedbackUrl).finally(() => setState(2));
+  };
+
+  return (
+    <Action
+      name="Looks good"
+      icon="thumbs-up"
+      loading={state === 1}
+      onClick={onClick}
+    />
+  );
 }
