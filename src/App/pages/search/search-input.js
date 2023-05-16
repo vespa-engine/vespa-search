@@ -1,5 +1,5 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { ActionIcon, Autocomplete, Group, Text } from '@mantine/core';
+import { ActionIcon, Autocomplete, Group, rem, Text } from '@mantine/core';
 import { ACTION, dispatch, useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
@@ -80,10 +80,11 @@ export function SearchInput({ size = 'md', autofocus = false }) {
       <Autocomplete
         styles={(theme) => ({
           input: {
-            overflowY: 'hidden',
-            lineHeight: 1,
-            paddingTop: '15px',
-            paddingBottom: '15px',
+            lineHeight: theme.lineHeight,
+            paddingTop: `calc(${theme.spacing.sm} + ${rem(
+              size === 'md' ? 0 : 1.5
+            )})`, // this is a hack to fix input alignment
+            paddingBottom: theme.spacing.sm,
             ...(dropdownOpened &&
               suggestions.length > 0 && {
                 borderBottomLeftRadius: 0,
