@@ -10,6 +10,9 @@ export function HeaderLinks() {
       <Link to="https://github.com/vespa-engine/vespa">
         <Icon name="github" type="brands" size="lg" color="gray.8" />
       </Link>
+      <Link to="http://slack.vespa.ai">
+        <Icon name="slack" type="brands" size="lg" color="gray.8" />
+      </Link>
       <LinkTheme />
     </Group>
   );

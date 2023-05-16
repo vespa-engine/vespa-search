@@ -3,7 +3,7 @@ import { ActionIcon, Autocomplete, Group, rem, Text } from '@mantine/core';
 import { ACTION, dispatch, useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
-import { Icon } from 'App/components/index.js';
+import { Icon } from 'App/components';
 import { Link } from 'App/libs/router';
 
 const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
