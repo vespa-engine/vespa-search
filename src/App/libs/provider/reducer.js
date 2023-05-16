@@ -1,4 +1,5 @@
 import { isEqual, shuffle, sortedUniq } from 'lodash';
+import { createUrlParams } from 'App/libs/provider/url-params';
 import { parseMarkdown, parseTokens } from 'App/pages/search/md-parser';
 import { ALL_NAMESPACES } from 'App/libs/provider/namespaces';
 
@@ -74,7 +75,12 @@ function _preReducer(state, action, data) {
             .flatMap((hit) => hit?.fields?.questions ?? [])
             .sort()
         )
-      ).slice(0, 3);
+      )
+        .slice(0, 3)
+        .map((query) => ({
+          text: query,
+          url: createUrlParams({ query, namespaces: state.namespaces }),
+        }));
       return { ...state, questions };
     }
 

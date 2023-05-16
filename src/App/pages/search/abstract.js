@@ -5,7 +5,6 @@ import { typography } from 'App/styles/theme/typography';
 import { Icon } from 'App/components';
 import { AbstractFeedback } from 'App/pages/search/abstract-feedback';
 import { fontWeightBold } from 'App/styles/common';
-import { createUrlParams } from 'App/libs/provider/url-params';
 import { Link } from 'App/libs/router';
 
 export function Abstract() {
@@ -51,7 +50,6 @@ function AbstractContent() {
 }
 
 function Questions() {
-  const namespaces = useSearchContext('namespaces');
   const questions = useSearchContext('questions');
   if (!(questions?.length > 0)) return null;
 
@@ -72,18 +70,15 @@ function Questions() {
         type="unordered"
         center
       >
-        {questions.map((query, i) => {
-          const to = createUrlParams({ query, namespaces });
-          return (
-            <Link to={to} key={i}>
-              <List.Item>
-                <Text color="blue" inline>
-                  {query}
-                </Text>
-              </List.Item>
-            </Link>
-          );
-        })}
+        {questions.map(({ text, url }, i) => (
+          <Link to={url} key={i}>
+            <List.Item>
+              <Text color="blue" inline>
+                {text}
+              </Text>
+            </List.Item>
+          </Link>
+        ))}
       </List>
     </Stack>
   );
