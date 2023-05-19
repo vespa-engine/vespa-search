@@ -74,7 +74,8 @@ function _preReducer(state, action, data) {
       const questions = shuffle(
         sortedUniq(refs.flatMap((hit) => hit?.fields?.questions ?? []).sort())
       )
-        .slice(0, 3)
+        .filter((query) => query.toLowerCase() !== state.query.toLowerCase())
+        .slice(0, 5)
         .map((query) => ({
           text: query,
           url: createUrlParams({ query, namespaces: state.namespaces }),

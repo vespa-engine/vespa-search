@@ -80,6 +80,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
       <Autocomplete
         styles={(theme) => ({
           input: {
+            overflowY: 'hidden',
             lineHeight: theme.lineHeight,
             paddingTop: `calc(${theme.spacing.sm} + ${rem(
               size === 'md' ? 0 : 1.5
