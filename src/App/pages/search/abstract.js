@@ -56,18 +56,35 @@ function Questions() {
   if (!(questions?.length > 0)) return null;
 
   return (
-    <>
+    <Stack>
       <Text fw={fontWeightBold}>Also try these questions:</Text>
-      <List type="unordered">
+      <List
+        styles={(theme) => ({
+          item: {
+            border: `1px solid ${theme.cr.getSubtleBorderAndSeparator('blue')}`,
+            backgroundColor: theme.cr.getAppBackground(),
+            borderRadius: theme.spacing.xl,
+            padding: theme.spacing.sm,
+            marginBottom: theme.spacing.xs,
+          },
+        })}
+        icon={<Icon name="magnifying-glass" color="blue" />}
+        type="unordered"
+        center
+      >
         {questions.map((query, i) => {
           const to = createUrlParams({ query, namespaces });
           return (
-            <List.Item key={i}>
-              <Link to={to}>{query}</Link>
-            </List.Item>
+            <Link to={to} key={i}>
+              <List.Item>
+                <Text color="blue" inline>
+                  {query}
+                </Text>
+              </List.Item>
+            </Link>
           );
         })}
       </List>
-    </>
+    </Stack>
   );
 }
