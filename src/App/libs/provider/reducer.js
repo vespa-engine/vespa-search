@@ -1,4 +1,7 @@
-import { isEqual } from 'lodash';
+import { isEqual, shuffle, sortedUniq } from 'lodash';
+import { UrlBuilder } from 'App/utils';
+import { createUrlParams } from 'App/libs/provider/url-params';
+import { parseMarkdown, parseTokens } from 'App/pages/search/md-parser';
 import { ALL_NAMESPACES } from 'App/libs/provider/namespaces';
 
 function toggleOption(allOptions, current, item) {
@@ -26,7 +29,8 @@ export const ACTION = Object.freeze({
   SET_NAMESPACES: 2,
 
   TOGGLE_NAMESPACE: 12,
-  APPEND_SUMMARY: 20,
+  SUMMARY_APPEND: 20,
+  SUMMARY_COMPLETE: 21,
 
   SET_HITS: 50,
   SELECT_HIT: 51,
@@ -58,10 +62,34 @@ function _preReducer(state, action, data) {
       return _preReducer(state, ACTION.SET_NAMESPACES, namespaces);
     }
 
-    case ACTION.APPEND_SUMMARY: {
+    case ACTION.SUMMARY_APPEND: {
+      const raw = (state.summary.raw + data).replace('<br/>', '\n');
+      const element = parseMarkdown(raw);
+      return { ...state, summary: { raw, element } };
+    }
+    case ACTION.SUMMARY_COMPLETE: {
+      const refs = parseTokens(state.summary.raw)
+        .filter(({ type }) => type === 'ref')
+        .map(({ text }) => state.hits.hits?.[parseInt(text) - 1]);
+      const questions = shuffle(
+        sortedUniq(refs.flatMap((hit) => hit?.fields?.questions ?? []).sort())
+      )
+        .filter((query) => query.toLowerCase() !== state.query.toLowerCase())
+        .slice(0, 5)
+        .map((query) => ({
+          text: query,
+          url: createUrlParams({ query, namespaces: state.namespaces }),
+        }));
+      const docIds = sortedUniq(refs.flatMap((hit) => hit.id).sort()).join(',');
+      const feedbackUrl = new UrlBuilder(import.meta.env.VITE_ENDPOINT)
+        .add('search')
+        .queryParam('query', state.query)
+        .queryParam('abstract', state.summary.raw)
+        .queryParam('docids', docIds)
+        .toString();
       return {
         ...state,
-        summary: (state.summary + data).replace('<br/>', '\n'),
+        summary: { ...state.summary, questions, feedbackUrl },
       };
     }
 
@@ -84,7 +112,7 @@ function _postReducer(state, result) {
   // Reset hits and summary if the query has changed
   if (state.query !== result.query || state.namespaces !== result.namespaces) {
     result.hits = { loading: true };
-    result.summary = '';
+    result.summary = { raw: '' };
   }
 
   return result;

@@ -58,20 +58,22 @@ export function SearchContextProvider({ children }) {
     const streamUrl = new UrlBuilder(endpoint)
       .add('stream')
       .queryParam('query', value.query)
-      .queryParam('filter', filters)
+      .queryParam('filters', filters)
       .toString();
     const source = new EventSource(streamUrl);
     source.addEventListener('message', (e) =>
-      dispatch(ACTION.APPEND_SUMMARY, e.data)
+      dispatch(ACTION.SUMMARY_APPEND, e.data)
     );
-    source.addEventListener('error', source.close); // TODO: Display error somewhere?
-    source.addEventListener('close', source.close);
+    source.addEventListener(
+      'error',
+      () => dispatch(ACTION.SUMMARY_COMPLETE) || source.close()
+    );
 
     let cancelled = false;
     const searchUrl = new UrlBuilder(endpoint)
       .add('search')
       .queryParam('query', value.query)
-      .queryParam('filter', filters);
+      .queryParam('filters', filters);
     Get(searchUrl)
       .then(
         (result) =>

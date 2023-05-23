@@ -1,9 +1,9 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { ActionIcon, Autocomplete, Group, Text } from '@mantine/core';
+import { ActionIcon, Autocomplete, Group, rem, Text } from '@mantine/core';
 import { ACTION, dispatch, useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
-import { Icon } from 'App/components/index.js';
+import { Icon } from 'App/components';
 import { Link } from 'App/libs/router';
 
 const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
@@ -31,6 +31,11 @@ export function SearchInput({ size = 'md', autofocus = false }) {
   useEffect(() => setValue(query), [query]);
 
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.style.height = '';
+      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
+    }
+
     let cancelled = false;
     if (value.length === 0) {
       setSuggestions([]);
@@ -61,14 +66,15 @@ export function SearchInput({ size = 'md', autofocus = false }) {
 
   const onSubmit = ({ value, url }) => {
     inputRef.current?.blur();
-    url ? (location.href = url) : dispatch(ACTION.SET_QUERY, value);
+    url
+      ? window.open(url, '_blank').focus()
+      : dispatch(ACTION.SET_QUERY, value);
   };
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        inputRef.current?.blur();
         onSubmit({ value });
         return false;
       }}
@@ -76,6 +82,12 @@ export function SearchInput({ size = 'md', autofocus = false }) {
       <Autocomplete
         styles={(theme) => ({
           input: {
+            overflowY: 'hidden',
+            lineHeight: theme.lineHeight,
+            paddingTop: `calc(${theme.spacing.sm} + ${rem(
+              size === 'md' ? 0 : 1.5
+            )})`, // this is a hack to fix input alignment
+            paddingBottom: theme.spacing.sm,
             ...(dropdownOpened &&
               suggestions.length > 0 && {
                 borderBottomLeftRadius: 0,
@@ -125,6 +137,12 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         size={size}
         filter={() => true}
         radius="xl"
+        component="textarea"
+        onKeyDown={(e) => {
+          if (e.key !== 'Enter') return;
+          e.preventDefault();
+          onSubmit({ value });
+        }}
       />
     </form>
   );

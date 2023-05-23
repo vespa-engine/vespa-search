@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lexer } from 'marked';
+import { Lexer, walkTokens } from 'marked';
 import {
   Blockquote,
   Code,
@@ -32,8 +32,13 @@ const extensions = Object.freeze({
 const convertTokens = ({ tokens }, urlResolver) =>
   tokens.map((token, i) => convert(token, `${token.type}-${i}`, urlResolver));
 
+function resolveUrl(url, options) {
+  if (options.baseUrl) return new URL(url, options.baseUrl).href;
+  return url.includes('://') ? url : undefined;
+}
+
 // https://github.com/markedjs/marked/blob/7c1e114f9f7949ba4033366582d2a4ddf09e85af/src/Tokenizer.js
-function convert(token, key, urlResolver) {
+function convert(token, key, options) {
   switch (token.type) {
     case 'code':
       return (
@@ -42,13 +47,11 @@ function convert(token, key, urlResolver) {
         </Prism>
       );
     case 'blockquote':
-      return (
-        <Blockquote key={key}>{convertTokens(token, urlResolver)}</Blockquote>
-      );
+      return <Blockquote key={key}>{convertTokens(token, options)}</Blockquote>;
     case 'heading':
       return (
         <Title key={key} order={token.depth}>
-          {convertTokens(token, urlResolver)}
+          {convertTokens(token, options)}
         </Title>
       );
     case 'hr':
@@ -57,7 +60,7 @@ function convert(token, key, urlResolver) {
       return (
         <List key={key} type={token.ordered ? 'ordered' : 'unordered'}>
           {token.items.map((item, i) => (
-            <List.Item key={i}>{convertTokens(item, urlResolver)}</List.Item>
+            <List.Item key={i}>{convertTokens(item, options)}</List.Item>
           ))}
         </List>
       );
@@ -67,7 +70,7 @@ function convert(token, key, urlResolver) {
           <thead>
             <tr>
               {token.header.map((cell, i) => (
-                <th key={i}>{convertTokens(cell, urlResolver)}</th>
+                <th key={i}>{convertTokens(cell, options)}</th>
               ))}
             </tr>
           </thead>
@@ -75,7 +78,7 @@ function convert(token, key, urlResolver) {
             {token.rows.map((row, i) => (
               <tr key={i}>
                 {row.map((cell, j) => (
-                  <td key={j}>{convertTokens(cell, urlResolver)}</td>
+                  <td key={j}>{convertTokens(cell, options)}</td>
                 ))}
               </tr>
             ))}
@@ -86,13 +89,13 @@ function convert(token, key, urlResolver) {
     case 'strong':
       return (
         <Text key={key} fw={fontWeightBold} span>
-          {convertTokens(token, urlResolver)}
+          {convertTokens(token, options)}
         </Text>
       );
     case 'em':
       return (
         <Text key={key} italic span>
-          {convertTokens(token, urlResolver)}
+          {convertTokens(token, options)}
         </Text>
       );
     case 'codespan':
@@ -104,23 +107,30 @@ function convert(token, key, urlResolver) {
     case 'del':
       return (
         <Text key={key} strikethrough span>
-          {convertTokens(token, urlResolver)}
+          {convertTokens(token, options)}
         </Text>
       );
-    case 'link':
+    case 'link': {
+      const to = resolveUrl(token.href, options);
+      if (!to) return convertTokens(token, options);
       return (
-        <Link key={key} to={urlResolver(token.href)}>
-          {convertTokens(token, urlResolver)}
+        <Link key={key} to={to}>
+          {convertTokens(token, options)}
         </Link>
       );
+    }
     case 'image':
       return (
-        <Image key={key} src={urlResolver(token.href)} alt={token.title} />
+        <Image
+          key={key}
+          src={resolveUrl(token.href, options)}
+          alt={token.title}
+        />
       );
     case 'paragraph':
-      return <Text key={key}>{convertTokens(token, urlResolver)}</Text>;
+      return <Text key={key}>{convertTokens(token, options)}</Text>;
     case 'text':
-      return token.tokens ? convertTokens(token, urlResolver) : token.raw;
+      return token.tokens ? convertTokens(token, options) : token.raw;
     case 'ref':
       return ['[', <LinkReference key={key} token={token} />, ']'];
     default:
@@ -130,14 +140,22 @@ function convert(token, key, urlResolver) {
   }
 }
 
-export function parseMarkdown(src, baseUrl) {
+export function parseMarkdown(src, options = {}) {
   try {
-    const urlResolver = baseUrl
-      ? (href) => new URL(href, baseUrl).href
-      : (href) => href;
     const opt = { extensions, gfm: true };
     const tokens = Lexer.lex(src, opt);
-    return convertTokens({ tokens }, urlResolver);
+    return convertTokens({ tokens }, options);
+  } catch (e) {
+    console.error(e);
+    return src;
+  }
+}
+
+export function parseTokens(src) {
+  try {
+    const opt = { extensions, gfm: true };
+    const tokens = Lexer.lex(src, opt);
+    return walkTokens(tokens, (t) => t);
   } catch (e) {
     console.error(e);
     return src;

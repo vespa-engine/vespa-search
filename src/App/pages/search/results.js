@@ -72,7 +72,7 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
             )}
           </Group>
           <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
-            {parseMarkdown(content, titleLink)}
+            {parseMarkdown(content, { baseUrl: titleLink })}
           </Stack>
         </Stack>
       </Spoiler>
