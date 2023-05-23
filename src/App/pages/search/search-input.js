@@ -66,7 +66,9 @@ export function SearchInput({ size = 'md', autofocus = false }) {
 
   const onSubmit = ({ value, url }) => {
     inputRef.current?.blur();
-    url ? (location.href = url) : dispatch(ACTION.SET_QUERY, value);
+    url
+      ? window.open(url, '_blank').focus()
+      : dispatch(ACTION.SET_QUERY, value);
   };
 
   return (
