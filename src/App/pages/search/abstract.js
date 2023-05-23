@@ -64,6 +64,9 @@ function AbstractQuestions() {
             borderRadius: theme.spacing.xl,
             padding: theme.spacing.sm,
             marginBottom: theme.spacing.xs,
+            '&:hover': {
+              borderColor: theme.cr.getSolidBackground('blue'),
+            },
           },
         })}
         icon={<Icon name="magnifying-glass" color="blue" />}
