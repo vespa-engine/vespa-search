@@ -70,9 +70,10 @@ function _preReducer(state, action, data) {
     case ACTION.SUMMARY_COMPLETE: {
       const refs = parseTokens(state.summary.raw)
         .filter(({ type }) => type === 'ref')
-        .map(({ text }) => state.hits.hits?.[parseInt(text) - 1]);
+        .map(({ text }) => state.hits.hits?.[parseInt(text) - 1])
+        .filter((hit) => hit != null);
       const questions = shuffle(
-        sortedUniq(refs.flatMap((hit) => hit?.fields?.questions ?? []).sort())
+        sortedUniq(refs.flatMap((hit) => hit.fields?.questions ?? []).sort())
       )
         .filter((query) => query.toLowerCase() !== state.query.toLowerCase())
         .slice(0, 5)
