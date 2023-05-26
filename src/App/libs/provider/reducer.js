@@ -87,7 +87,7 @@ function _preReducer(state, action, data) {
         .queryParam('query', state.query)
         .queryParam('abstract', state.summary.raw)
         .queryParam('docids', docIds)
-        .toString();
+        .toString(true);
       return {
         ...state,
         summary: { ...state.summary, questions, feedbackUrl },
