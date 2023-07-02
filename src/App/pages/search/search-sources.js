@@ -1,14 +1,10 @@
 import React from 'react';
 import { Button, Group } from '@mantine/core';
-import {
-  ACTION,
-  ALL_NAMESPACES,
-  dispatch,
-  useSearchContext,
-} from 'App/libs/provider';
+import { ALL_NAMESPACES, useSearchContext } from 'App/libs/provider';
 import { Icon } from 'App/components';
 
 function Source({ id, icon, name }) {
+  const toggleNamespace = useSearchContext((ctx) => ctx.toggleNamespace);
   const selected = useSearchContext((ctx) => ctx.namespaces.includes(id));
 
   return (
@@ -16,7 +12,7 @@ function Source({ id, icon, name }) {
       leftIcon={<Icon name={icon} />}
       color={selected ? 'blue' : 'gray'}
       variant={selected ? 'filled' : 'subtle'}
-      onClick={() => dispatch(ACTION.TOGGLE_NAMESPACE, id)}
+      onClick={() => toggleNamespace(id)}
       radius="xl"
       size="xs"
     >

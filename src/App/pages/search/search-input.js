@@ -1,6 +1,6 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
 import { ActionIcon, Autocomplete, Group, rem, Text } from '@mantine/core';
-import { ACTION, dispatch, useSearchContext } from 'App/libs/provider';
+import { useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
 import { Icon } from 'App/components';
@@ -18,10 +18,11 @@ const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
 });
 
 export function SearchInput({ size = 'md', autofocus = false }) {
-  const query = useSearchContext('query');
-  const filters = useSearchContext((ctx) =>
-    ctx.namespaces.map((n) => `+namespace:${n}`).join(' ')
-  );
+  const [query, filters, setQuery] = useSearchContext((ctx) => [
+    ctx.query,
+    ctx.namespaces.map((n) => `+namespace:${n}`).join(' '),
+    ctx.setQuery,
+  ]);
   const [dropdownOpened, setDropdownOpened] = useState(false);
   const [value, setValue] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
@@ -67,9 +68,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
 
   const onSubmit = ({ value, url }) => {
     inputRef.current?.blur();
-    url
-      ? window.open(url, '_blank').focus()
-      : dispatch(ACTION.SET_QUERY, value);
+    url ? window.open(url, '_blank').focus() : setQuery(value);
   };
 
   return (

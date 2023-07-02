@@ -81,7 +81,7 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
 }
 
 export function Results() {
-  const { loading, error, hits } = useSearchContext('hits');
+  const { loading, error, hits } = useSearchContext((ctx) => ctx.hits);
 
   if (loading) return <LoadingResult />;
   if (error) return <Error message={error.message} />;

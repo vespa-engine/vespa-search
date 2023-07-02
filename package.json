@@ -40,8 +40,8 @@
     "prism-react-renderer": "^1",
     "prismjs": "^1",
     "react-router-dom": "^6",
-    "use-context-selector": "^1",
     "vite": "^4",
-    "vitest": "^0"
+    "vitest": "^0",
+    "zustand": "^4"
   }
 }
