@@ -12,7 +12,7 @@ const endpoint = import.meta.env.VITE_ENDPOINT;
 export function SearchContext() {
   const location = useLocation();
   const navigate = useNavigate();
-  const queryRef = useRef(location.search);
+  const queryRef = useRef(null);
   const [
     query,
     namespaces,
@@ -39,7 +39,12 @@ export function SearchContext() {
   // Every time the query/namespaces are changed, update the URL
   useLayoutEffect(() => {
     const queryParams = createUrlParams({ query, namespaces });
-    if (queryParams === window.location.search) return;
+    if (
+      queryRef.current == null ||
+      query.length === 0 ||
+      queryParams === queryRef.current
+    )
+      return;
 
     queryRef.current = queryParams;
     navigate((query ? '/search' : '/') + queryParams);
