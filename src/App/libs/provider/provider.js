@@ -60,8 +60,10 @@ export function SearchContext() {
       .queryParam('filters', filters)
       .toString(true);
     const source = new EventSource(streamUrl);
-    source.addEventListener('message', (e) => summaryAppend(e.data));
-    source.addEventListener('error', () => summaryComplete() || source.close());
+    const onMessage = (e) => summaryAppend(e.data);
+    const onError = () => summaryComplete() || source.close();
+    source.addEventListener('message', onMessage);
+    source.addEventListener('error', onError);
 
     let cancelled = false;
     const searchUrl = new UrlBuilder(endpoint)
@@ -77,6 +79,8 @@ export function SearchContext() {
     return () => {
       cancelled = true;
       source.close();
+      source.removeEventListener('message', onMessage);
+      source.removeEventListener('error', onError);
     };
   }, [query, namespaces, setHits, summaryAppend, summaryComplete]);
 
