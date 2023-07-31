@@ -1,5 +1,5 @@
 import React from 'react';
-import { Aside as MantineAside } from '@mantine/core';
+import { Aside as MantineAside, ScrollArea } from '@mantine/core';
 
 export function Aside({ children, ...props }) {
   return (
@@ -13,7 +13,9 @@ export function Aside({ children, ...props }) {
       withBorder={false}
       {...props}
     >
-      {children}
+      <MantineAside.Section grow component={ScrollArea}>
+        {children}
+      </MantineAside.Section>
     </MantineAside>
   );
 }
