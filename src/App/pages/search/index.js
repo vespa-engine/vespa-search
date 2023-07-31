@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ScrollArea, Stack } from '@mantine/core';
 import { Results } from 'App/pages/search/results';
 import { SearchInput } from 'App/pages/search/search-input';
@@ -8,12 +8,15 @@ import { SearchSources } from 'App/pages/search/search-sources';
 import { Aside } from 'App/libs/layout';
 
 export function Search() {
+  const viewportRef = useRef(null);
+
   return (
     <Container>
       <ScrollArea
         sx={(theme) => ({
           height: `calc(100vh - var(--mantine-header-height, 0px) - (2 * ${theme.spacing.md}))`,
         })}
+        viewportRef={viewportRef}
       >
         <Stack
           sx={(theme) => ({
@@ -27,7 +30,9 @@ export function Search() {
             <SearchInput />
             <SearchSources />
           </Stack>
-          <Results />
+          <Results
+            scrollBy={(options) => viewportRef.current.scrollBy(options)}
+          />
         </Stack>
       </ScrollArea>
       <Aside>
