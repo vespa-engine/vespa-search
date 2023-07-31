@@ -106,14 +106,14 @@ function fn(set, mapper) {
 }
 
 function apply(state, result) {
-  // Unset selectedHit if the hits have changed
-  if (state.hits !== result.hits) delete result.selectedHit;
-
   // Reset hits and summary if the query has changed
   if (state.query !== result.query || state.namespaces !== result.namespaces) {
     result.hits = { loading: true };
     result.summary = { raw: '' };
   }
+
+  // Unset selectedHit if the hits have changed
+  if (state.hits !== result.hits) result.selectedHit = null;
 
   return Object.freeze(result);
 }
