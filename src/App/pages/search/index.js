@@ -47,7 +47,7 @@ export function Search() {
       <ScrollArea sx={(theme) => ({ height: getHeight(theme) })}>
         <Stack
           sx={(theme) => ({
-            maxWidth: `calc(${ABSTRACT_WIDTH} - (2 * ${theme.spacing.md}))`,
+            maxWidth: `calc(${ABSTRACT_WIDTH} - (1 * ${theme.spacing.md}))`,
             width: '100%',
           })}
         >
