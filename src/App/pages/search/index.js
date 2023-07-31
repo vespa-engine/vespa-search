@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack } from '@mantine/core';
+import { ScrollArea, Stack } from '@mantine/core';
 import { Results } from 'App/pages/search/results';
 import { SearchInput } from 'App/pages/search/search-input';
 import { Abstract } from 'App/pages/search/abstract';
@@ -10,20 +10,26 @@ import { Aside } from 'App/libs/layout';
 export function Search() {
   return (
     <Container>
-      <Stack
+      <ScrollArea
         sx={(theme) => ({
-          maxWidth: `calc(100vw - calc(var(--mantine-aside-width, 0px) + (3 * ${theme.spacing.md})))`,
-          paddingTop: theme.spacing.md,
-          width: '100%',
+          height: `calc(100vh - var(--mantine-header-height, 0px) - (2 * ${theme.spacing.md}))`,
         })}
-        spacing="lg"
       >
-        <Stack>
-          <SearchInput />
-          <SearchSources />
+        <Stack
+          sx={(theme) => ({
+            maxWidth: `calc(100vw - calc(var(--mantine-aside-width, 0px) + (3 * ${theme.spacing.md})))`,
+            paddingTop: theme.spacing.md,
+            width: '100%',
+          })}
+          spacing="lg"
+        >
+          <Stack>
+            <SearchInput />
+            <SearchSources />
+          </Stack>
+          <Results />
         </Stack>
-        <Results />
-      </Stack>
+      </ScrollArea>
       <Aside>
         <Abstract />
       </Aside>
