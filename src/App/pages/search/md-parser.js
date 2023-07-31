@@ -33,7 +33,12 @@ const convertTokens = ({ tokens }, urlResolver) =>
   tokens.map((token, i) => convert(token, `${token.type}-${i}`, urlResolver));
 
 function resolveUrl(url, options) {
-  if (options.baseUrl) return new URL(url, options.baseUrl).href;
+  if (options.baseUrl)
+    try {
+      return new URL(url, options.baseUrl).href;
+    } catch (err) {
+      return undefined;
+    }
   return url.includes('://') ? url : undefined;
 }
 
