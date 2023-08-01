@@ -6,7 +6,15 @@ import { Content, Error, Icon, LoadingResult } from 'App/components';
 import { typography } from 'App/styles/theme/typography';
 import { Link } from 'App/libs/router';
 
-function Result({ refId, title, content, base_uri, path, namespace }) {
+function Result({
+  refId,
+  title,
+  content,
+  base_uri,
+  path,
+  namespace,
+  scrollBy,
+}) {
   const isSelected = useSearchContext((ctx) => ctx.selectedHit === refId);
   const ref = useRef();
   const titleLink = base_uri + path;
@@ -14,9 +22,9 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
-    const position = ref.current.getBoundingClientRect().top - 80;
-    window.scrollBy({ top: position, behavior: 'smooth' });
-  }, [ref, isSelected]);
+    const position = ref.current.getBoundingClientRect().top - 85;
+    scrollBy({ top: position, behavior: 'smooth' });
+  }, [ref, isSelected, scrollBy]);
 
   return (
     <Content
@@ -80,7 +88,7 @@ function Result({ refId, title, content, base_uri, path, namespace }) {
   );
 }
 
-export function Results() {
+export function Results({ scrollBy }) {
   const { loading, error, hits } = useSearchContext((ctx) => ctx.hits);
 
   if (loading) return <LoadingResult />;
@@ -91,7 +99,12 @@ export function Results() {
   ) : (
     <Stack spacing="lg">
       {hits.map((child, i) => (
-        <Result key={child.id} refId={i + 1} {...child.fields} />
+        <Result
+          key={child.id}
+          refId={i + 1}
+          scrollBy={scrollBy}
+          {...child.fields}
+        />
       ))}
     </Stack>
   );

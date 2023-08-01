@@ -39,15 +39,10 @@ export function SearchContext() {
   // Every time the query/namespaces are changed, update the URL
   useLayoutEffect(() => {
     const queryParams = createUrlParams({ query, namespaces });
-    if (
-      queryRef.current == null ||
-      query.length === 0 ||
-      queryParams === queryRef.current
-    )
-      return;
+    if (queryRef.current == null || queryParams === queryRef.current) return;
 
     queryRef.current = queryParams;
-    navigate((query ? '/search' : '/') + queryParams);
+    navigate(query ? '/search' + queryParams : '/');
   }, [navigate, query, namespaces]);
 
   useLayoutEffect(() => {
