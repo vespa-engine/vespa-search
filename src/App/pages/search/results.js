@@ -22,7 +22,7 @@ function Result({
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
-    const position = ref.current.getBoundingClientRect().top - 80;
+    const position = ref.current.getBoundingClientRect().top - 85;
     scrollBy({ top: position, behavior: 'smooth' });
   }, [ref, isSelected, scrollBy]);
 
