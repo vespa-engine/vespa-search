@@ -37,7 +37,7 @@
     "lodash": "^4",
     "marked": "^4",
     "prettier": "^2",
-    "prism-react-renderer": "^1",
+    "prism-react-renderer": "^2.0.0",
     "prismjs": "^1",
     "react-router-dom": "^6",
     "vite": "^4",
