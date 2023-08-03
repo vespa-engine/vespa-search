@@ -11,7 +11,7 @@ import {
   Title,
 } from '@mantine/core';
 import { Prism } from '@mantine/prism';
-import PrismRenderer from 'prism-react-renderer/prism';
+import { Prism as PrismRenderer } from 'prism-react-renderer';
 import { Link } from 'App/libs/router';
 import { LinkReference } from 'App/pages/search/link-reference';
 import { fontWeightBold } from 'App/styles/common';
