@@ -35,7 +35,7 @@
     "eslint-plugin-unused-imports": "^2",
     "file-saver": "^2",
     "lodash": "^4",
-    "marked": "^4",
+    "marked": "^6.0.0",
     "prettier": "^2",
     "prism-react-renderer": "^1",
     "prismjs": "^1",
