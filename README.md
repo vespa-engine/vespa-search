@@ -1,4 +1,12 @@
-# vespa-search
+<!-- Copyright Yahoo. Licensed under the terms of the Apache 2.0 license. See LICENSE in the project root. -->
+
+![Vespa Search screenshot](vespa-search.png)
+
+# Vespa Search
+This is a Vespa Application for searching and exploring documentation, blogs,
+sample applications and other resources useful when working on Vespa.
+
+<!-- ToDo: Link to Blog post announcement when published -->
 
 Install and start:
 
