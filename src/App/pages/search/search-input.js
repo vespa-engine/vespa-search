@@ -48,6 +48,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         .add('suggest')
         .queryParam('query', value)
         .queryParam('filters', filters)
+        .queryParam('queryProfile', 'suggest')
         .toString(true)
     )
       .then(

@@ -53,6 +53,7 @@ export function SearchContext() {
       .add('stream')
       .queryParam('query', query)
       .queryParam('filters', filters)
+      .queryParam('queryProfile', 'llmsearch')
       .toString(true);
     const source = new EventSource(streamUrl);
     const onMessage = (e) => summaryAppend(e.data);
@@ -65,6 +66,7 @@ export function SearchContext() {
       .add('search')
       .queryParam('query', query)
       .queryParam('filters', filters)
+      .queryParam('queryProfile', 'llmsearch')
       .toString(true);
     Get(searchUrl)
       .then(
