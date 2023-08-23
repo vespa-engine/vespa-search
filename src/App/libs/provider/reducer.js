@@ -54,7 +54,7 @@ function toggleNamespace(state, namespace) {
   let namespaces = toggleOption(ALL_NAMESPACES, state.namespaces, namespace);
   if (namespaces.length === 0)
     namespaces = ALL_NAMESPACES.map(({ id }) => id).filter(
-      (id) => id !== namespace
+      (id) => id !== namespace,
     );
   return setNamespaces(state, namespaces);
 }
@@ -71,7 +71,7 @@ function summaryComplete(state) {
     .map(({ text }) => state.hits.hits?.[parseInt(text) - 1])
     .filter((hit) => hit != null);
   const questions = shuffle(
-    sortedUniq(refs.flatMap((hit) => hit.fields?.questions ?? []).sort())
+    sortedUniq(refs.flatMap((hit) => hit.fields?.questions ?? []).sort()),
   )
     .filter((query) => query.toLowerCase() !== state.query.toLowerCase())
     .slice(0, 5)
@@ -85,6 +85,7 @@ function summaryComplete(state) {
     .queryParam('query', state.query)
     .queryParam('abstract', state.summary.raw)
     .queryParam('docids', docIds)
+    .queryParam('queryProfile', 'llmsearch')
     .toString(true);
   return {
     ...state,
