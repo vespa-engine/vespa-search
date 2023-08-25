@@ -44,8 +44,8 @@ export function Abstract() {
       </Group>
       <AbstractContent />
       <AbstractFeedback />
-      <AbstractQuestions />
       <AbstractAbout />
+      <AbstractQuestions />
     </Stack>
   );
 }
