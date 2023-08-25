@@ -102,13 +102,12 @@ function AbstractAbout() {
     <Stack>
       <Text fw={fontWeightBold}>About the abstract</Text>
       <Text size="sm">
-        This abstract is dependent on the quality of your initial query and
-        output of the resulting search. The algorithm may have been distracted
-        by irrelevant context retrieved from the query, and the answer may
-        change depending on which sources are included. Abstracts are not
-        designed for, or intended to meet regulatory, legal, or other
-        obligations, or to be used, or relied upon, as a substitute for medical,
-        legal, financial, or other professional advice.
+        This abstract was created by a generative AI model using your query and
+        the search results as input. By entering a query, you agree to share any
+        information provided with Open AI, which is subject to its Terms of
+        Service and Privacy Policy. There may be inaccuracies or unintended bias
+        in any abstract provided. Abstracts should not be used as a substitute
+        for medical, legal, financial or other professional advice.
       </Text>
     </Stack>
   );
