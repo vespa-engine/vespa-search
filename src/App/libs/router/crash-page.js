@@ -20,7 +20,7 @@ export function CrashPage({ error }) {
       </Anchor>
       <Anchor
         color="blue"
-        href="mailto:support@vespa.ai?subject=Vespa Seach crash"
+        href="mailto:support@vespa.ai?subject=Vespa Search crash"
       >
         Email us a bug report, please include the information below
       </Anchor>
