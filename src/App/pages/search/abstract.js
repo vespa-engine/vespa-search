@@ -1,10 +1,18 @@
 import React from 'react';
-import { Group, HoverCard, Stack, List, Text, Title } from '@mantine/core';
+import {
+  Group,
+  HoverCard,
+  Stack,
+  List,
+  Text,
+  Title,
+  Container,
+} from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider';
 import { typography } from 'App/styles/theme/typography';
 import { Icon } from 'App/components';
 import { AbstractFeedback } from 'App/pages/search/abstract-feedback';
-import { breakpoints, fontWeightBold } from 'App/styles/common';
+import { fontWeightBold } from 'App/styles/common';
 import { Link } from 'App/libs/router';
 
 export function Abstract() {
@@ -27,18 +35,16 @@ export function Abstract() {
             </Text>
           </HoverCard.Target>
           <HoverCard.Dropdown>
-            <Stack sx={{ maxWidth: breakpoints.sm }}>
+            <Container size="sm">
               <Text size="sm">
-                This abstract is dependent on the quality of your initial query
-                and output of the resulting search. The algorithm may have been
-                distracted by irrelevant context retrieved from the query, and
-                the answer may change depending on which sources are included.
-                Abstracts are not designed for, or intended to meet regulatory,
-                legal, or other obligations, or to be used, or relied upon, as a
-                substitute for medical, legal, financial, or other professional
-                advice.
+                The abstract&apos;s accuracy relies on your query and the search
+                outcome. Irrelevant query context might influence results, and
+                answers vary based on sources used. Abstracts aren&apos;t
+                suitable for regulatory or legal purposes and shouldn&apos;t
+                replace professional advice in medical, legal, or financial
+                areas.
               </Text>
-            </Stack>
+            </Container>
           </HoverCard.Dropdown>
         </HoverCard>
       </Group>
@@ -102,12 +108,17 @@ function AbstractAbout() {
     <Stack>
       <Text fw={fontWeightBold}>About the abstract</Text>
       <Text size="sm">
-        This abstract was created by a generative AI model using your query and
-        the search results as input. By entering a query, you agree to share any
-        information provided with Open AI, which is subject to its Terms of
-        Service and Privacy Policy. There may be inaccuracies or unintended bias
-        in any abstract provided. Abstracts should not be used as a substitute
-        for medical, legal, financial or other professional advice.
+        This abstract is AI-generated, based on your query and search results.
+        By submitting a query, you agree to share data with OpenAI, governed by
+        theirs{' '}
+        <Link to="https://openai.com/policies/terms-of-use">Terms of Use</Link>{' '}
+        and{' '}
+        <Link to="https://openai.com/policies/privacy-policy">
+          Privacy Policy
+        </Link>
+        . Note that abstracts may contain inaccuracies or unintended biases and
+        shouldn&apos;t serve as a substitute for professional advice in medical,
+        legal, financial, or other domains.
       </Text>
     </Stack>
   );
