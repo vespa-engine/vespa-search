@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Space, Stack } from '@mantine/core';
 import { SearchInput } from 'App/pages/search/search-input.js';
+import { SearchDisclaimer } from 'App/pages/home/search-disclaimer';
 
 export function Home() {
   return (
@@ -8,6 +9,7 @@ export function Home() {
       <Space h={89} />
       <Stack>
         <SearchInput size="lg" autofocus />
+        <SearchDisclaimer />
       </Stack>
     </Container>
   );
