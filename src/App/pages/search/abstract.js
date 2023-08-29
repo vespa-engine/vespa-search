@@ -1,12 +1,12 @@
 import React from 'react';
 import {
   Group,
-  HoverCard,
   Stack,
   List,
   Text,
   Title,
   Container,
+  Popover,
 } from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider';
 import { typography } from 'App/styles/theme/typography';
@@ -28,13 +28,13 @@ export function Abstract() {
         >
           Abstract
         </Title>
-        <HoverCard withinPortal>
-          <HoverCard.Target>
-            <Text color="blue">
+        <Popover withinPortal>
+          <Popover.Target>
+            <Text sx={{ cursor: 'pointer' }} color="blue">
               <Icon name="circle-question" type="regular" /> What is this?
             </Text>
-          </HoverCard.Target>
-          <HoverCard.Dropdown>
+          </Popover.Target>
+          <Popover.Dropdown>
             <Container size="sm">
               <Text size="sm">
                 The abstract&apos;s accuracy relies on your query and the search
@@ -45,8 +45,8 @@ export function Abstract() {
                 areas.
               </Text>
             </Container>
-          </HoverCard.Dropdown>
-        </HoverCard>
+          </Popover.Dropdown>
+        </Popover>
       </Group>
       <AbstractContent />
       <AbstractFeedback />
@@ -104,6 +104,11 @@ function AbstractQuestions() {
 }
 
 function AbstractAbout() {
+  const hasFinished = useSearchContext(
+    (ctx) => ctx.summary.feedbackUrl != null,
+  );
+  if (!hasFinished) return null;
+
   return (
     <Stack>
       <Text fw={fontWeightBold}>About the abstract</Text>
