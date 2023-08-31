@@ -49,7 +49,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         .queryParam('query', value)
         .queryParam('filters', filters)
         .queryParam('queryProfile', 'suggest')
-        .toString(true)
+        .toString(true),
     )
       .then(
         (response) =>
@@ -59,8 +59,8 @@ export function SearchInput({ size = 'md', autofocus = false }) {
               value: item.fields.term,
               type: item.fields.type,
               url: item.fields.url,
-            }))
-          )
+            })),
+          ),
       )
       .catch(() => !cancelled && setSuggestions([]));
 
@@ -86,7 +86,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
             overflowY: 'hidden',
             lineHeight: theme.lineHeight,
             paddingTop: `calc(${theme.spacing.sm} + ${rem(
-              size === 'md' ? 0 : 1.5
+              size === 'md' ? 0 : 1.5,
             )})`, // this is a hack to fix input alignment
             paddingBottom: theme.spacing.sm,
             ...(dropdownOpened &&
