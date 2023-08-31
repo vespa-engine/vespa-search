@@ -23,11 +23,11 @@ function Action({ icon, name, type, ...props }) {
 export function AbstractFeedback() {
   const feedbackUrl = useSearchContext((ctx) => ctx.summary.feedbackUrl);
   const [state, setState] = useState(0);
-  if (!feedbackUrl || state > 1) return null;
+  if (!feedbackUrl || feedbackUrl === state) return null;
 
-  const onClick = (feedbackUrl) => {
+  const onClick = (url) => {
     setState(1);
-    Get(feedbackUrl).finally(() => setState(2));
+    Get(url).finally(() => setState(feedbackUrl));
   };
 
   return (
