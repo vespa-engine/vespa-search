@@ -25,7 +25,7 @@ export function AbstractFeedback() {
   const [state, setState] = useState(0);
   if (!feedbackUrl || state > 1) return null;
 
-  const onClick = () => {
+  const onClick = (feedbackUrl) => {
     setState(1);
     Get(feedbackUrl).finally(() => setState(2));
   };
