@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button } from '@mantine/core';
+import { Button, Group } from '@mantine/core';
 import { Get } from 'App/libs/fetcher';
 import { useSearchContext } from 'App/libs/provider';
 import { Icon } from 'App/components/index.js';
@@ -25,17 +25,25 @@ export function AbstractFeedback() {
   const [state, setState] = useState(0);
   if (!feedbackUrl || state > 1) return null;
 
-  const onClick = () => {
+  const onClick = (feedbackUrl) => {
     setState(1);
     Get(feedbackUrl).finally(() => setState(2));
   };
 
   return (
-    <Action
-      name="Looks good"
-      icon="thumbs-up"
-      loading={state === 1}
-      onClick={onClick}
-    />
+    <Group spacing="xs" grow>
+      <Action
+        name="Looks good"
+        icon="thumbs-up"
+        loading={state === 1}
+        onClick={() => onClick(feedbackUrl + 'good')}
+      />
+      <Action
+        name="Not useful"
+        icon="thumbs-down"
+        loading={state === 1}
+        onClick={() => onClick(feedbackUrl + 'bad')}
+      />
+    </Group>
   );
 }

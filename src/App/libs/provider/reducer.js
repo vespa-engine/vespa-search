@@ -86,6 +86,7 @@ function summaryComplete(state) {
     .queryParam('abstract', state.summary.raw)
     .queryParam('docids', docIds)
     .queryParam('queryProfile', 'llmsearch')
+    .queryParam('reason', '')
     .toString(true);
   return {
     ...state,

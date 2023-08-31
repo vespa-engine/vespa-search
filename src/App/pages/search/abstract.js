@@ -12,7 +12,7 @@ import { useSearchContext } from 'App/libs/provider';
 import { typography } from 'App/styles/theme/typography';
 import { Icon } from 'App/components';
 import { AbstractFeedback } from 'App/pages/search/abstract-feedback';
-import { fontWeightBold } from 'App/styles/common';
+import { fontWeightBold, fontWeightLight } from 'App/styles/common';
 import { Link } from 'App/libs/router';
 
 export function Abstract() {
@@ -26,7 +26,10 @@ export function Abstract() {
           sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
           order={4}
         >
-          Abstract
+          Abstract{' '}
+          <Text weight={fontWeightLight} size="sm" span>
+            (experimental)
+          </Text>
         </Title>
         <Popover withinPortal>
           <Popover.Target>

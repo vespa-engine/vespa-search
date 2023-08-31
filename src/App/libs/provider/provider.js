@@ -70,7 +70,7 @@ export function SearchContext() {
       .toString(true);
     Get(searchUrl)
       .then(
-        (result) => !cancelled && setHits({ hits: result.root.children ?? [] })
+        (result) => !cancelled && setHits({ hits: result.root.children ?? [] }),
       )
       .catch((error) => !cancelled && setHits({ error }));
     return () => {
