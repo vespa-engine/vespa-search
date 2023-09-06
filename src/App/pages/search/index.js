@@ -31,6 +31,7 @@ export function Search() {
           sx={(theme) => ({
             maxWidth: `calc(${RESULTS_WIDTH} - (3 * ${theme.spacing.md}))`,
             paddingTop: theme.spacing.md,
+            paddingRight: theme.spacing.md,
             width: '100%',
           })}
           spacing="lg"
