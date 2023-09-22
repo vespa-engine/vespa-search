@@ -7,8 +7,8 @@ module.exports = {
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings"
+    "plugin:import/recommended",
+    "plugin:prettier/recommended"
   ],
   "overrides": [
   ],
@@ -22,7 +22,6 @@ module.exports = {
   "plugins": [
     "react",
     "react-hooks",
-    "prettier",
     "unused-imports"
   ],
   "rules": {
@@ -35,7 +34,6 @@ module.exports = {
     "unused-imports/no-unused-imports": "error",
     "import/order": ["error", { "newlines-between": "never" }],
     "import/no-unassigned-import": ["error", { "allow": ["**/*.css"] }],
-    "prettier/prettier": "error"
   },
   "settings": {
     "react": {
@@ -44,7 +42,8 @@ module.exports = {
     "import/resolver": {
       "node": {
         "moduleDirectory": ["node_modules", "src"]
-      }
+      },
+      alias: true
     }
   },
   "ignorePatterns": [ "node_modules/*", "public/*", "*.css" ]
