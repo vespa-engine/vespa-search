@@ -1,3 +1,15 @@
+import 'App/styles/reset.css';
+
+import '@fontsource/inter/latin-300.css';
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+
+import '@mantine/core/styles.css';
+import '@mantine/code-highlight/styles.css';
+import '@mantine/notifications/styles.css';
+
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
