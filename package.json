@@ -6,14 +6,14 @@
   "scripts": {
     "dev": "vite dev --port 3000",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
-    "@emotion/react": "^11",
     "@fontsource/inter": "^5",
     "@fortawesome/fontawesome-svg-core": "^6",
     "@fortawesome/free-brands-svg-icons": "^6",
@@ -27,6 +27,7 @@
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitejs/plugin-react": "^4",
+    "clsx": "^2",
     "dayjs": "^1",
     "eslint": "^8",
     "eslint-config-prettier": "^9",
@@ -43,8 +44,6 @@
     "postcss-preset-mantine": "^1",
     "postcss-simple-vars": "^7",
     "prettier": "^3",
-    "prism-react-renderer": "^2",
-    "prismjs": "^1",
     "react-router-dom": "^6",
     "vite": "^4",
     "vitest": "^0",
