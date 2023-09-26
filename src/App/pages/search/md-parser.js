@@ -10,14 +10,10 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { Prism } from '@mantine/prism';
-import { Prism as PrismRenderer } from 'prism-react-renderer';
+import { CodeHighlight } from '@mantine/code-highlight';
 import { Link } from 'App/libs/router';
 import { LinkReference } from 'App/pages/search/link-reference';
 import { fontWeightBold } from 'App/styles/common';
-
-window.Prism = PrismRenderer;
-import('prismjs/components/prism-java');
 
 const refRegex = /^\[([0-9]+)]+/;
 const extensions = Object.freeze({
@@ -47,9 +43,9 @@ function convert(token, key, options) {
   switch (token.type) {
     case 'code':
       return (
-        <Prism key={key} language={token.lang}>
+        <CodeHighlight key={key} language={token.lang}>
           {token.text}
-        </Prism>
+        </CodeHighlight>
       );
     case 'blockquote':
       return <Blockquote key={key}>{convertTokens(token, options)}</Blockquote>;

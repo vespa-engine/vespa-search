@@ -3,8 +3,8 @@ import { Badge, Group, Spoiler, Stack, Text, Title } from '@mantine/core';
 import { NAMESPACES_BY_ID, useSearchContext } from 'App/libs/provider';
 import { parseMarkdown } from 'App/pages/search/md-parser';
 import { Content, Error, Icon, LoadingResult } from 'App/components';
-import { typography } from 'App/styles/theme/typography';
 import { Link } from 'App/libs/router';
+import classNames from 'App/pages/search/search.module.css';
 
 function Result({
   refId,
@@ -19,6 +19,7 @@ function Result({
   const ref = useRef();
   const titleLink = base_uri + path;
   const namespaceMeta = NAMESPACES_BY_ID[namespace];
+  const { typography, boxContent } = classNames;
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
@@ -27,36 +28,17 @@ function Result({
   }, [ref, isSelected, scrollBy]);
 
   return (
-    <Content
-      sxBox={(theme) => ({
-        ...(isSelected && { borderColor: theme.cr.getSolidBackground('blue') }),
-        '&:hover': {
-          borderColor: isSelected
-            ? theme.cr.getSolidBackground('blue')
-            : theme.cr.getSolidBackground(),
-        },
-      })}
-      withBorder
-    >
+    <Content className={boxContent} selected={isSelected} withBorder>
       <Spoiler
         ref={ref}
-        styles={(theme) => ({
-          control: {
-            ...theme.fn.hover({ textDecoration: 'none' }),
-            color: 'inherit',
-          },
-        })}
         maxHeight={233}
         showLabel="Show more"
         hideLabel="Show less"
       >
-        <Stack sx={typography}>
+        <Stack className={typography}>
           <Group position="apart" spacing="xs">
             <Title
-              sx={(theme) => ({
-                color: theme.cr.getHighContrastText(),
-                lineHeight: 'inherit',
-              })}
+              lh="inherit"
               className="title"
               id={`result-${refId}`}
               component={Link}
@@ -79,9 +61,7 @@ function Result({
               </Badge>
             )}
           </Group>
-          <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
-            {parseMarkdown(content, { baseUrl: titleLink })}
-          </Stack>
+          <Stack>{parseMarkdown(content, { baseUrl: titleLink })}</Stack>
         </Stack>
       </Spoiler>
     </Content>

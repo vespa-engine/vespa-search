@@ -9,7 +9,7 @@ import { Link } from 'App/libs/router';
 const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
   return (
     <div ref={ref} {...props}>
-      <Group position="apart" noWrap>
+      <Group position="apart" wrap="nowrap">
         <Text>{value}</Text>
         {type && <Link to={url}>{type}</Link>}
       </Group>
@@ -101,14 +101,13 @@ export function SearchInput({ size = 'md', autofocus = false }) {
               }),
           },
           dropdown: {
-            ...theme.focusRingStyles.inputStyles(theme),
             borderBottomLeftRadius: theme.radius.lg,
             borderBottomRightRadius: theme.radius.lg,
             borderTop: 'none',
             overflow: 'hidden',
             marginTop: -10,
           },
-          item: { color: theme.cr.getLowContrastText() },
+          item: {},
         })}
         ref={(ref) => {
           if (!ref) return;

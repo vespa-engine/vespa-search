@@ -1,0 +1,51 @@
+.typography {
+  font-size: var(--mantine-font-size-sm);
+
+  & ul,
+  & ol {
+    & li {
+      font-size: var(--mantine-font-size-sm);
+    }
+  }
+
+  & blockquote {
+    font-size: var(--mantine-font-size-sm);
+    border-top-right-radius: var(--mantine-radius-sm);
+    border-bottom-right-radius: var(--mantine-radius-sm);
+    color: var(--low-contrast-text);
+    border-left: rem(5) solid var(--mantine-color-default-border);
+
+    & cite {
+      display: block;
+      font-size: var(--mantine-font-size-sm);
+      margin-top: var(--mantine-spacing-xs);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.boxContent {
+  @mixin hover {
+    border-color: var(--mantine-color-default-border);
+  }
+
+  &[data-selected] {
+    border-color: var(--mantine-primary-color-filled);
+
+    @mixin hover {
+      border-color: var(--mantine-primary-color-filled-hover);
+    }
+  }
+}
+
+.item {
+  border: 1px solid var(--mantine-primary-color-light);
+  border-radius: var(--mantine-radius-xl);
+  padding: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-xs);
+
+  @mixin hover {
+    border-color: var(--mantine-primary-color-filled);
+  }
+}

@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { ScrollArea, Stack } from '@mantine/core';
 import { Results } from 'App/pages/search/results';
-import { SearchInput } from 'App/pages/search/search-input';
 import { Abstract } from 'App/pages/search/abstract';
 import { Container } from 'App/components';
 import { SearchSources } from 'App/pages/search/search-sources';
@@ -9,8 +8,8 @@ import { SearchSources } from 'App/pages/search/search-sources';
 const RESULTS_WIDTH = '67vw';
 const ABSTRACT_WIDTH = '33vw';
 
-function getHeight(theme) {
-  return `calc(100vh - var(--mantine-header-height, 0px) - (2 * ${theme.spacing.md}))`;
+function getHeight() {
+  return `calc(100vh - var(--mantine-header-height, 0px) - (2 * var(--mantine-spacing-md)))`;
 }
 
 export function Search() {
@@ -18,26 +17,21 @@ export function Search() {
 
   return (
     <Container
-      sx={(theme) => ({
+      style={{
         gridTemplateColumns: `minmax(0, ${RESULTS_WIDTH}) minmax(0, ${ABSTRACT_WIDTH})`,
-        columnGap: theme.spacing.md,
-      })}
+        columnGap: 'var(--mantine-spacing-md)',
+      }}
     >
-      <ScrollArea
-        sx={(theme) => ({ height: getHeight(theme) })}
-        viewportRef={viewportRef}
-      >
+      <ScrollArea h={getHeight()} viewportRef={viewportRef}>
         <Stack
-          sx={(theme) => ({
-            maxWidth: `calc(${RESULTS_WIDTH} - (3 * ${theme.spacing.md}))`,
-            paddingTop: theme.spacing.md,
-            paddingRight: theme.spacing.md,
-            width: '100%',
-          })}
+          maw={`calc(${RESULTS_WIDTH} - (3 * var(--mantine-spacing-md)))`}
+          w="100%"
+          pt="md"
+          pr="md"
           spacing="lg"
         >
           <Stack>
-            <SearchInput />
+            {/*<SearchInput />*/}
             <SearchSources />
           </Stack>
           <Results
@@ -45,12 +39,10 @@ export function Search() {
           />
         </Stack>
       </ScrollArea>
-      <ScrollArea sx={(theme) => ({ height: getHeight(theme) })}>
+      <ScrollArea h={getHeight()}>
         <Stack
-          sx={(theme) => ({
-            maxWidth: `calc(${ABSTRACT_WIDTH} - (1 * ${theme.spacing.md}))`,
-            width: '100%',
-          })}
+          maw={`calc(${ABSTRACT_WIDTH} - (1 * var(--mantine-spacing-md)))`}
+          w="100%"
         >
           <Abstract />
         </Stack>

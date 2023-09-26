@@ -7,13 +7,13 @@ function DisclaimerDetails() {
   return (
     <HoverCard>
       <HoverCard.Target>
-        <Text size="sm" underline span>
+        <Text size="sm" td="underline" span>
           privacy notice
         </Text>
       </HoverCard.Target>
       <HoverCard.Dropdown>
         <Container size="sm">
-          <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
+          <Stack>
             <Text align="left" weight={fontWeightBold}>
               Privacy notice
             </Text>
@@ -43,7 +43,7 @@ function DisclaimerDetails() {
 export function SearchDisclaimer() {
   return (
     <Stack px="lg" justify="c">
-      <Text size="sm" color="dimmed" align="center">
+      <Text size="sm" c="dimmed" align="center">
         By querying, you consent to share data with OpenAI. The AI-generated
         abstract may have biases or inaccuracies. See <DisclaimerDetails /> for
         more details. For the traditional search{' '}

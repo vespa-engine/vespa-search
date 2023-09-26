@@ -13,7 +13,7 @@ import '@mantine/notifications/styles.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Notifications } from '@mantine/notifications';
-import { ThemeProvider } from 'App/styles/theme';
+import { ColorScheme, ThemeProvider } from 'App/styles/theme';
 import { ErrorBoundary, Router, CrashPage } from 'App/libs/router';
 import { Layout } from 'App/libs/layout';
 import { Home } from 'App/pages/home';
@@ -27,6 +27,7 @@ export default function App() {
     <BrowserRouter>
       <ThemeProvider>
         <ErrorBoundary crashPage={CrashPage}>
+          <ColorScheme />
           <Notifications />
           <SearchContext />
           <Layout>

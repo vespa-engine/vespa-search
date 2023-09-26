@@ -27,7 +27,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
-import { Prism } from '@mantine/prism';
+import { CodeHighlight } from '@mantine/code-highlight';
 import { Content, Icon } from 'App/components';
 
 function DemoActionIcon() {
@@ -362,7 +362,7 @@ function DemoBadgeGradients() {
   );
 }
 
-function DemoPrism() {
+function DemoCodeHighlight() {
   const demoCode = `import { Button } from '@mantine/core';
 
 function Demo() {
@@ -375,8 +375,8 @@ function Demo() {
 
   return (
     <Stack>
-      <Prism language="markup">{demoCode}</Prism>
-      <Prism language="tsx">{demoCode}</Prism>
+      <CodeHighlight language="markup">{demoCode}</CodeHighlight>
+      <CodeHighlight language="tsx">{demoCode}</CodeHighlight>
     </Stack>
   );
 }
@@ -415,195 +415,43 @@ function DemoMiscs() {
           </Text>
         </HoverCard.Dropdown>
       </HoverCard>
-      <Content background="ui-element">
+      <Content>
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('gray'),
-        })}
-      >
+      <Content>
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('blue'),
-        })}
-      >
+      <Content>
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('yellow'),
-        })}
-      >
+      <Content>
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
       <Divider />
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getAppBackground(),
-        })}
-        withBorder
-      >
-        getAppBackground
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getAppBackground('blue'),
-        })}
-        withBorder
-      >
-        getAppBackground
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBackground(),
-        })}
-        withBorder
-      >
-        getSubtleBackground
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBackground('blue'),
-        })}
-        withBorder
-      >
-        getSubtleBackground
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground(),
-        })}
-        withBorder
-      >
-        getUiElementBackground
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('blue'),
-        })}
-        withBorder
-      >
-        getUiElementBackground
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredUiElementBackground(),
-        })}
-        withBorder
-      >
-        getHoveredUiElementBackground
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredUiElementBackground('blue'),
-        })}
-        withBorder
-      >
-        getHoveredUiElementBackground
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBorderAndSeparator(),
-        })}
-        withBorder
-      >
-        getSubtleBorderAndSeparator
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBorderAndSeparator('blue'),
-        })}
-        withBorder
-      >
-        getSubtleBorderAndSeparator
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBorderAndFocus(),
-        })}
-        withBorder
-      >
-        getUiElementBorderAndFocus
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBorderAndFocus('blue'),
-        })}
-        withBorder
-      >
-        getUiElementBorderAndFocus
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSolidBackground(),
-        })}
-        withBorder
-      >
-        getSolidBackground
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSolidBackground('blue'),
-        })}
-        withBorder
-      >
-        getSolidBackground
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredSolidBackground(),
-        })}
-        withBorder
-      >
-        getHoveredSolidBackground
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredSolidBackground('blue'),
-        })}
-        withBorder
-      >
-        getHoveredSolidBackground
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getLowContrastText(),
-        })}
-        withBorder
-      >
-        getLowContrastText
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getLowContrastText('blue'),
-        })}
-        withBorder
-      >
-        getLowContrastText
-      </Content>
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHighContrastText(),
-        })}
-        withBorder
-      >
-        getHighContrastText
-      </Content>{' '}
-      <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHighContrastText('blue'),
-        })}
-        withBorder
-      >
-        getHighContrastText
-      </Content>
+      <Content withBorder>getAppBackground</Content>{' '}
+      <Content withBorder>getAppBackground</Content>
+      <Content withBorder>getSubtleBackground</Content>{' '}
+      <Content withBorder>getSubtleBackground</Content>
+      <Content withBorder>getUiElementBackground</Content>{' '}
+      <Content withBorder>getUiElementBackground</Content>
+      <Content withBorder>getHoveredUiElementBackground</Content>{' '}
+      <Content withBorder>getHoveredUiElementBackground</Content>
+      <Content withBorder>getSubtleBorderAndSeparator</Content>{' '}
+      <Content withBorder>getSubtleBorderAndSeparator</Content>
+      <Content withBorder>getUiElementBorderAndFocus</Content>{' '}
+      <Content withBorder>getUiElementBorderAndFocus</Content>
+      <Content withBorder>getSolidBackground</Content>{' '}
+      <Content withBorder>getSolidBackground</Content>
+      <Content withBorder>getHoveredSolidBackground</Content>{' '}
+      <Content withBorder>getHoveredSolidBackground</Content>
+      <Content withBorder>getLowContrastText</Content>{' '}
+      <Content withBorder>getLowContrastText</Content>
+      <Content withBorder>getHighContrastText</Content>{' '}
+      <Content withBorder>getHighContrastText</Content>
     </Stack>
   );
 }
@@ -632,7 +480,7 @@ export function Testcomp() {
         <DemoAccordion />
         <DemoBadge />
         <DemoBadgeGradients />
-        <DemoPrism />
+        <DemoCodeHighlight />
         <DemoSkeleton />
         <DemoMiscs />
       </Stack>
