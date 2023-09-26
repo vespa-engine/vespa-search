@@ -1,0 +1,65 @@
+.root {
+  &[data-is-home] {
+    background-image: radial-gradient(
+        circle,
+        transparent 0%,
+        rgb(251, 252, 253) 99%
+      ),
+      repeating-linear-gradient(
+        0deg,
+        rgb(225, 240, 255) 0px,
+        rgb(225, 240, 255) 1px,
+        transparent 1px,
+        transparent 6px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        rgb(225, 240, 255) 0px,
+        rgb(225, 240, 255) 1px,
+        transparent 1px,
+        transparent 6px
+      ),
+      linear-gradient(90deg, rgb(251, 252, 253), rgb(251, 252, 253));
+
+    @mixin dark {
+      background-image: radial-gradient(
+          circle,
+          transparent 0%,
+          rgb(21, 23, 24) 99%
+        ),
+        repeating-linear-gradient(
+          0deg,
+          rgb(16, 36, 62) 0px,
+          rgb(16, 36, 62) 1px,
+          transparent 1px,
+          transparent 6px
+        ),
+        repeating-linear-gradient(
+          90deg,
+          rgb(16, 36, 62) 0px,
+          rgb(16, 36, 62) 1px,
+          transparent 1px,
+          transparent 6px
+        ),
+        linear-gradient(90deg, rgb(21, 23, 24), rgb(21, 23, 24));
+    }
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: var(--mantine-spacing-md);
+  padding-right: var(--mantine-spacing-md);
+  background: transparent;
+
+  &[data-with-border] {
+    background: var(--mantine-color-body);
+  }
+}
+
+.container {
+  grid-auto-flow: column;
+  justify-content: space-between;
+}

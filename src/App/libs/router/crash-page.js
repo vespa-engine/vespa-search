@@ -4,22 +4,17 @@ import { Icon } from 'App/components';
 
 export function CrashPage({ error }) {
   return (
-    <Stack
-      sx={(theme) => ({ color: theme.cr.getSolidBackground('blue') })}
-      align="center"
-    >
+    <Stack align="center">
       <Space h={55} />
       <Icon name="bug" size="4x" />
       <Title>You encountered a bug</Title>
-      <Text color="blue">This is our fault.</Text>
-      <Text color="blue">
+      <Text>This is our fault.</Text>
+      <Text>
         Not much you can do about it, but here are three suggestions anyway
       </Text>
-      <Anchor color="blue" href={window.location.href}>
-        Reload page - you never know
-      </Anchor>
+      <Anchor href={window.location.href}>Reload page - you never know</Anchor>
       <Anchor
-        color="blue"
+        c="blue"
         href="mailto:support@vespa.ai?subject=Vespa Search crash"
       >
         Email us a bug report, please include the information below

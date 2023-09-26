@@ -1,20 +1,27 @@
 import React from 'react';
-import { ActionIcon, Tooltip } from '@mantine/core';
+import {
+  ActionIcon,
+  Tooltip,
+  useComputedColorScheme,
+  useMantineColorScheme,
+} from '@mantine/core';
 import { Icon } from 'App/components';
-import { useTheme } from 'App/styles/theme';
 
 export function LinkTheme() {
-  const { colorScheme, setColorScheme } = useTheme();
-  const isDarkMode = colorScheme === 'dark';
+  const { toggleColorScheme } = useMantineColorScheme();
+  const computedColorScheme = useComputedColorScheme('light');
+  const isDarkMode = computedColorScheme === 'dark';
+  const color = isDarkMode ? 'yellow' : 'gray';
+  const iconName = isDarkMode ? 'sun' : 'moon';
 
   return (
     <Tooltip label="Change appearance" position="bottom">
       <ActionIcon
+        onClick={() => toggleColorScheme()}
         variant="transparent"
-        color={isDarkMode ? 'yellow' : 'gray.8'}
-        onClick={() => setColorScheme(isDarkMode ? 'light' : 'dark')}
+        color={color}
       >
-        <Icon size="lg" name={isDarkMode ? 'sun' : 'moon'} />
+        <Icon size="lg" name={iconName} />
       </ActionIcon>
     </Tooltip>
   );

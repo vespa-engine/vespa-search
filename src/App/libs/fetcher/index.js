@@ -1,30 +1,9 @@
-import { useLayoutEffect, useReducer, useRef } from 'react';
 import { UrlBuilder } from 'App/utils';
-import { useCustomCompareCallback } from 'App/hooks';
 
 export function Get(url, params) {
   return Fetch('GET', url, params);
 }
-export function Post(url, params) {
-  return Fetch('POST', url, params);
-}
-export function Put(url, params) {
-  return Fetch('PUT', url, params);
-}
-export function Patch(url, params) {
-  return Fetch('PATCH', url, params);
-}
-export function Delete(url, params) {
-  return Fetch('DELETE', url, params);
-}
-function reducer(state, action) {
-  if (action.response && action.error)
-    throw new Error('Cannot set both error and response');
-  const newState = { ...state, ...action };
-  if (action.response) delete newState.error;
-  else if (action.error) delete newState.response;
-  return newState;
-}
+
 function xhrFetch(url, { body, method, ...params }, onProgress) {
   return new Promise(function (resolve, reject) {
     const xhr = new XMLHttpRequest();
@@ -37,7 +16,7 @@ function xhrFetch(url, { body, method, ...params }, onProgress) {
         }
         case 'headers': {
           Object.entries(value).forEach(([headerKey, headerValue]) =>
-            xhr.setRequestHeader(headerKey, headerValue)
+            xhr.setRequestHeader(headerKey, headerValue),
           );
           break;
         }
@@ -57,7 +36,7 @@ function xhrFetch(url, { body, method, ...params }, onProgress) {
             .map((s) => {
               const index = s.indexOf(':');
               return [s.substring(0, index), s.substring(index + 1)];
-            })
+            }),
         ),
         text: () => Promise.resolve(xhr.responseText),
         json: () => Promise.resolve(JSON.parse(xhr.responseText)),
@@ -67,45 +46,11 @@ function xhrFetch(url, { body, method, ...params }, onProgress) {
     xhr.send(body);
   });
 }
-export function useGet(url, { responseMapper, ...params } = {}) {
-  const initialState = { loading: true, reloading: true };
-  const [state, dispatch] = useReducer(reducer, initialState);
-  const cancelled = useRef(false);
-  const refresh = useCustomCompareCallback(() => {
-    if (cancelled.current) return;
-    dispatch({ reloading: true });
-    return Get(url, params)
-      .then((response) => {
-        if (!cancelled.current)
-          dispatch({
-            loading: false,
-            reloading: false,
-            response: responseMapper ? responseMapper(response) : response,
-          });
-        return response;
-      })
-      .catch((error) => {
-        if (!cancelled.current)
-          dispatch({ loading: false, reloading: false, error });
-      });
-  }, [url, params, responseMapper]);
-  useLayoutEffect(() => {
-    cancelled.current = false;
-    return () => {
-      cancelled.current = true;
-    };
-  }, []);
-  useLayoutEffect(() => {
-    // Initial parameters have changed, set loading
-    dispatch({ loading: true });
-    refresh();
-  }, [refresh]);
-  return { ...state, refresh };
-}
+
 async function Fetch(
   method,
   url,
-  { returnRaw, json, onProgress, ...params } = {}
+  { returnRaw, json, onProgress, ...params } = {},
 ) {
   if (url instanceof UrlBuilder) url = url.toString();
   params.method = method;

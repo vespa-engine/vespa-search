@@ -25,12 +25,7 @@ export function ErrorPage({ code }) {
   return (
     <Message style={{ height: '100%' }}>
       <Title>
-        <Text
-          sx={(theme) => ({ color: theme.cr.getSolidBackground() })}
-          weight={400}
-          color="blue"
-          inherit
-        >
+        <Text weight={400} inherit>
           {message}
         </Text>
       </Title>
