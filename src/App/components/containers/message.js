@@ -1,17 +1,17 @@
 import React from 'react';
 import { Box } from '@mantine/core';
-import { mergeSx } from 'App/styles/common';
+import { mergeStyles } from 'App/styles/common';
 
-export function Message({ sx, ...props }) {
+export function Message({ style, ...props }) {
   return (
     <Box
-      sx={mergeSx(
+      style={mergeStyles(
         {
           display: 'grid',
           placeContent: 'center',
           minHeight: '55px',
         },
-        sx
+        style,
       )}
       {...props}
     />

@@ -1,13 +1,13 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { mergeSx, opacity } from 'App/styles/common';
+import classNames from './icon.module.css';
 
 function resolveIconName(name, maybeType) {
   if (name.startsWith('fa') && name.charAt(3) === '-') {
     if (maybeType != null)
       throw new Error(
-        `Invalid usage, cannot set both name with prefix (${name}) and type (${maybeType})`
+        `Invalid usage, cannot set both name with prefix (${name}) and type (${maybeType})`,
       );
 
     const shortType = name.charAt(2);
@@ -28,19 +28,16 @@ function resolveIconName(name, maybeType) {
   return `fa-${name} fa-${maybeType ?? 'solid'}`;
 }
 
-export function Icon({ name, type, color, disabled, sx, ...rest }) {
-  const icon = resolveIconName(name, type);
+export function Icon({ name, type, color, disabled, ...rest }) {
+  const _icon = resolveIconName(name, type);
+  const { icon } = classNames;
   return (
     <Box
-      sx={mergeSx(
-        (theme) => ({
-          ...(color && { color: theme.cr.getSolidBackground(color) }),
-          ...(disabled && { pointerEvents: 'none', opacity }),
-        }),
-        sx
-      )}
+      className={icon}
+      mod={{ disabled }}
+      c={color}
       component={FontAwesomeIcon}
-      icon={icon}
+      icon={_icon}
       {...rest}
     />
   );

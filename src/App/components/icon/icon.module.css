@@ -1,0 +1,6 @@
+.icon {
+  &[data-disabled] {
+    pointer-events: none;
+    opacity: var(--common-opacity);
+  }
+}
