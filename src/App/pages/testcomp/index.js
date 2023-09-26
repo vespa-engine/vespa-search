@@ -58,25 +58,29 @@ function DemoActionIcon() {
 function DemoButton() {
   return (
     <Group>
-      <Button color="blue" variant="transparent" leftIcon={<Icon name="bug" />}>
+      <Button
+        color="blue"
+        variant="transparent"
+        leftSection={<Icon name="bug" />}
+      >
         transparent
       </Button>
-      <Button color="blue" variant="subtle" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="subtle" leftSection={<Icon name="bug" />}>
         subtle
       </Button>
-      <Button color="blue" variant="default" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="default" leftSection={<Icon name="bug" />}>
         default
       </Button>
-      <Button color="blue" variant="outline" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="outline" leftSection={<Icon name="bug" />}>
         outline
       </Button>
-      <Button color="blue" variant="filled" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="filled" leftSection={<Icon name="bug" />}>
         filled
       </Button>
-      <Button color="blue" variant="light" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="light" leftSection={<Icon name="bug" />}>
         light
       </Button>
-      <Button color="pink" leftIcon={<Icon name="bug" />}>
+      <Button color="pink" leftSection={<Icon name="bug" />}>
         button
       </Button>
     </Group>
@@ -375,8 +379,8 @@ function Demo() {
 
   return (
     <Stack>
-      <CodeHighlight language="markup">{demoCode}</CodeHighlight>
-      <CodeHighlight language="tsx">{demoCode}</CodeHighlight>
+      <CodeHighlight language="markup" code={demoCode} />
+      <CodeHighlight language="tsx" code={demoCode} />
     </Stack>
   );
 }

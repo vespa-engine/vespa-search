@@ -1,5 +1,12 @@
 import React, { forwardRef, useEffect, useRef, useState } from 'react';
-import { ActionIcon, Autocomplete, Group, rem, Text } from '@mantine/core';
+import {
+  ActionIcon,
+  Combobox,
+  Group,
+  Text,
+  TextInput,
+  useCombobox,
+} from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
@@ -17,16 +24,16 @@ const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
   );
 });
 
-export function SearchInput({ size = 'md', autofocus = false }) {
+export function SearchInput({ autofocus = false }) {
   const [query, filters, setQuery] = useSearchContext((ctx) => [
     ctx.query,
     ctx.namespaces.map((n) => `+namespace:${n}`).join(' '),
     ctx.setQuery,
   ]);
-  const [dropdownOpened, setDropdownOpened] = useState(false);
   const [value, setValue] = useState(query);
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
+  const combobox = useCombobox();
 
   // Update search input if we go back/forward in history
   useEffect(() => setValue(query), [query]);
@@ -49,7 +56,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         .queryParam('query', value)
         .queryParam('filters', filters)
         .queryParam('queryProfile', 'suggest')
-        .toString(true),
+        .toString(true)
     )
       .then(
         (response) =>
@@ -59,8 +66,8 @@ export function SearchInput({ size = 'md', autofocus = false }) {
               value: item.fields.term,
               type: item.fields.type,
               url: item.fields.url,
-            })),
-          ),
+            }))
+          )
       )
       .catch(() => !cancelled && setSuggestions([]));
 
@@ -80,70 +87,65 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         return false;
       }}
     >
-      <Autocomplete
-        styles={(theme) => ({
-          input: {
-            overflowY: 'hidden',
-            lineHeight: theme.lineHeight,
-            paddingTop: `calc(${theme.spacing.sm} + ${rem(
-              size === 'md' ? 0 : 1.5,
-            )})`, // this is a hack to fix input alignment
-            paddingBottom: theme.spacing.sm,
-            ...(dropdownOpened &&
-              suggestions.length > 0 && {
-                borderBottomLeftRadius: 0,
-                borderBottomRightRadius: 0,
-                borderTopLeftRadius: theme.radius.lg,
-                borderTopRightRadius: theme.radius.lg,
-                '&:focus, &:focus-within': {
-                  borderBottomColor: 'transparent',
-                },
-              }),
-          },
-          dropdown: {
-            borderBottomLeftRadius: theme.radius.lg,
-            borderBottomRightRadius: theme.radius.lg,
-            borderTop: 'none',
-            overflow: 'hidden',
-            marginTop: -10,
-          },
-          item: {},
-        })}
-        ref={(ref) => {
-          if (!ref) return;
-          inputRef.current = ref;
-          if (autofocus) ref.focus();
+      <Combobox
+        onOptionSubmit={(value) => {
+          onSubmit(value);
+          combobox.closeDropdown();
         }}
-        onDropdownOpen={() => setDropdownOpened(true)}
-        onDropdownClose={() => setDropdownOpened(false)}
-        icon={<Icon name="magnifying-glass" />}
-        itemComponent={AutoCompleteItem}
-        rightSection={
-          <ActionIcon
-            type="submit"
-            variant="filled"
-            color="blue"
-            radius="xl"
-            size="lg"
-          >
-            <Icon name="arrow-right" />
-          </ActionIcon>
-        }
-        placeholder="Ask a question about Vespa"
-        data={suggestions}
-        onChange={setValue}
-        onItemSubmit={onSubmit}
-        value={value}
-        size={size}
-        filter={() => true}
-        radius="xl"
-        component="textarea"
-        onKeyDown={(e) => {
-          if (e.key !== 'Enter') return;
-          e.preventDefault();
-          onSubmit({ value });
-        }}
-      />
+        store={combobox}
+      >
+        <Combobox.Target>
+          <TextInput
+            ref={(ref) => {
+              if (!ref) return;
+              inputRef.current = ref;
+              if (autofocus) ref.focus();
+            }}
+            leftSection={<Icon name="magnifying-glass" />}
+            rightSection={
+              <ActionIcon
+                type="submit"
+                variant="filled"
+                color="blue"
+                radius="xl"
+                size="lg"
+              >
+                <Icon name="arrow-right" />
+              </ActionIcon>
+            }
+            placeholder="Ask a question about Vespa"
+            value={value}
+            onChange={(event) => {
+              combobox.openDropdown();
+              combobox.updateSelectedOptionIndex();
+              setValue(event.currentTarget.value);
+            }}
+            onClick={() => combobox.openDropdown()}
+            onFocus={() => combobox.openDropdown()}
+            onBlur={() => combobox.closeDropdown()}
+            onKeyDown={(e) => {
+              if (e.key !== 'Enter') return;
+              e.preventDefault();
+              onSubmit({ value });
+            }}
+          />
+        </Combobox.Target>
+
+        {suggestions.length > 0 && (
+          <Combobox.Dropdown>
+            <Combobox.Options>
+              {suggestions.map(({ value, type, url }) => (
+                <Combobox.Option value={{ value, url, type }} key={value}>
+                  <Group position="apart" wrap="nowrap">
+                    <Text>{value}</Text>
+                    {type && <Link to={url}>{type}</Link>}
+                  </Group>
+                </Combobox.Option>
+              ))}
+            </Combobox.Options>
+          </Combobox.Dropdown>
+        )}
+      </Combobox>
     </form>
   );
 }

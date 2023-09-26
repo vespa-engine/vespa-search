@@ -43,9 +43,11 @@ function convert(token, key, options) {
   switch (token.type) {
     case 'code':
       return (
-        <CodeHighlight key={key} language={token.lang}>
-          {token.text}
-        </CodeHighlight>
+        <CodeHighlight
+          key={key}
+          language={token.lang || undefined}
+          code={token.text}
+        />
       );
     case 'blockquote':
       return <Blockquote key={key}>{convertTokens(token, options)}</Blockquote>;
@@ -95,7 +97,7 @@ function convert(token, key, options) {
       );
     case 'em':
       return (
-        <Text key={key} italic span>
+        <Text key={key} span>
           {convertTokens(token, options)}
         </Text>
       );

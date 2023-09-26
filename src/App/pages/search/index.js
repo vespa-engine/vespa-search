@@ -4,6 +4,7 @@ import { Results } from 'App/pages/search/results';
 import { Abstract } from 'App/pages/search/abstract';
 import { Container } from 'App/components';
 import { SearchSources } from 'App/pages/search/search-sources';
+import { SearchInput } from 'App/pages/search/search-input';
 
 const RESULTS_WIDTH = '67vw';
 const ABSTRACT_WIDTH = '33vw';
@@ -31,7 +32,7 @@ export function Search() {
           spacing="lg"
         >
           <Stack>
-            {/*<SearchInput />*/}
+            <SearchInput />
             <SearchSources />
           </Stack>
           <Results

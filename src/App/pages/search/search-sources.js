@@ -9,7 +9,7 @@ function Source({ id, icon, name }) {
 
   return (
     <Button
-      leftIcon={<Icon name={icon} />}
+      leftSection={<Icon name={icon} />}
       color={selected ? 'blue' : 'gray'}
       variant={selected ? 'filled' : 'subtle'}
       onClick={() => toggleNamespace(id)}

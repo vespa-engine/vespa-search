@@ -7,7 +7,7 @@ import { Icon } from 'App/components/index.js';
 function Action({ icon, name, type, ...props }) {
   return (
     <Button
-      leftIcon={<Icon name={icon} type={type} />}
+      leftSection={<Icon name={icon} type={type} />}
       color="gray"
       variant="outline"
       onClick={() => {}}
