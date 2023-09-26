@@ -1,14 +1,9 @@
 import { rem } from '@mantine/core';
-import { variant } from 'App/styles/theme/variant';
 
 export const common = {
-  primaryShade: { light: 6, dark: 3 },
-  white: '#fff',
   black: '#151718',
   defaultRadius: 'xs',
-  primaryColor: 'blue',
   cursorType: 'pointer',
-  lineHeight: 1.62,
   fontFamily: 'Inter, sans-serif',
   spacing: {
     xs: rem(5),
@@ -28,6 +23,4 @@ export const common = {
       h6: { fontSize: '0.9375rem', lineHeight: 1, fontWeight: 600 },
     },
   },
-  other: { variant },
-  fn: {},
 };
