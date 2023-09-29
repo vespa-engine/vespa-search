@@ -29,15 +29,16 @@ function resolveIconName(name, maybeType) {
 }
 
 export function Icon({ name, type, color, disabled, ...rest }) {
-  const _icon = resolveIconName(name, type);
-  const { icon } = classNames;
+  console.log('Icon', { name, type, color, disabled, rest });
+  const icon = resolveIconName(name, type);
+  const { box } = classNames;
   return (
     <Box
-      className={icon}
+      className={box}
       mod={{ disabled }}
       c={color}
       component={FontAwesomeIcon}
-      icon={_icon}
+      icon={icon}
       {...rest}
     />
   );

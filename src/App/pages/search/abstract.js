@@ -22,7 +22,7 @@ export function Abstract() {
       <Group pt="md" position="apart">
         <Title order={4}>
           Abstract{' '}
-          <Text weight={fontWeightLight} size="sm" span>
+          <Text fw={fontWeightLight} size="sm" span>
             (experimental)
           </Text>
         </Title>

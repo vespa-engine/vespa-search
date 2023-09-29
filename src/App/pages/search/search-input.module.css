@@ -1,0 +1,21 @@
+.input {
+  overflow-y: hidden;
+
+  &[data-expanded='true'][data-suggestions='true'] {
+    border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0;
+
+    &:focus,
+    &:focus-within {
+      border-bottom-color: transparent;
+    }
+  }
+}
+
+.dropdown {
+  border-bottom-left-radius: var(--mantine-radius-lg);
+  border-bottom-right-radius: var(--mantine-radius-lg);
+  border-color: var(--solid-background-blue);
+  border-top: none;
+  overflow: hidden;
+  margin-top: -10px;
+}

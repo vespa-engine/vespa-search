@@ -1,7 +1,7 @@
 .box {
   position: relative;
 
-  &[data-with-border] {
+  &[data-with-border='true'] {
     border: 1px solid var(--mantine-color-default-border);
     border-radius: var(--mantine-radius-xs);
   }

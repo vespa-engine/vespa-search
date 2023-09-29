@@ -25,7 +25,7 @@ export function ErrorPage({ code }) {
   return (
     <Message style={{ height: '100%' }}>
       <Title>
-        <Text weight={400} inherit>
+        <Text fw={400} inherit>
           {message}
         </Text>
       </Title>

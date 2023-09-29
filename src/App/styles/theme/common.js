@@ -12,6 +12,13 @@ export const common = {
     lg: rem(21),
     xl: rem(34),
   },
+  lineHeights: {
+    xs: '1.62',
+    sm: '1.62',
+    md: '1.62',
+    lg: '1.62',
+    xl: '1.62',
+  },
   headings: {
     fontFamily: 'Inter, sans-serif',
     sizes: {

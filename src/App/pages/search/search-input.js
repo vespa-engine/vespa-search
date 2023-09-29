@@ -1,4 +1,4 @@
-import React, { forwardRef, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   ActionIcon,
   Combobox,
@@ -7,24 +7,14 @@ import {
   TextInput,
   useCombobox,
 } from '@mantine/core';
+import classNames from './search-input.module.css';
 import { useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
 import { Icon } from 'App/components';
 import { Link } from 'App/libs/router';
 
-const AutoCompleteItem = forwardRef(({ value, type, url, ...props }, ref) => {
-  return (
-    <div ref={ref} {...props}>
-      <Group position="apart" wrap="nowrap">
-        <Text>{value}</Text>
-        {type && <Link to={url}>{type}</Link>}
-      </Group>
-    </div>
-  );
-});
-
-export function SearchInput({ autofocus = false }) {
+export function SearchInput({ size = 'md', autofocus = false }) {
   const [query, filters, setQuery] = useSearchContext((ctx) => [
     ctx.query,
     ctx.namespaces.map((n) => `+namespace:${n}`).join(' '),
@@ -34,6 +24,7 @@ export function SearchInput({ autofocus = false }) {
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
   const combobox = useCombobox();
+  const { input, dropdown } = classNames;
 
   // Update search input if we go back/forward in history
   useEffect(() => setValue(query), [query]);
@@ -56,7 +47,7 @@ export function SearchInput({ autofocus = false }) {
         .queryParam('query', value)
         .queryParam('filters', filters)
         .queryParam('queryProfile', 'suggest')
-        .toString(true)
+        .toString(true),
     )
       .then(
         (response) =>
@@ -66,8 +57,8 @@ export function SearchInput({ autofocus = false }) {
               value: item.fields.term,
               type: item.fields.type,
               url: item.fields.url,
-            }))
-          )
+            })),
+          ),
       )
       .catch(() => !cancelled && setSuggestions([]));
 
@@ -88,6 +79,7 @@ export function SearchInput({ autofocus = false }) {
       }}
     >
       <Combobox
+        classNames={{ dropdown }}
         onOptionSubmit={(value) => {
           onSubmit(value);
           combobox.closeDropdown();
@@ -96,6 +88,8 @@ export function SearchInput({ autofocus = false }) {
       >
         <Combobox.Target>
           <TextInput
+            classNames={{ input }}
+            data-suggestions={suggestions.length > 0}
             ref={(ref) => {
               if (!ref) return;
               inputRef.current = ref;
@@ -128,6 +122,8 @@ export function SearchInput({ autofocus = false }) {
               e.preventDefault();
               onSubmit({ value });
             }}
+            size={size}
+            radius="xl"
           />
         </Combobox.Target>
 

@@ -1,5 +1,5 @@
-.icon {
-  &[data-disabled] {
+.box {
+  &[data-disabled='true'] {
     pointer-events: none;
     opacity: var(--common-opacity);
   }
