@@ -23,7 +23,7 @@ function Source({ id, icon, name }) {
 
 export function SearchSources() {
   return (
-    <Group position="center">
+    <Group justify="center">
       {ALL_NAMESPACES.map(({ id, name, icon }) => (
         <Source key={id} id={id} name={name} icon={icon} />
       ))}

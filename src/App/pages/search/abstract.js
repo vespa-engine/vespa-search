@@ -19,8 +19,8 @@ export function Abstract() {
   const { typography } = classNames;
   return (
     <Stack className={typography}>
-      <Group pt="md" position="apart">
-        <Title order={4}>
+      <Group pt="md" justify="space-between">
+        <Title order={4} c="var(--high-contrast-text)">
           Abstract{' '}
           <Text fw={fontWeightLight} size="sm" span>
             (experimental)
@@ -28,7 +28,7 @@ export function Abstract() {
         </Title>
         <Popover withinPortal>
           <Popover.Target>
-            <Text style={{ cursor: 'pointer' }} c="blue">
+            <Text style={{ cursor: 'pointer' }} c="blue" size="sm">
               <Icon name="circle-question" type="regular" /> What is this?
             </Text>
           </Popover.Target>
@@ -67,7 +67,9 @@ function AbstractQuestions() {
 
   return (
     <Stack>
-      <Text fw={fontWeightBold}>Also try these questions</Text>
+      <Text size="sm" c="var(--high-contrast-text)" fw={fontWeightBold}>
+        Also try these questions
+      </Text>
       <List
         classNames={{ item }}
         icon={<Icon name="magnifying-glass" color="blue" />}
@@ -77,7 +79,7 @@ function AbstractQuestions() {
         {questions.map(({ text, url }, i) => (
           <Link to={url} key={i}>
             <List.Item>
-              <Text c="blue" inline>
+              <Text size="sm" c="blue" lh={1} span>
                 {text}
               </Text>
             </List.Item>
@@ -96,7 +98,9 @@ function AbstractAbout() {
 
   return (
     <Stack>
-      <Text fw={fontWeightBold}>About the abstract</Text>
+      <Text size="sm" c="var(--high-contrast-text)" fw={fontWeightBold}>
+        About the abstract
+      </Text>
       <Text size="sm">
         This abstract is AI-generated, based on your query and search results.
         By submitting a query, you agree to share data with OpenAI, governed by

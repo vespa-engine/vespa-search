@@ -7,7 +7,7 @@ export function Home() {
   return (
     <Container w="100%" size="sm">
       <Space h={89} />
-      <Stack pt="md">
+      <Stack>
         <SearchInput size="lg" autofocus />
         <SearchDisclaimer />
       </Stack>

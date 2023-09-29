@@ -6,12 +6,22 @@ import { Link } from 'App/libs/router';
 
 export function HeaderLinks() {
   return (
-    <Group wrap="nowrap" spacing="lg">
+    <Group wrap="nowrap" gap="lg">
       <Link to="https://github.com/vespa-engine/vespa">
-        <Icon name="github" type="brands" size="lg" color="gray" />
+        <Icon
+          color="var(--low-contrast-text)"
+          name="github"
+          type="brands"
+          size="lg"
+        />
       </Link>
       <Link to="http://slack.vespa.ai">
-        <Icon name="slack" type="brands" size="lg" color="gray" />
+        <Icon
+          color="var(--low-contrast-text)"
+          name="slack"
+          type="brands"
+          size="lg"
+        />
       </Link>
       <LinkTheme />
     </Group>

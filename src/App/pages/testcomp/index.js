@@ -120,9 +120,9 @@ function DemoButtonGradients() {
 
 function DemoCloseButton() {
   return (
-    <Group position="center">
+    <Group justify="center">
       <CloseButton aria-label="Close modal" />
-      <CloseButton title="Close popover" size="xl" iconSize={20} />
+      <CloseButton size="xl" />
     </Group>
   );
 }
@@ -173,7 +173,9 @@ function DemoCheckBoxes() {
 function DemoChips() {
   return (
     <Group>
-      <Chip defaultChecked>Awesome chip</Chip>
+      <Chip defaultChecked variant="outline">
+        Awesome chip
+      </Chip>
       <Chip defaultChecked variant="light">
         Awesome chip
       </Chip>
@@ -268,13 +270,13 @@ function DemoTabs() {
       <Space h={1} />
       <Tabs defaultValue="gallery">
         <Tabs.List>
-          <Tabs.Tab value="gallery" icon={<Icon name="bug" />}>
+          <Tabs.Tab value="gallery" leftSection={<Icon name="bug" />}>
             Gallery
           </Tabs.Tab>
-          <Tabs.Tab value="messages" icon={<Icon name="bug" />}>
+          <Tabs.Tab value="messages" leftSection={<Icon name="bug" />}>
             Messages
           </Tabs.Tab>
-          <Tabs.Tab value="settings" icon={<Icon name="bug" />}>
+          <Tabs.Tab value="settings" leftSection={<Icon name="bug" />}>
             Settings
           </Tabs.Tab>
         </Tabs.List>
@@ -327,7 +329,7 @@ function DemoAccordion() {
 function DemoBadge() {
   return (
     <Group>
-      <Badge>light</Badge>
+      <Badge variant="light">light</Badge>
       <Badge variant="filled">filled</Badge>
       <Badge variant="outline">outline</Badge>
       <Badge variant="dot">dot</Badge>
@@ -379,7 +381,7 @@ function Demo() {
 
   return (
     <Stack>
-      <CodeHighlight language="markup" code={demoCode} />
+      <CodeHighlight language="markdown" code={demoCode} />
       <CodeHighlight language="tsx" code={demoCode} />
     </Stack>
   );
@@ -389,7 +391,7 @@ function DemoSkeleton() {
   return (
     <Stack>
       <Skeleton height={21} radius="xl" />
-      <Stack spacing="xs">
+      <Stack gap="xs">
         <Skeleton height={8} radius="xl" />
         <Skeleton height={8} radius="xl" />
         <Skeleton height={8} radius="xl" />
@@ -404,8 +406,12 @@ function DemoMiscs() {
     <Stack>
       <Button>text</Button>
       <Button color="yellow">text</Button>
-      <Badge color="blue">text</Badge>
-      <Badge color="yellow">text</Badge>
+      <Badge variant="light" color="blue">
+        text
+      </Badge>
+      <Badge variant="light" color="yellow">
+        text
+      </Badge>
       <Icon color="blue" name="bug" />
       <Icon color="yellow" name="bug" />
       <HoverCard width={280} shadow="md">
@@ -419,43 +425,199 @@ function DemoMiscs() {
           </Text>
         </HoverCard.Dropdown>
       </HoverCard>
-      <Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background)',
+        }}
+      >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
-      <Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background-gray)',
+        }}
+      >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
-      <Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background-blue)',
+        }}
+      >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
-      <Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background-yellow)',
+        }}
+      >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
       <Divider />
-      <Content withBorder>getAppBackground</Content>{' '}
-      <Content withBorder>getAppBackground</Content>
-      <Content withBorder>getSubtleBackground</Content>{' '}
-      <Content withBorder>getSubtleBackground</Content>
-      <Content withBorder>getUiElementBackground</Content>{' '}
-      <Content withBorder>getUiElementBackground</Content>
-      <Content withBorder>getHoveredUiElementBackground</Content>{' '}
-      <Content withBorder>getHoveredUiElementBackground</Content>
-      <Content withBorder>getSubtleBorderAndSeparator</Content>{' '}
-      <Content withBorder>getSubtleBorderAndSeparator</Content>
-      <Content withBorder>getUiElementBorderAndFocus</Content>{' '}
-      <Content withBorder>getUiElementBorderAndFocus</Content>
-      <Content withBorder>getSolidBackground</Content>{' '}
-      <Content withBorder>getSolidBackground</Content>
-      <Content withBorder>getHoveredSolidBackground</Content>{' '}
-      <Content withBorder>getHoveredSolidBackground</Content>
-      <Content withBorder>getLowContrastText</Content>{' '}
-      <Content withBorder>getLowContrastText</Content>
-      <Content withBorder>getHighContrastText</Content>{' '}
-      <Content withBorder>getHighContrastText</Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--app-background)',
+        }}
+        withBorder
+      >
+        getAppBackground
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--app-background-blue)',
+        }}
+        withBorder
+      >
+        getAppBackground
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--subtle-background)',
+        }}
+        withBorder
+      >
+        getSubtleBackground
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--subtle-background-blue)',
+        }}
+        withBorder
+      >
+        getSubtleBackground
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background)',
+        }}
+        withBorder
+      >
+        getUiElementBackground
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background-blue',
+        }}
+        withBorder
+      >
+        getUiElementBackground
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--hovered-ui-element-background)',
+        }}
+        withBorder
+      >
+        getHoveredUiElementBackground
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--hovered-ui-element-background-blue)',
+        }}
+        withBorder
+      >
+        getHoveredUiElementBackground
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--subtle-border-and-separator)',
+        }}
+        withBorder
+      >
+        getSubtleBorderAndSeparator
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--subtle-border-and-separator-blue)',
+        }}
+        withBorder
+      >
+        getSubtleBorderAndSeparator
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-border-and-focus)',
+        }}
+        withBorder
+      >
+        getUiElementBorderAndFocus
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-border-and-focus-blue)',
+        }}
+        withBorder
+      >
+        getUiElementBorderAndFocus
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--solid-background)',
+        }}
+        withBorder
+      >
+        getSolidBackground
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--solid-background-blue)',
+        }}
+        withBorder
+      >
+        getSolidBackground
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--hovered-solid-background)',
+        }}
+        withBorder
+      >
+        getHoveredSolidBackground
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--hovered-solid-background-blue)',
+        }}
+        withBorder
+      >
+        getHoveredSolidBackground
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--low-contrast-text)',
+        }}
+        withBorder
+      >
+        getLowContrastText
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--low-contrast-text-blue)',
+        }}
+        withBorder
+      >
+        getLowContrastText
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--high-contrast-text)',
+        }}
+        withBorder
+      >
+        getHighContrastText
+      </Content>{' '}
+      <Content
+        style={{
+          backgroundColor: 'var(--high-contrast-text-blue)',
+        }}
+        withBorder
+      >
+        getHighContrastText
+      </Content>
     </Stack>
   );
 }

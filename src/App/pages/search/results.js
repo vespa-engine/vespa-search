@@ -19,7 +19,8 @@ function Result({
   const ref = useRef();
   const titleLink = base_uri + path;
   const namespaceMeta = NAMESPACES_BY_ID[namespace];
-  const { typography, boxContent } = classNames;
+  const { typography, boxContent, resulTitle, externalIcon, spoilerControl } =
+    classNames;
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
@@ -30,38 +31,42 @@ function Result({
   return (
     <Content className={boxContent} selected={isSelected} withBorder>
       <Spoiler
+        classNames={{ control: spoilerControl }}
         ref={ref}
         maxHeight={233}
         showLabel="Show more"
         hideLabel="Show less"
       >
         <Stack className={typography}>
-          <Group position="apart" spacing="xs">
+          <Group justify="space-between" gap="xs">
             <Title
-              lh="inherit"
-              className="title"
+              lh={1.2}
+              className={resulTitle}
               id={`result-${refId}`}
               component={Link}
               to={titleLink}
             >
               [{refId}] {title}{' '}
               <Icon
-                sx={{
-                  display: 'none',
-                  '.title:hover &': { display: 'revert' },
-                }}
+                className={externalIcon}
                 name="external-link"
                 color="gray"
                 size="2xs"
               />
             </Title>
             {namespaceMeta && (
-              <Badge leftSection={<Icon name={namespaceMeta.icon} />} size="xs">
+              <Badge
+                leftSection={<Icon name={namespaceMeta.icon} />}
+                variant="light"
+                size="xs"
+              >
                 {namespaceMeta.name}
               </Badge>
             )}
           </Group>
-          <Stack>{parseMarkdown(content, { baseUrl: titleLink })}</Stack>
+          <Stack style={{ color: 'var(--low-contrast-text)' }}>
+            {parseMarkdown(content, { baseUrl: titleLink })}
+          </Stack>
         </Stack>
       </Spoiler>
     </Content>
@@ -77,7 +82,7 @@ export function Results({ scrollBy }) {
   return hits.length === 0 ? (
     <Text>No matches</Text>
   ) : (
-    <Stack spacing="lg">
+    <Stack gap="lg">
       {hits.map((child, i) => (
         <Result
           key={child.id}

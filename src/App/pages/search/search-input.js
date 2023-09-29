@@ -128,7 +128,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
             <Combobox.Options>
               {suggestions.map(({ value, type, url }) => (
                 <Combobox.Option value={{ value, url, type }} key={value}>
-                  <Group position="apart" wrap="nowrap">
+                  <Group justify="space-between" wrap="nowrap">
                     <Text>{value}</Text>
                     {type && <Link to={url}>{type}</Link>}
                   </Group>

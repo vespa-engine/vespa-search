@@ -16,6 +16,7 @@ export function Layout({ children }) {
       classNames={{ root, header }}
       data-is-home={isHome}
       header={{ height: 55 }}
+      padding="md"
     >
       <AppShell.Header withBorder={withBorder}>
         <Container className={container}>

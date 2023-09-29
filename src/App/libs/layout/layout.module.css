@@ -1,5 +1,5 @@
 .root {
-  &[data-is-home] {
+  &[data-is-home='true'] {
     background-image: radial-gradient(
         circle,
         transparent 0%,
@@ -54,7 +54,7 @@
   padding-right: var(--mantine-spacing-md);
   background: transparent;
 
-  &[data-with-border] {
+  &[data-with-border='true'] {
     background: var(--mantine-color-body);
   }
 }

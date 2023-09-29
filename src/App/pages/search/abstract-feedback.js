@@ -31,7 +31,7 @@ export function AbstractFeedback() {
   };
 
   return (
-    <Group spacing="xs" grow>
+    <Group gap="xs" grow>
       <Action
         name="Looks good"
         icon="thumbs-up"

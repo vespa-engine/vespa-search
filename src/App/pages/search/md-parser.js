@@ -44,13 +44,18 @@ function convert(token, key, options) {
     case 'code':
       return (
         <CodeHighlight
+          styles={{ code: { fontSize: 'var(--mantine-font-size-xs)' } }}
           key={key}
           language={token.lang || undefined}
           code={token.text}
         />
       );
     case 'blockquote':
-      return <Blockquote key={key}>{convertTokens(token, options)}</Blockquote>;
+      return (
+        <Blockquote p="lg" key={key}>
+          {convertTokens(token, options)}
+        </Blockquote>
+      );
     case 'heading':
       return (
         <Title key={key} order={token.depth}>
@@ -61,7 +66,11 @@ function convert(token, key, options) {
       return <Divider key={key} />;
     case 'list':
       return (
-        <List key={key} type={token.ordered ? 'ordered' : 'unordered'}>
+        <List
+          key={key}
+          size="sm"
+          type={token.ordered ? 'ordered' : 'unordered'}
+        >
           {token.items.map((item, i) => (
             <List.Item key={i}>{convertTokens(item, options)}</List.Item>
           ))}
@@ -69,23 +78,35 @@ function convert(token, key, options) {
       );
     case 'table':
       return (
-        <Table key={key} fontSize="xs">
-          <thead>
-            <tr>
+        <Table
+          key={key}
+          styles={{
+            table: {
+              fontSize: 'var(--mantine-font-size-xs)',
+              color: 'var(--low-contrast-text)',
+            },
+            thead: {
+              textTransform: 'uppercase',
+              textAlign: 'left',
+            },
+          }}
+        >
+          <Table.Thead>
+            <Table.Tr>
               {token.header.map((cell, i) => (
                 <th key={i}>{convertTokens(cell, options)}</th>
               ))}
-            </tr>
-          </thead>
-          <tbody>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
             {token.rows.map((row, i) => (
-              <tr key={i}>
+              <Table.Tr key={i}>
                 {row.map((cell, j) => (
-                  <td key={j}>{convertTokens(cell, options)}</td>
+                  <Table.Td key={j}>{convertTokens(cell, options)}</Table.Td>
                 ))}
-              </tr>
+              </Table.Tr>
             ))}
-          </tbody>
+          </Table.Tbody>
         </Table>
       );
 
@@ -97,7 +118,7 @@ function convert(token, key, options) {
       );
     case 'em':
       return (
-        <Text key={key} span>
+        <Text key={key} fs="italic" span>
           {convertTokens(token, options)}
         </Text>
       );
@@ -109,7 +130,7 @@ function convert(token, key, options) {
       return '\n';
     case 'del':
       return (
-        <Text key={key} strikethrough span>
+        <Text key={key} td="line-through" span>
           {convertTokens(token, options)}
         </Text>
       );
@@ -131,7 +152,11 @@ function convert(token, key, options) {
         />
       );
     case 'paragraph':
-      return <Text key={key}>{convertTokens(token, options)}</Text>;
+      return (
+        <Text key={key} size="sm">
+          {convertTokens(token, options)}
+        </Text>
+      );
     case 'text':
       return token.tokens ? convertTokens(token, options) : token.raw;
     case 'ref':

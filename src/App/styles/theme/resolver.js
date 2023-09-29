@@ -20,24 +20,19 @@ const properties = [
 const cssVariablesOverrides = (colors) => {
   const result = {};
   for (let colorName in colors) {
-    result['--mantine-color-text'] = 'var(--high-contrast-text-gray)';
-    result['--mantine-color-body'] = 'var(--app-background-gray)';
+    result['--mantine-color-text'] = 'var(--high-contrast-text-slate)';
+    result['--mantine-color-body'] = 'var(--app-background-slate)';
     result['--mantine-color-error'] = 'var(--solid-background-red)';
-    result['--mantine-color-placeholder'] = 'var(--hovered-ui-element-border-gray)';
+    result['--mantine-color-placeholder'] = 'var(--hovered-ui-element-border-slate)';
     result['--mantine-color-anchor'] = 'var(--solid-background-blue)';
-    result['--mantine-color-default'] = 'var(--solid-background-gray)';
-    result['--mantine-color-default-hover'] = 'var(--subtle-background-gray)';
-    result['--mantine-color-default-color'] = 'var(--high-contrast-text-gray)';
-    result['--mantine-color-default-border'] = 'var(--subtle-border-and-separator-gray)';
-    result['--mantine-color-text'] = 'var(--high-contrast-text-gray)';
     result['--mantine-color-dimmed'] = 'var(--solid-background-gray)';
     result[`--mantine-color-${colorName}-filled`] = `var(--solid-background-${colorName})`;
     result[`--mantine-color-${colorName}-filled-hover`] = `var(--hovered-solid-background-${colorName})`;
     result[`--mantine-color-${colorName}-light`] = `var(--ui-element-background-${colorName})`;
     result[`--mantine-color-${colorName}-light-hover`] = `var(--hovered-ui-element-background-${colorName})`;
-    result[`--mantine-color-${colorName}-light-color`] = `var(--low-contrast-text-${colorName})`;
+    result[`--mantine-color-${colorName}-light-color`] = `var(--solid-background-${colorName})`;
     result[`--mantine-color-${colorName}-outline`] = `var(--solid-background-${colorName})`;
-    result[`--mantine-color-${colorName}-outline-hover`] = `var(--hovered-solid-background-${colorName})`;
+    result[`--mantine-color-${colorName}-outline-hover`] = `var(--subtle-background-${colorName})`;
   }
   return result;
 };
@@ -74,11 +69,11 @@ export const resolver = (theme) => ({
   light: {
     ...cssVariablesResolver(light),
     ...cssVariablesOverrides(light),
-    ...cssVariablesDefaults('blue'),
+    ...cssVariablesDefaults('slate'),
   },
   dark: {
     ...cssVariablesResolver(dark),
     ...cssVariablesOverrides(dark),
-    ...cssVariablesDefaults('mauve'),
+    ...cssVariablesDefaults('slate'),
   },
 });

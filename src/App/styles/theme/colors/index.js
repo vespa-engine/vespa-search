@@ -1,5 +1,6 @@
 // prettier-ignore
 export const light = {
+  slate:   ['#fcfcfd', '#f9f9fb', '#f2f2f5', '#ebebef', '#e4e4e9', '#dddde3', '#d3d4db', '#b9bbc6', '#8b8d98', '#7e808a', '#60646c', '#1c2024'],
   gray:    ['#fcfcfc', '#f9f9f9', '#f1f1f1', '#ebebeb', '#e4e4e4', '#dddddd', '#d4d4d4', '#bbbbbb', '#8d8d8d', '#808080', '#646464', '#202020'],
   mauve:   ['#fdfcfd', '#faf9fb', '#f3f1f5', '#eceaef', '#e6e3e9', '#dfdce3', '#d5d3db', '#bcbac7', '#8e8c99', '#817f8b', '#65636d', '#211f26'],
   bronze:  ['#fdfcfc', '#fdf8f6', '#f8f1ee', '#f2e8e4', '#eaddd7', '#e0cec7', '#d1b9b0', '#bfa094', '#a18072', '#947467', '#7d5e54', '#43302b'],
@@ -30,6 +31,7 @@ export const light = {
 
 // prettier-ignore
 export const dark = {
+  slate:   ['#18181a', '#1b1b1f', '#27282d', '#2e3035', '#35373c', '#3c3f44', '#464b50', '#5a6165', '#696e77', '#7d828a', '#adb1b8', '#edeef0'],
   gray:    ['#181818', '#1b1b1b', '#282828', '#303030', '#373737', '#3f3f3f', '#4a4a4a', '#606060', '#6e6e6e', '#818181', '#b1b1b1', '#eeeeee'],
   mauve:   ['#191719', '#1e1a1e', '#2b272c', '#332f35', '#3a363c', '#423e45', '#4d4951', '#625f69', '#6f6d78', '#82808b', '#b1afb8', '#eeeef0'],
   bronze:  ['#191514', '#1c1918', '#272220', '#302926', '#382f2c', '#463a35', '#5d4c45', '#8d7266', '#a18072', '#b39283', '#d4b3a5', '#ede0d9'],

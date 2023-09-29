@@ -10,7 +10,7 @@ const RESULTS_WIDTH = '67vw';
 const ABSTRACT_WIDTH = '33vw';
 
 function getHeight() {
-  return `calc(100vh - var(--mantine-header-height, 0px) - (2 * var(--mantine-spacing-md)))`;
+  return `calc(100vh - var(--app-shell-header-height, 0px) - (2 * var(--mantine-spacing-md)))`;
 }
 
 export function Search() {
@@ -29,7 +29,7 @@ export function Search() {
           w="100%"
           pt="md"
           pr="md"
-          spacing="lg"
+          gap="lg"
         >
           <Stack>
             <SearchInput />

@@ -1,4 +1,5 @@
 .typography {
+  color: var(--low-contrast-text);
   font-size: var(--mantine-font-size-sm);
 
   & ul,
@@ -30,7 +31,7 @@
     border-color: var(--mantine-color-default-border);
   }
 
-  &[data-selected] {
+  &[data-selected='true'] {
     border-color: var(--mantine-primary-color-filled);
 
     @mixin hover {
@@ -40,12 +41,38 @@
 }
 
 .item {
-  border: 1px solid var(--mantine-primary-color-light);
+  border: 1px solid var(--subtle-border-and-separator-blue);
+  background-color: var(--app-background);
   border-radius: var(--mantine-radius-xl);
   padding: var(--mantine-spacing-sm);
   margin-bottom: var(--mantine-spacing-xs);
 
   @mixin hover {
-    border-color: var(--mantine-primary-color-filled);
+    border-color: var(--hovered-ui-element-border-blue);
+  }
+}
+
+.resulTitle {
+  color: var(--high-contrast-text);
+}
+
+.externalIcon {
+  display: none;
+}
+
+.resulTitle:hover .externalIcon {
+  display: revert;
+}
+
+.spoilerControl {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--high-contrast-text);
+  background-color: var(--ui-element-background);
+  text-align: center;
+  width: 100%;
+
+  @mixin hover {
+    text-decoration: none;
+    background-color: var(--hovered-ui-element-background);
   }
 }
