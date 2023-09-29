@@ -4,7 +4,7 @@ import {
   Combobox,
   Group,
   Text,
-  TextInput,
+  Textarea,
   useCombobox,
 } from '@mantine/core';
 import classNames from './search-input.module.css';
@@ -30,11 +30,6 @@ export function SearchInput({ size = 'md', autofocus = false }) {
   useEffect(() => setValue(query), [query]);
 
   useEffect(() => {
-    if (inputRef.current) {
-      inputRef.current.style.height = '';
-      inputRef.current.style.height = `${inputRef.current.scrollHeight}px`;
-    }
-
     let cancelled = false;
     if (value.length === 0) {
       setSuggestions([]);
@@ -87,7 +82,8 @@ export function SearchInput({ size = 'md', autofocus = false }) {
         store={combobox}
       >
         <Combobox.Target>
-          <TextInput
+          <Textarea
+            autosize
             classNames={{ input }}
             data-suggestions={suggestions.length > 0}
             ref={(ref) => {
