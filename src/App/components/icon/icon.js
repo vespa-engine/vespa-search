@@ -28,8 +28,7 @@ function resolveIconName(name, maybeType) {
   return `fa-${name} fa-${maybeType ?? 'solid'}`;
 }
 
-export function Icon({ name, type, color, disabled, ...rest }) {
-  console.log('Icon', { name, type, color, disabled, rest });
+export function Icon({ name, type, color, disabled, size, ...rest }) {
   const icon = resolveIconName(name, type);
   const { box } = classNames;
   return (
@@ -37,8 +36,9 @@ export function Icon({ name, type, color, disabled, ...rest }) {
       className={box}
       mod={{ disabled }}
       c={color}
-      component={FontAwesomeIcon}
-      icon={icon}
+      renderRoot={(props) => (
+        <FontAwesomeIcon icon={icon} size={size} {...props} />
+      )}
       {...rest}
     />
   );
