@@ -11,7 +11,7 @@ export function LinkTheme() {
   const { toggleColorScheme } = useMantineColorScheme();
   const computedColorScheme = useComputedColorScheme('light');
   const isDarkMode = computedColorScheme === 'dark';
-  const color = isDarkMode ? 'yellow' : 'gray';
+  const color = isDarkMode ? 'yellow' : 'var(--low-contrast-text)';
   const iconName = isDarkMode ? 'sun' : 'moon';
 
   return (

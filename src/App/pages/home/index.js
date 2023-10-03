@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Space, Stack } from '@mantine/core';
 import { SearchDisclaimer } from 'App/pages/home/search-disclaimer';
-import { SearchInput } from 'App/pages/search/search-input';
+import { SearchInput } from 'App/pages/search/search-input/index.js';
 
 export function Home() {
   return (

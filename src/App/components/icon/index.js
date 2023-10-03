@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mantine/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import classNames from './icon.module.css';
+import classNames from 'App/components/icon/index.module.css';
 
 function resolveIconName(name, maybeType) {
   if (name.startsWith('fa') && name.charAt(3) === '-') {

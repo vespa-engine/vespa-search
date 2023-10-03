@@ -8,17 +8,17 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import classNames from './search.module.css';
+import classNames from 'App/pages/search/abstract/index.module.css';
 import { useSearchContext } from 'App/libs/provider';
 import { Icon } from 'App/components';
-import { AbstractFeedback } from 'App/pages/search/abstract-feedback';
+import { AbstractFeedback } from 'App/pages/search/abstract/abstract-feedback';
 import { fontWeightBold, fontWeightLight } from 'App/styles/common';
 import { Link } from 'App/libs/router';
+import { Typography } from 'App/pages/search/typography/index.js';
 
 export function Abstract() {
-  const { typography } = classNames;
   return (
-    <Stack className={typography}>
+    <Typography>
       <Group pt="md" justify="space-between">
         <Title order={4} c="var(--high-contrast-text)">
           Abstract{' '}
@@ -50,7 +50,7 @@ export function Abstract() {
       <AbstractFeedback />
       <AbstractAbout />
       <AbstractQuestions />
-    </Stack>
+    </Typography>
   );
 }
 
@@ -62,16 +62,13 @@ function AbstractContent() {
 function AbstractQuestions() {
   const questions = useSearchContext((ctx) => ctx.summary.questions);
   if (!(questions?.length > 0)) return null;
-
-  const { item } = classNames;
-
   return (
     <Stack>
       <Text size="sm" c="var(--high-contrast-text)" fw={fontWeightBold}>
         Also try these questions
       </Text>
       <List
-        classNames={{ item }}
+        classNames={classNames}
         icon={<Icon name="magnifying-glass" color="blue" />}
         type="unordered"
         center

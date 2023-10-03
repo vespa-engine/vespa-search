@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Stack } from '@mantine/core';
-import classNames from './content.module.css';
+import classNames from 'App/components/containers/content/index.module.css';
 
 export function Content({ withBorder, selected, ...props }) {
   const { box } = classNames;

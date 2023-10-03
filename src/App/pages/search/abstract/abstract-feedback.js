@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Button, Group } from '@mantine/core';
-import { Get } from 'App/libs/fetcher';
-import { useSearchContext } from 'App/libs/provider';
+import { Get } from 'App/libs/fetcher/index.js';
+import { useSearchContext } from 'App/libs/provider/index.js';
 import { Icon } from 'App/components/index.js';
 
 function Action({ icon, name, type, ...props }) {

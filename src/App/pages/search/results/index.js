@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Badge, Group, Spoiler, Stack, Text, Title } from '@mantine/core';
-import { NAMESPACES_BY_ID, useSearchContext } from 'App/libs/provider';
-import { parseMarkdown } from 'App/pages/search/md-parser';
-import { Content, Error, Icon, LoadingResult } from 'App/components';
-import { Link } from 'App/libs/router';
-import classNames from 'App/pages/search/search.module.css';
+import { NAMESPACES_BY_ID, useSearchContext } from 'App/libs/provider/index.js';
+import { parseMarkdown } from 'App/pages/search/md-parser.js';
+import { Content, Error, Icon, LoadingResult } from 'App/components/index.js';
+import { Typography } from 'App/pages/search/typography/index.js';
+import { Link } from 'App/libs/router/index.js';
+import classNames from 'App/pages/search/results/index.module.css';
 
 function Result({
   refId,
@@ -19,7 +20,7 @@ function Result({
   const ref = useRef();
   const titleLink = base_uri + path;
   const namespaceMeta = NAMESPACES_BY_ID[namespace];
-  const { typography, resulTitle, externalIcon, spoilerControl } = classNames;
+  const { titleResult, iconExternal, spoilerControl } = classNames;
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
@@ -37,18 +38,18 @@ function Result({
         hideLabel="Show less"
         pb="md"
       >
-        <Stack className={typography}>
+        <Typography>
           <Group justify="space-between" gap="xs">
             <Title
               lh={1.2}
-              className={resulTitle}
+              className={titleResult}
               id={`result-${refId}`}
               component={Link}
               to={titleLink}
             >
               [{refId}] {title}{' '}
               <Icon
-                className={externalIcon}
+                className={iconExternal}
                 name="external-link"
                 color="gray"
                 size="2xs"
@@ -67,7 +68,7 @@ function Result({
           <Stack style={{ color: 'var(--low-contrast-text)' }}>
             {parseMarkdown(content, { baseUrl: titleLink })}
           </Stack>
-        </Stack>
+        </Typography>
       </Spoiler>
     </Content>
   );

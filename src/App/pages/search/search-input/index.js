@@ -7,7 +7,7 @@ import {
   Textarea,
   useCombobox,
 } from '@mantine/core';
-import classNames from './search-input.module.css';
+import classNames from 'App/pages/search/search-input/index.module.css';
 import { useSearchContext } from 'App/libs/provider';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';

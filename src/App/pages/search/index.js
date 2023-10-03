@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
 import { ScrollArea, Stack } from '@mantine/core';
-import { Results } from 'App/pages/search/results';
-import { Abstract } from 'App/pages/search/abstract';
+import { Results } from 'App/pages/search/results/index.js';
+import { Abstract } from 'App/pages/search/abstract/index.js';
 import { Container } from 'App/components';
 import { SearchSources } from 'App/pages/search/search-sources';
-import { SearchInput } from 'App/pages/search/search-input';
+import { SearchInput } from 'App/pages/search/search-input/index.js';
 
 const RESULTS_WIDTH = '67vw';
 const ABSTRACT_WIDTH = '33vw';
