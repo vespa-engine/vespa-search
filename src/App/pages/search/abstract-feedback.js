@@ -8,7 +8,7 @@ function Action({ icon, name, type, ...props }) {
   return (
     <Button
       leftSection={<Icon name={icon} type={type} />}
-      color="gray"
+      color="var(--low-contrast-text)"
       variant="outline"
       onClick={() => {}}
       radius="xl"

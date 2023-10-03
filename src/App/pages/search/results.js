@@ -19,8 +19,7 @@ function Result({
   const ref = useRef();
   const titleLink = base_uri + path;
   const namespaceMeta = NAMESPACES_BY_ID[namespace];
-  const { typography, boxContent, resulTitle, externalIcon, spoilerControl } =
-    classNames;
+  const { typography, resulTitle, externalIcon, spoilerControl } = classNames;
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
@@ -29,13 +28,14 @@ function Result({
   }, [ref, isSelected, scrollBy]);
 
   return (
-    <Content className={boxContent} selected={isSelected} withBorder>
+    <Content selected={isSelected} withBorder>
       <Spoiler
         classNames={{ control: spoilerControl }}
         ref={ref}
         maxHeight={233}
         showLabel="Show more"
         hideLabel="Show less"
+        pb="md"
       >
         <Stack className={typography}>
           <Group justify="space-between" gap="xs">

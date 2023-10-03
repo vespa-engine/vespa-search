@@ -112,13 +112,13 @@ function convert(token, key, options) {
 
     case 'strong':
       return (
-        <Text key={key} fw={fontWeightBold} span>
+        <Text key={key} fz="sm" fw={fontWeightBold} span>
           {convertTokens(token, options)}
         </Text>
       );
     case 'em':
       return (
-        <Text key={key} fs="italic" span>
+        <Text key={key} fz="sm" fs="italic" span>
           {convertTokens(token, options)}
         </Text>
       );
@@ -130,7 +130,7 @@ function convert(token, key, options) {
       return '\n';
     case 'del':
       return (
-        <Text key={key} td="line-through" span>
+        <Text key={key} fz="sm" td="line-through" span>
           {convertTokens(token, options)}
         </Text>
       );
