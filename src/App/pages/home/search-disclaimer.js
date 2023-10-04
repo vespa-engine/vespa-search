@@ -3,7 +3,7 @@ import { Container, HoverCard, Stack, Text } from '@mantine/core';
 import { Link } from 'App/libs/router';
 import { fontWeightBold } from 'App/styles/common';
 
-function DisclaimerDetails() {
+export function DisclaimerDetails() {
   return (
     <HoverCard>
       <HoverCard.Target>
@@ -40,9 +40,10 @@ function DisclaimerDetails() {
     </HoverCard>
   );
 }
+
 export function SearchDisclaimer() {
   return (
-    <Stack px="lg" justify="c">
+    <Stack px="lg">
       <Text size="sm" c="dimmed" align="center">
         By querying, you consent to share data with OpenAI. The AI-generated
         abstract may have biases or inaccuracies. See <DisclaimerDetails /> for
