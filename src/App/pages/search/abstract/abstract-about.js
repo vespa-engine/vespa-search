@@ -1,10 +1,12 @@
 import React from 'react';
-import { Stack, Text } from '@mantine/core';
+import { Anchor, Stack, Text } from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
 import { Link } from 'App/libs/router/index.js';
+import { useConsent } from 'App/pages/search/abstract/use-consent.js';
 
 export function AbstractAbout() {
+  const { setValue } = useConsent();
   const hasFinished = useSearchContext(
     (ctx) => ctx.summary.feedbackUrl != null,
   );
@@ -26,7 +28,11 @@ export function AbstractAbout() {
         </Link>
         . Note that abstracts may contain inaccuracies or unintended biases and
         shouldn&apos;t serve as a substitute for professional advice in medical,
-        legal, financial, or other domains.
+        legal, financial, or other domains.{' '}
+        <Text span>
+          Click <Anchor onClick={() => setValue(false)}>here</Anchor> to revoke
+          showing the abstract.
+        </Text>
       </Text>
     </Stack>
   );

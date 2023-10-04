@@ -51,4 +51,7 @@ a {
   color: var(--solid-background-blue);
   cursor: pointer;
   text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
 }
