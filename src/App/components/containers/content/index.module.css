@@ -1,0 +1,20 @@
+.box {
+  position: relative;
+
+  &[data-with-border='true'] {
+    border: 1px solid var(--subtle-border-and-separator);
+    border-radius: var(--mantine-radius-xs);
+  }
+
+  &[data-selected='true'] {
+    border-color: var(--ui-element-border-and-focus-blue);
+
+    @mixin hover {
+      border-color: var(--hovered-ui-element-border-blue);
+    }
+  }
+
+  @mixin hover {
+    border-color: var(--hovered-ui-element-border);
+  }
+}

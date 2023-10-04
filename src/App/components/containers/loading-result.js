@@ -6,7 +6,7 @@ export function LoadingResult() {
   return (
     <Content withBorder>
       <Skeleton height={21} radius="xl" />
-      <Stack spacing="xs">
+      <Stack gap="xs">
         <Skeleton height={8} radius="xl" />
         <Skeleton height={8} radius="xl" />
         <Skeleton height={8} radius="xl" />

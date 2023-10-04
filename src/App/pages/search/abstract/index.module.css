@@ -1,0 +1,11 @@
+.item {
+  border: 1px solid var(--subtle-border-and-separator-blue);
+  background-color: var(--app-background);
+  border-radius: var(--mantine-radius-xl);
+  padding: var(--mantine-spacing-sm);
+  margin-bottom: var(--mantine-spacing-xs);
+
+  @mixin hover {
+    border-color: var(--hovered-ui-element-border-blue);
+  }
+}

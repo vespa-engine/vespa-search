@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 import { Badge, Group, Spoiler, Stack, Text, Title } from '@mantine/core';
-import { NAMESPACES_BY_ID, useSearchContext } from 'App/libs/provider';
-import { parseMarkdown } from 'App/pages/search/md-parser';
-import { Content, Error, Icon, LoadingResult } from 'App/components';
-import { typography } from 'App/styles/theme/typography';
-import { Link } from 'App/libs/router';
+import { NAMESPACES_BY_ID, useSearchContext } from 'App/libs/provider/index.js';
+import { parseMarkdown } from 'App/pages/search/md-parser.js';
+import { Content, Error, Icon, LoadingResult } from 'App/components/index.js';
+import { Typography } from 'App/pages/search/typography/index.js';
+import { Link } from 'App/libs/router/index.js';
+import classNames from 'App/pages/search/results/index.module.css';
 
 function Result({
   refId,
@@ -19,6 +20,7 @@ function Result({
   const ref = useRef();
   const titleLink = base_uri + path;
   const namespaceMeta = NAMESPACES_BY_ID[namespace];
+  const { titleResult, iconExternal, spoilerControl } = classNames;
 
   useEffect(() => {
     if (!isSelected || !ref.current) return;
@@ -27,62 +29,46 @@ function Result({
   }, [ref, isSelected, scrollBy]);
 
   return (
-    <Content
-      sxBox={(theme) => ({
-        ...(isSelected && { borderColor: theme.cr.getSolidBackground('blue') }),
-        '&:hover': {
-          borderColor: isSelected
-            ? theme.cr.getSolidBackground('blue')
-            : theme.cr.getSolidBackground(),
-        },
-      })}
-      withBorder
-    >
+    <Content selected={isSelected} withBorder>
       <Spoiler
+        classNames={{ control: spoilerControl }}
         ref={ref}
-        styles={(theme) => ({
-          control: {
-            ...theme.fn.hover({ textDecoration: 'none' }),
-            color: 'inherit',
-          },
-        })}
         maxHeight={233}
         showLabel="Show more"
         hideLabel="Show less"
+        pb="md"
       >
-        <Stack sx={typography}>
-          <Group position="apart" spacing="xs">
+        <Typography>
+          <Group justify="space-between" gap="xs">
             <Title
-              sx={(theme) => ({
-                color: theme.cr.getHighContrastText(),
-                lineHeight: 'inherit',
-              })}
-              className="title"
+              lh={1.2}
+              className={titleResult}
               id={`result-${refId}`}
               component={Link}
               to={titleLink}
             >
               [{refId}] {title}{' '}
               <Icon
-                sx={{
-                  display: 'none',
-                  '.title:hover &': { display: 'revert' },
-                }}
+                className={iconExternal}
                 name="external-link"
                 color="gray"
                 size="2xs"
               />
             </Title>
             {namespaceMeta && (
-              <Badge leftSection={<Icon name={namespaceMeta.icon} />} size="xs">
+              <Badge
+                leftSection={<Icon name={namespaceMeta.icon} />}
+                variant="light"
+                size="xs"
+              >
                 {namespaceMeta.name}
               </Badge>
             )}
           </Group>
-          <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
+          <Stack style={{ color: 'var(--low-contrast-text)' }}>
             {parseMarkdown(content, { baseUrl: titleLink })}
           </Stack>
-        </Stack>
+        </Typography>
       </Spoiler>
     </Content>
   );
@@ -97,7 +83,7 @@ export function Results({ scrollBy }) {
   return hits.length === 0 ? (
     <Text>No matches</Text>
   ) : (
-    <Stack spacing="lg">
+    <Stack gap="lg">
       {hits.map((child, i) => (
         <Result
           key={child.id}

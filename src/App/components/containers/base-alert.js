@@ -4,7 +4,7 @@ import { Icon, Container } from '..';
 
 function BaseAlert({ message, icon, color, ...props }) {
   return (
-    <Container sx={{ textAlign: 'center' }}>
+    <Container ta="center">
       <Alert icon={icon && <Icon name={icon} />} color={color} {...props}>
         {message}
       </Alert>
@@ -12,5 +12,4 @@ function BaseAlert({ message, icon, color, ...props }) {
   );
 }
 
-export const Warning = (props) => <BaseAlert color="yellow" {...props} />;
 export const Error = (props) => <BaseAlert color="red" {...props} />;

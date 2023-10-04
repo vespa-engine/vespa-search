@@ -9,6 +9,6 @@ export const ALL_NAMESPACES = Object.freeze([
 export const NAMESPACES_BY_ID = Object.freeze(
   ALL_NAMESPACES.reduce(
     (object, namespace) => ({ ...object, [namespace.id]: namespace }),
-    {}
-  )
+    {},
+  ),
 );

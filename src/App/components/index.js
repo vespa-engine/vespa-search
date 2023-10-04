@@ -1,10 +1,6 @@
 export { Container } from 'App/components/containers/container.js';
-export { Content } from 'App/components/containers/content.js';
+export { Content } from 'App/components/containers/content';
 export { Error } from 'App/components/containers/base-alert.js';
-export { Icon } from 'App/components/icon/icon.js';
-export { Loading } from 'App/components/containers/loading.js';
+export { Icon } from 'App/components/icon';
 export { LoadingResult } from 'App/components/containers/loading-result.js';
 export { Message } from 'App/components/containers/message.js';
-export { Topbar } from 'App/components/containers/topbar.js';
-export { VespaIcon } from 'App/components/icon/vespa-icon.js';
-export { Warning } from 'App/components/containers/base-alert.js';

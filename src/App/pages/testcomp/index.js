@@ -27,7 +27,7 @@ import {
   Text,
   TextInput,
 } from '@mantine/core';
-import { Prism } from '@mantine/prism';
+import { CodeHighlight } from '@mantine/code-highlight';
 import { Content, Icon } from 'App/components';
 
 function DemoActionIcon() {
@@ -58,25 +58,29 @@ function DemoActionIcon() {
 function DemoButton() {
   return (
     <Group>
-      <Button color="blue" variant="transparent" leftIcon={<Icon name="bug" />}>
+      <Button
+        color="blue"
+        variant="transparent"
+        leftSection={<Icon name="bug" />}
+      >
         transparent
       </Button>
-      <Button color="blue" variant="subtle" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="subtle" leftSection={<Icon name="bug" />}>
         subtle
       </Button>
-      <Button color="blue" variant="default" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="default" leftSection={<Icon name="bug" />}>
         default
       </Button>
-      <Button color="blue" variant="outline" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="outline" leftSection={<Icon name="bug" />}>
         outline
       </Button>
-      <Button color="blue" variant="filled" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="filled" leftSection={<Icon name="bug" />}>
         filled
       </Button>
-      <Button color="blue" variant="light" leftIcon={<Icon name="bug" />}>
+      <Button color="blue" variant="light" leftSection={<Icon name="bug" />}>
         light
       </Button>
-      <Button color="pink" leftIcon={<Icon name="bug" />}>
+      <Button color="pink" leftSection={<Icon name="bug" />}>
         button
       </Button>
     </Group>
@@ -116,9 +120,9 @@ function DemoButtonGradients() {
 
 function DemoCloseButton() {
   return (
-    <Group position="center">
+    <Group justify="center">
       <CloseButton aria-label="Close modal" />
-      <CloseButton title="Close popover" size="xl" iconSize={20} />
+      <CloseButton size="xl" />
     </Group>
   );
 }
@@ -169,7 +173,9 @@ function DemoCheckBoxes() {
 function DemoChips() {
   return (
     <Group>
-      <Chip defaultChecked>Awesome chip</Chip>
+      <Chip defaultChecked variant="outline">
+        Awesome chip
+      </Chip>
       <Chip defaultChecked variant="light">
         Awesome chip
       </Chip>
@@ -264,13 +270,13 @@ function DemoTabs() {
       <Space h={1} />
       <Tabs defaultValue="gallery">
         <Tabs.List>
-          <Tabs.Tab value="gallery" icon={<Icon name="bug" />}>
+          <Tabs.Tab value="gallery" leftSection={<Icon name="bug" />}>
             Gallery
           </Tabs.Tab>
-          <Tabs.Tab value="messages" icon={<Icon name="bug" />}>
+          <Tabs.Tab value="messages" leftSection={<Icon name="bug" />}>
             Messages
           </Tabs.Tab>
-          <Tabs.Tab value="settings" icon={<Icon name="bug" />}>
+          <Tabs.Tab value="settings" leftSection={<Icon name="bug" />}>
             Settings
           </Tabs.Tab>
         </Tabs.List>
@@ -323,7 +329,7 @@ function DemoAccordion() {
 function DemoBadge() {
   return (
     <Group>
-      <Badge>light</Badge>
+      <Badge variant="light">light</Badge>
       <Badge variant="filled">filled</Badge>
       <Badge variant="outline">outline</Badge>
       <Badge variant="dot">dot</Badge>
@@ -362,7 +368,7 @@ function DemoBadgeGradients() {
   );
 }
 
-function DemoPrism() {
+function DemoCodeHighlight() {
   const demoCode = `import { Button } from '@mantine/core';
 
 function Demo() {
@@ -375,8 +381,8 @@ function Demo() {
 
   return (
     <Stack>
-      <Prism language="markup">{demoCode}</Prism>
-      <Prism language="tsx">{demoCode}</Prism>
+      <CodeHighlight language="markdown" code={demoCode} />
+      <CodeHighlight language="tsx" code={demoCode} />
     </Stack>
   );
 }
@@ -385,7 +391,7 @@ function DemoSkeleton() {
   return (
     <Stack>
       <Skeleton height={21} radius="xl" />
-      <Stack spacing="xs">
+      <Stack gap="xs">
         <Skeleton height={8} radius="xl" />
         <Skeleton height={8} radius="xl" />
         <Skeleton height={8} radius="xl" />
@@ -400,8 +406,12 @@ function DemoMiscs() {
     <Stack>
       <Button>text</Button>
       <Button color="yellow">text</Button>
-      <Badge color="blue">text</Badge>
-      <Badge color="yellow">text</Badge>
+      <Badge variant="light" color="blue">
+        text
+      </Badge>
+      <Badge variant="light" color="yellow">
+        text
+      </Badge>
       <Icon color="blue" name="bug" />
       <Icon color="yellow" name="bug" />
       <HoverCard width={280} shadow="md">
@@ -415,191 +425,195 @@ function DemoMiscs() {
           </Text>
         </HoverCard.Dropdown>
       </HoverCard>
-      <Content background="ui-element">
-        Hover card is revealed when user hovers over target element, it will be
-        hidden once mouse is not over both target and dropdown elements
-      </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('gray'),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-background)',
+        }}
       >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-background-gray)',
+        }}
       >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('yellow'),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-background-blue)',
+        }}
+      >
+        Hover card is revealed when user hovers over target element, it will be
+        hidden once mouse is not over both target and dropdown elements
+      </Content>
+      <Content
+        style={{
+          backgroundColor: 'var(--ui-element-background-yellow)',
+        }}
       >
         Hover card is revealed when user hovers over target element, it will be
         hidden once mouse is not over both target and dropdown elements
       </Content>
       <Divider />
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getAppBackground(),
-        })}
+        style={{
+          backgroundColor: 'var(--app-background)',
+        }}
         withBorder
       >
         getAppBackground
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getAppBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--app-background-blue)',
+        }}
         withBorder
       >
         getAppBackground
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBackground(),
-        })}
+        style={{
+          backgroundColor: 'var(--subtle-background)',
+        }}
         withBorder
       >
         getSubtleBackground
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--subtle-background-blue)',
+        }}
         withBorder
       >
         getSubtleBackground
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground(),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-background)',
+        }}
         withBorder
       >
         getUiElementBackground
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-background-blue',
+        }}
         withBorder
       >
         getUiElementBackground
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredUiElementBackground(),
-        })}
+        style={{
+          backgroundColor: 'var(--hovered-ui-element-background)',
+        }}
         withBorder
       >
         getHoveredUiElementBackground
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredUiElementBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--hovered-ui-element-background-blue)',
+        }}
         withBorder
       >
         getHoveredUiElementBackground
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBorderAndSeparator(),
-        })}
+        style={{
+          backgroundColor: 'var(--subtle-border-and-separator)',
+        }}
         withBorder
       >
         getSubtleBorderAndSeparator
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSubtleBorderAndSeparator('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--subtle-border-and-separator-blue)',
+        }}
         withBorder
       >
         getSubtleBorderAndSeparator
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBorderAndFocus(),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-border-and-focus)',
+        }}
         withBorder
       >
         getUiElementBorderAndFocus
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getUiElementBorderAndFocus('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--ui-element-border-and-focus-blue)',
+        }}
         withBorder
       >
         getUiElementBorderAndFocus
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSolidBackground(),
-        })}
+        style={{
+          backgroundColor: 'var(--solid-background)',
+        }}
         withBorder
       >
         getSolidBackground
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getSolidBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--solid-background-blue)',
+        }}
         withBorder
       >
         getSolidBackground
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredSolidBackground(),
-        })}
+        style={{
+          backgroundColor: 'var(--hovered-solid-background)',
+        }}
         withBorder
       >
         getHoveredSolidBackground
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHoveredSolidBackground('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--hovered-solid-background-blue)',
+        }}
         withBorder
       >
         getHoveredSolidBackground
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getLowContrastText(),
-        })}
+        style={{
+          backgroundColor: 'var(--low-contrast-text)',
+        }}
         withBorder
       >
         getLowContrastText
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getLowContrastText('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--low-contrast-text-blue)',
+        }}
         withBorder
       >
         getLowContrastText
       </Content>
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHighContrastText(),
-        })}
+        style={{
+          backgroundColor: 'var(--high-contrast-text)',
+        }}
         withBorder
       >
         getHighContrastText
       </Content>{' '}
       <Content
-        sx={(theme) => ({
-          backgroundColor: theme.cr.getHighContrastText('blue'),
-        })}
+        style={{
+          backgroundColor: 'var(--high-contrast-text-blue)',
+        }}
         withBorder
       >
         getHighContrastText
@@ -632,7 +646,7 @@ export function Testcomp() {
         <DemoAccordion />
         <DemoBadge />
         <DemoBadgeGradients />
-        <DemoPrism />
+        <DemoCodeHighlight />
         <DemoSkeleton />
         <DemoMiscs />
       </Stack>

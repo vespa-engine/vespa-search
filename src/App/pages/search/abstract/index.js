@@ -1,39 +1,34 @@
 import React from 'react';
 import {
+  Container,
   Group,
-  Stack,
   List,
+  Popover,
+  Stack,
   Text,
   Title,
-  Container,
-  Popover,
 } from '@mantine/core';
+import classNames from 'App/pages/search/abstract/index.module.css';
 import { useSearchContext } from 'App/libs/provider';
-import { typography } from 'App/styles/theme/typography';
 import { Icon } from 'App/components';
-import { AbstractFeedback } from 'App/pages/search/abstract-feedback';
+import { AbstractFeedback } from 'App/pages/search/abstract/abstract-feedback';
 import { fontWeightBold, fontWeightLight } from 'App/styles/common';
 import { Link } from 'App/libs/router';
+import { Typography } from 'App/pages/search/typography/index.js';
 
 export function Abstract() {
   return (
-    <Stack sx={typography}>
-      <Group
-        sx={(theme) => ({ paddingTop: theme.spacing.md })}
-        position="apart"
-      >
-        <Title
-          sx={(theme) => ({ color: theme.cr.getHighContrastText() })}
-          order={4}
-        >
+    <Typography>
+      <Group pt="md" justify="space-between">
+        <Title order={4} c="var(--high-contrast-text)">
           Abstract{' '}
-          <Text weight={fontWeightLight} size="sm" span>
+          <Text fw={fontWeightLight} size="sm" span>
             (experimental)
           </Text>
         </Title>
         <Popover withinPortal>
           <Popover.Target>
-            <Text sx={{ cursor: 'pointer' }} color="blue">
+            <Text style={{ cursor: 'pointer' }} c="blue" size="sm">
               <Icon name="circle-question" type="regular" /> What is this?
             </Text>
           </Popover.Target>
@@ -55,39 +50,25 @@ export function Abstract() {
       <AbstractFeedback />
       <AbstractAbout />
       <AbstractQuestions />
-    </Stack>
+    </Typography>
   );
 }
 
 function AbstractContent() {
   const summary = useSearchContext((ctx) => ctx.summary.element);
-  return (
-    <Stack sx={(theme) => ({ color: theme.cr.getLowContrastText() })}>
-      {summary}
-    </Stack>
-  );
+  return <Stack>{summary}</Stack>;
 }
 
 function AbstractQuestions() {
   const questions = useSearchContext((ctx) => ctx.summary.questions);
   if (!(questions?.length > 0)) return null;
-
   return (
     <Stack>
-      <Text fw={fontWeightBold}>Also try these questions</Text>
+      <Text size="sm" c="var(--high-contrast-text)" fw={fontWeightBold}>
+        Also try these questions
+      </Text>
       <List
-        styles={(theme) => ({
-          item: {
-            border: `1px solid ${theme.cr.getSubtleBorderAndSeparator('blue')}`,
-            backgroundColor: theme.cr.getAppBackground(),
-            borderRadius: theme.spacing.xl,
-            padding: theme.spacing.sm,
-            marginBottom: theme.spacing.xs,
-            '&:hover': {
-              borderColor: theme.cr.getSolidBackground('blue'),
-            },
-          },
-        })}
+        classNames={classNames}
         icon={<Icon name="magnifying-glass" color="blue" />}
         type="unordered"
         center
@@ -95,7 +76,7 @@ function AbstractQuestions() {
         {questions.map(({ text, url }, i) => (
           <Link to={url} key={i}>
             <List.Item>
-              <Text color="blue" inline>
+              <Text size="sm" c="blue" lh={1} span>
                 {text}
               </Text>
             </List.Item>
@@ -114,7 +95,9 @@ function AbstractAbout() {
 
   return (
     <Stack>
-      <Text fw={fontWeightBold}>About the abstract</Text>
+      <Text size="sm" c="var(--high-contrast-text)" fw={fontWeightBold}>
+        About the abstract
+      </Text>
       <Text size="sm">
         This abstract is AI-generated, based on your query and search results.
         By submitting a query, you agree to share data with OpenAI, governed by

@@ -1,33 +1,18 @@
-import { rem } from '@mantine/core';
+import { Badge as MantineBadge } from '@mantine/core';
 
-const getVariantStyles = ({ theme, variant, color }) => {
-  if (variant === 'dot') {
-    return {
-      backgroundColor: 'transparent',
-      color: theme.cr.getLowContrastText('gray'),
-      border: `${rem(1)} solid ${theme.cr.getSubtleBorderAndSeparator('gray')}`,
-      '&::before': {
-        backgroundColor: theme.cr.getSolidBackground(color),
-      },
-    };
-  }
-
-  const colors = theme.other.variant({ theme, color, variant });
-
-  return {
-    border: `${rem(variant === 'gradient' ? 0 : 1)} solid ${colors.border}`,
-    backgroundColor: colors.background,
-    color: colors.color,
-  };
-};
-
-export const Badge = {
-  defaultProps: {},
-  styles: (theme, { color = 'blue' }, { variant = 'light' }) => {
-    return {
-      root: {
-        ...getVariantStyles({ theme, variant, color }),
-      },
-    };
+export const Badge = MantineBadge.extend({
+  vars: (theme, { variant, color }) => {
+    const _color = color || theme.primaryColor;
+    if (variant === 'light') {
+      return {
+        root: {
+          color: `var(--low-contrast-text-${_color})`,
+          background: `var(--ui-element-background-${_color})`,
+          hover: `var(--hovered-ui-element-background-${_color})`,
+        },
+      };
+    }
   },
-};
+  defaultProps: {},
+  styles: {},
+});

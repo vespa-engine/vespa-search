@@ -5,7 +5,7 @@ test('external links', () => {
   expect(isInternalLink('http://www.vg.no')).toBeFalsy();
   expect(isInternalLink('gopher://gopher.floodgap.com/1/world')).toBeFalsy();
   expect(
-    isInternalLink('slack://channel?team=T025DU6HX&id=C6KT1FC9L')
+    isInternalLink('slack://channel?team=T025DU6HX&id=C6KT1FC9L'),
   ).toBeFalsy();
 });
 

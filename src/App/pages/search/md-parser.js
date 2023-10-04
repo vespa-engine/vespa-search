@@ -10,14 +10,10 @@ import {
   Text,
   Title,
 } from '@mantine/core';
-import { Prism } from '@mantine/prism';
-import { Prism as PrismRenderer } from 'prism-react-renderer';
+import { CodeHighlight } from '@mantine/code-highlight';
 import { Link } from 'App/libs/router';
 import { LinkReference } from 'App/pages/search/link-reference';
 import { fontWeightBold } from 'App/styles/common';
-
-window.Prism = PrismRenderer;
-import('prismjs/components/prism-java');
 
 const refRegex = /^\[([0-9]+)]+/;
 const extensions = Object.freeze({
@@ -47,12 +43,19 @@ function convert(token, key, options) {
   switch (token.type) {
     case 'code':
       return (
-        <Prism key={key} language={token.lang}>
-          {token.text}
-        </Prism>
+        <CodeHighlight
+          styles={{ code: { fontSize: 'var(--mantine-font-size-xs)' } }}
+          key={key}
+          language={token.lang || undefined}
+          code={token.text}
+        />
       );
     case 'blockquote':
-      return <Blockquote key={key}>{convertTokens(token, options)}</Blockquote>;
+      return (
+        <Blockquote p="lg" key={key}>
+          {convertTokens(token, options)}
+        </Blockquote>
+      );
     case 'heading':
       return (
         <Title key={key} order={token.depth}>
@@ -63,7 +66,11 @@ function convert(token, key, options) {
       return <Divider key={key} />;
     case 'list':
       return (
-        <List key={key} type={token.ordered ? 'ordered' : 'unordered'}>
+        <List
+          key={key}
+          size="sm"
+          type={token.ordered ? 'ordered' : 'unordered'}
+        >
           {token.items.map((item, i) => (
             <List.Item key={i}>{convertTokens(item, options)}</List.Item>
           ))}
@@ -71,35 +78,47 @@ function convert(token, key, options) {
       );
     case 'table':
       return (
-        <Table key={key} fontSize="xs">
-          <thead>
-            <tr>
+        <Table
+          key={key}
+          styles={{
+            table: {
+              fontSize: 'var(--mantine-font-size-xs)',
+              color: 'var(--low-contrast-text)',
+            },
+            thead: {
+              textTransform: 'uppercase',
+              textAlign: 'left',
+            },
+          }}
+        >
+          <Table.Thead>
+            <Table.Tr>
               {token.header.map((cell, i) => (
                 <th key={i}>{convertTokens(cell, options)}</th>
               ))}
-            </tr>
-          </thead>
-          <tbody>
+            </Table.Tr>
+          </Table.Thead>
+          <Table.Tbody>
             {token.rows.map((row, i) => (
-              <tr key={i}>
+              <Table.Tr key={i}>
                 {row.map((cell, j) => (
-                  <td key={j}>{convertTokens(cell, options)}</td>
+                  <Table.Td key={j}>{convertTokens(cell, options)}</Table.Td>
                 ))}
-              </tr>
+              </Table.Tr>
             ))}
-          </tbody>
+          </Table.Tbody>
         </Table>
       );
 
     case 'strong':
       return (
-        <Text key={key} fw={fontWeightBold} span>
+        <Text key={key} fz="sm" fw={fontWeightBold} span>
           {convertTokens(token, options)}
         </Text>
       );
     case 'em':
       return (
-        <Text key={key} italic span>
+        <Text key={key} fz="sm" fs="italic" span>
           {convertTokens(token, options)}
         </Text>
       );
@@ -111,7 +130,7 @@ function convert(token, key, options) {
       return '\n';
     case 'del':
       return (
-        <Text key={key} strikethrough span>
+        <Text key={key} fz="sm" td="line-through" span>
           {convertTokens(token, options)}
         </Text>
       );
@@ -133,7 +152,11 @@ function convert(token, key, options) {
         />
       );
     case 'paragraph':
-      return <Text key={key}>{convertTokens(token, options)}</Text>;
+      return (
+        <Text key={key} size="sm">
+          {convertTokens(token, options)}
+        </Text>
+      );
     case 'text':
       return token.tokens ? convertTokens(token, options) : token.raw;
     case 'ref':

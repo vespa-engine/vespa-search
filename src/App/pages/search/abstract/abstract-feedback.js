@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Button, Group } from '@mantine/core';
-import { Get } from 'App/libs/fetcher';
-import { useSearchContext } from 'App/libs/provider';
+import { Get } from 'App/libs/fetcher/index.js';
+import { useSearchContext } from 'App/libs/provider/index.js';
 import { Icon } from 'App/components/index.js';
 
 function Action({ icon, name, type, ...props }) {
   return (
     <Button
-      leftIcon={<Icon name={icon} type={type} />}
-      color="gray"
+      leftSection={<Icon name={icon} type={type} />}
+      color="var(--low-contrast-text)"
       variant="outline"
       onClick={() => {}}
       radius="xl"
@@ -31,7 +31,7 @@ export function AbstractFeedback() {
   };
 
   return (
-    <Group spacing="xs" grow>
+    <Group gap="xs" grow>
       <Action
         name="Looks good"
         icon="thumbs-up"

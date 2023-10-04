@@ -1,4 +1,4 @@
-export * from 'App/styles/theme/common.js';
-export * from 'App/styles/theme/colors.js';
-export { useTheme } from 'App/styles/theme/use-theme.js';
+export { common } from 'App/styles/theme/common.js';
+export { resolver } from 'App/styles/theme/resolver.js';
 export { ThemeProvider } from 'App/styles/theme/provider.js';
+export { ColorScheme } from 'App/styles/theme/color-scheme.js';

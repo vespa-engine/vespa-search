@@ -9,7 +9,7 @@ function Source({ id, icon, name }) {
 
   return (
     <Button
-      leftIcon={<Icon name={icon} />}
+      leftSection={<Icon name={icon} />}
       color={selected ? 'blue' : 'gray'}
       variant={selected ? 'filled' : 'subtle'}
       onClick={() => toggleNamespace(id)}
@@ -23,7 +23,7 @@ function Source({ id, icon, name }) {
 
 export function SearchSources() {
   return (
-    <Group position="center">
+    <Group justify="center">
       {ALL_NAMESPACES.map(({ id, name, icon }) => (
         <Source key={id} id={id} name={name} icon={icon} />
       ))}

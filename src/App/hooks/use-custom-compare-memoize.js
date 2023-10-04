@@ -1,5 +1,5 @@
 import { isEqual } from 'lodash';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useRef } from 'react';
 
 export function useCustomCompareMemoize(deps, depsEqual = isEqual) {
   const ref = useRef();
@@ -10,9 +10,4 @@ export function useCustomCompareMemoize(deps, depsEqual = isEqual) {
 export function useCustomCompareCallback(callback, deps, depsEqual) {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   return useCallback(callback, useCustomCompareMemoize(deps, depsEqual));
-}
-
-export function useCustomCompareEffect(effect, deps, depsEqual) {
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  return useEffect(effect, useCustomCompareMemoize(deps, depsEqual));
 }

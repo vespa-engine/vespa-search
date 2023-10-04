@@ -3,6 +3,7 @@
 ![Vespa Search screenshot](vespa-search.png)
 
 # Vespa Search
+
 This is a Vespa Application for searching and exploring documentation, blogs,
 sample applications and other resources useful when working on Vespa.
 
@@ -21,6 +22,6 @@ Alternatively, use Docker to start it without installing node:
 
 When started, open [http://127.0.0.1:3000/](http://127.0.0.1:3000/).
 
-
 ## License
+
 Code licensed under the Apache 2.0 license. See [LICENSE](LICENSE) for terms.

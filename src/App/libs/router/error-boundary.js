@@ -15,7 +15,7 @@ export class ErrorBoundary extends React.Component {
         acc[key] = exception[key];
         return acc;
       },
-      { ...errorInfo }
+      { ...errorInfo },
     );
     const meta = {
       location: window?.location?.href,

@@ -1,0 +1,24 @@
+.titleResult {
+  color: var(--high-contrast-text);
+}
+
+.titleResult:hover .iconExternal {
+  display: revert;
+}
+
+.iconExternal {
+  display: none;
+}
+
+.spoilerControl {
+  font-size: var(--mantine-font-size-sm);
+  color: var(--high-contrast-text);
+  background-color: var(--ui-element-background);
+  text-align: center;
+  width: 100%;
+
+  @mixin hover {
+    text-decoration: none;
+    background-color: var(--hovered-ui-element-background);
+  }
+}
