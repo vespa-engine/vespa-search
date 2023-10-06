@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { create } from 'zustand';
+import { useConsent } from 'App/pages/search/abstract/use-consent.js';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
 import { createStore } from 'App/libs/provider/reducer';
@@ -8,11 +9,17 @@ import { parseUrlParams, createUrlParams } from 'App/libs/provider/url-params';
 
 export const useSearchContext = create(createStore);
 const endpoint = import.meta.env.VITE_ENDPOINT;
+const dummyEventSource = Object.freeze({
+  close: () => {},
+  addEventListener: () => {},
+  removeEventListener: () => {},
+});
 
 export function SearchContext() {
   const location = useLocation();
   const navigate = useNavigate();
   const queryRef = useRef(null);
+  const { value: abstractConsent } = useConsent();
   const [
     query,
     namespaces,
@@ -55,7 +62,9 @@ export function SearchContext() {
       .queryParam('filters', filters)
       .queryParam('queryProfile', 'llmsearch')
       .toString(true);
-    const source = new EventSource(streamUrl);
+    const source = abstractConsent
+      ? new EventSource(streamUrl)
+      : dummyEventSource;
     const onMessage = (e) => summaryAppend(e.data);
     const onError = () => summaryComplete() || source.close();
     source.addEventListener('message', onMessage);
@@ -79,7 +88,14 @@ export function SearchContext() {
       source.removeEventListener('message', onMessage);
       source.removeEventListener('error', onError);
     };
-  }, [query, namespaces, setHits, summaryAppend, summaryComplete]);
+  }, [
+    query,
+    namespaces,
+    setHits,
+    summaryAppend,
+    summaryComplete,
+    abstractConsent,
+  ]);
 
   return null;
 }

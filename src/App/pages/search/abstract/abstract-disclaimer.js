@@ -1,7 +1,8 @@
 import React from 'react';
-import { Container, HoverCard, Stack, Text } from '@mantine/core';
-import { Link } from 'App/libs/router';
-import { fontWeightBold } from 'App/styles/common';
+import { Button, Container, HoverCard, Stack, Text } from '@mantine/core';
+import { Link } from 'App/libs/router/index.js';
+import { useConsent } from 'App/pages/search/abstract/use-consent.js';
+import { fontWeightBold } from 'App/styles/common.js';
 
 function DisclaimerDetails() {
   return (
@@ -40,15 +41,20 @@ function DisclaimerDetails() {
     </HoverCard>
   );
 }
-export function SearchDisclaimer() {
+
+export function AbstractDisclaimer() {
+  const { setValue } = useConsent();
   return (
-    <Stack px="lg" justify="c">
-      <Text size="sm" c="dimmed" align="center">
-        By querying, you consent to share data with OpenAI. The AI-generated
-        abstract may have biases or inaccuracies. See <DisclaimerDetails /> for
-        more details. For the traditional search{' '}
-        <Link to="https://docs.vespa.ai">docs.search.ai</Link>.
-      </Text>
+    <Stack>
+      <Button onClick={() => setValue(true)}>Show abstract</Button>
+      <Stack>
+        <Text size="sm" align="center">
+          By showing, you consent to share data with OpenAI. The AI-generated
+          abstract may have biases or inaccuracies. See <DisclaimerDetails />{' '}
+          for more details. For the traditional search{' '}
+          <Link to="https://docs.vespa.ai">docs.search.ai</Link>.
+        </Text>
+      </Stack>
     </Stack>
   );
 }
