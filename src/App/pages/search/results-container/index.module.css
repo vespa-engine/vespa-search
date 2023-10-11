@@ -1,0 +1,18 @@
+.scrollArea {
+  height: var(--search-scrollarea-height);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: calc(
+      67vh - var(--app-shell-header-height, 0px) -
+        (2 * var(--mantine-spacing-md))
+    );
+  }
+}
+
+.stack {
+  max-width: calc(var(--search-result-width) - (4 * var(--mantine-spacing-md)));
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    max-width: calc(100vw - (2 * var(--mantine-spacing-md)));
+  }
+}

@@ -2,10 +2,13 @@ import React from 'react';
 import { Container, Group, Popover, Text, Title } from '@mantine/core';
 import { fontWeightLight } from 'App/styles/common.js';
 import { Icon } from 'App/components/index.js';
+import { useMobile } from 'App/hooks';
 
 export function AbstractTitle() {
+  const isMobile = useMobile();
+
   return (
-    <Group pt="md" justify="space-between">
+    <Group pt={isMobile ? 0 : 'md'} justify="space-between">
       <Title order={4} c="var(--high-contrast-text)">
         Abstract{' '}
         <Text fw={fontWeightLight} size="sm" span>
@@ -14,13 +17,17 @@ export function AbstractTitle() {
       </Title>
       <Popover withinPortal>
         <Popover.Target>
-          <Text style={{ cursor: 'pointer' }} c="blue" size="sm">
+          <Text
+            style={{ cursor: 'pointer' }}
+            size={isMobile ? 'xs' : 'sm'}
+            c="blue"
+          >
             <Icon name="circle-question" type="regular" /> What is this?
           </Text>
         </Popover.Target>
         <Popover.Dropdown>
-          <Container size="sm">
-            <Text size="sm">
+          <Container size={isMobile ? '55vw' : 'xs'}>
+            <Text size={isMobile ? 'xs' : 'sm'}>
               The abstract&apos;s accuracy relies on your query and the search
               outcome. Irrelevant query context might influence results, and
               answers vary based on sources used. Abstracts aren&apos;t suitable

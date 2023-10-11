@@ -1,0 +1,21 @@
+.scrollArea {
+  height: var(--search-scrollarea-height);
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    height: calc(33vh - (1 * var(--mantine-spacing-md)));
+    background-color: var(--ui-element-background-blue);
+    padding-top: var(--mantine-spacing-sm);
+    padding-left: var(--mantine-spacing-sm);
+    padding-right: var(--mantine-spacing-sm);
+  }
+}
+
+.stack {
+  max-width: calc(
+    var(--search-abstract-width) - (1 * var(--mantine-spacing-md))
+  );
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    max-width: calc(100vw - (2 * var(--mantine-spacing-md)));
+  }
+}
