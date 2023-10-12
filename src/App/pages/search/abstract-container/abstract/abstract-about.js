@@ -3,7 +3,7 @@ import { Anchor, Stack, Text } from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
 import { Link } from 'App/libs/router/index.js';
-import { useConsent } from 'App/pages/search/abstract/use-consent.js';
+import { useConsent } from 'App/pages/search/abstract-container/abstract/use-consent.js';
 
 export function AbstractAbout() {
   const { setValue } = useConsent();

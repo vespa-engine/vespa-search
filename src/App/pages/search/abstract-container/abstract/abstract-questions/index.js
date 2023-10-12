@@ -2,7 +2,7 @@ import React from 'react';
 import { List, Stack, Text } from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
-import classNames from 'App/pages/search/abstract/abstract-questions/index.module.css';
+import classNames from 'App/pages/search/abstract-container/abstract/abstract-questions/index.module.css';
 import { Icon } from 'App/components/index.js';
 import { Link } from 'App/libs/router/index.js';
 import { useMobile } from 'App/hooks/index.js';

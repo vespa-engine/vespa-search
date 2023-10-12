@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { Group, Stack } from '@mantine/core';
 import { Results } from 'App/pages/search/results/index.js';
-import { Abstract } from 'App/pages/search/abstract/index.js';
+import { Abstract } from 'App/pages/search/abstract-container/abstract/index.js';
 import { SearchSources } from 'App/pages/search/search-sources';
 import { SearchInput } from 'App/pages/search/search-input/index.js';
 import { SearchClassic } from 'App/pages/search/search-classic.js';

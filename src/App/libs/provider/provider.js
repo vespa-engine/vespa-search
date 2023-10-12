@@ -1,7 +1,7 @@
 import { useLayoutEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { create } from 'zustand';
-import { useConsent } from 'App/pages/search/abstract/use-consent.js';
+import { useConsent } from 'App/pages/search/abstract-container/abstract/use-consent.js';
 import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
 import { createStore } from 'App/libs/provider/reducer';
