@@ -5,7 +5,7 @@ import { parseMarkdown } from 'App/pages/search/md-parser.js';
 import { Content, Error, Icon, LoadingResult } from 'App/components/index.js';
 import { Typography } from 'App/pages/search/typography/index.js';
 import { Link } from 'App/libs/router/index.js';
-import classNames from 'App/pages/search/results/index.module.css';
+import classNames from 'App/pages/search/results-container/results/index.module.css';
 
 function Result({
   refId,
