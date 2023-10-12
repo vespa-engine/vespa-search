@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Container, HoverCard, Stack, Text } from '@mantine/core';
 import { Link } from 'App/libs/router/index.js';
-import { useConsent } from 'App/pages/search/abstract/use-consent.js';
+import { useConsent } from 'App/pages/search/abstract-container/abstract/use-consent.js';
 import { fontWeightBold } from 'App/styles/common.js';
 
 function DisclaimerDetails() {

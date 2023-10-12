@@ -1,0 +1,11 @@
+.container {
+  gap: var(--mantine-spacing-md);
+
+  grid-template-columns:
+    minmax(0, var(--search-result-width))
+    minmax(0, var(--search-abstract-width));
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    grid-template-columns: revert;
+  }
+}

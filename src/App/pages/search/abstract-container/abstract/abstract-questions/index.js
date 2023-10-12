@@ -2,11 +2,13 @@ import React from 'react';
 import { List, Stack, Text } from '@mantine/core';
 import { useSearchContext } from 'App/libs/provider/index.js';
 import { fontWeightBold } from 'App/styles/common.js';
-import classNames from 'App/pages/search/abstract/abstract-questions/index.module.css';
+import classNames from 'App/pages/search/abstract-container/abstract/abstract-questions/index.module.css';
 import { Icon } from 'App/components/index.js';
 import { Link } from 'App/libs/router/index.js';
+import { useMobile } from 'App/hooks/index.js';
 
 export function AbstractQuestions() {
+  const isMobile = useMobile();
   const questions = useSearchContext((ctx) => ctx.summary.questions);
   if (!(questions?.length > 0)) return null;
 
@@ -22,9 +24,9 @@ export function AbstractQuestions() {
         center
       >
         {questions.map(({ text, url }, i) => (
-          <Link to={url} key={i}>
+          <Link className={classNames.link} to={url} key={i}>
             <List.Item>
-              <Text size="sm" c="blue" lh={1} span>
+              <Text size={isMobile ? 'xs' : 'sm'} c="blue" lh={1} span>
                 {text}
               </Text>
             </List.Item>

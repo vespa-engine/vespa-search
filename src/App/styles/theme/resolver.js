@@ -59,6 +59,10 @@ const cssVariablesDefaults = (color) => {
 export const resolver = (theme) => ({
   variables: {
     '--common-opacity': opacity,
+    '--search-result-width': '67vw',
+    '--search-abstract-width': '33vw',
+    '--search-scrollarea-height':
+      'calc(100vh - var(--app-shell-header-height, 0px) - (2 * var(--mantine-spacing-md)))',
     // primary colors overrides
     '--mantine-primary-color-filled': `var(--solid-background-${theme.primaryColor})`,
     '--mantine-primary-color-filled-hover': `var(--hovered-solid-background-${theme.primaryColor})`,

@@ -13,6 +13,7 @@ import { UrlBuilder } from 'App/utils';
 import { Get } from 'App/libs/fetcher';
 import { Icon } from 'App/components';
 import { Link } from 'App/libs/router';
+import { useMobile } from 'App/hooks';
 
 export function SearchInput({ size = 'md', autofocus = false }) {
   const [query, filters, setQuery] = useSearchContext((ctx) => [
@@ -24,6 +25,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
   const [suggestions, setSuggestions] = useState([]);
   const inputRef = useRef(null);
   const combobox = useCombobox();
+  const isMobile = useMobile();
   const { input, dropdown } = classNames;
 
   // Update search input if we go back/forward in history
@@ -98,7 +100,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
                 variant="filled"
                 color="blue"
                 radius="xl"
-                size="lg"
+                size={isMobile ? 'md' : 'lg'}
               >
                 <Icon name="arrow-right" />
               </ActionIcon>
@@ -118,7 +120,7 @@ export function SearchInput({ size = 'md', autofocus = false }) {
               e.preventDefault();
               onSubmit({ value });
             }}
-            size={size}
+            size={isMobile ? 'sm' : size}
             radius="xl"
           />
         </Combobox.Target>
