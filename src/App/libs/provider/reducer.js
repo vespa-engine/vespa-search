@@ -1,7 +1,7 @@
 import { isEqual, shuffle, sortedUniq } from 'lodash';
 import { UrlBuilder } from 'App/utils';
 import { createUrlParams } from 'App/libs/provider/url-params';
-import { parseMarkdown, parseTokens } from 'App/pages/search/md-parser';
+import { parseTokens } from 'App/pages/search/md-parser';
 import { ALL_NAMESPACES } from 'App/libs/provider/namespaces';
 
 const initialState = Object.freeze({ query: '', namespaces: [] });
@@ -61,8 +61,7 @@ function toggleNamespace(state, namespace) {
 
 function summaryAppend(state, summary) {
   const raw = (state.summary.raw + summary).replace('<br/>', '\n');
-  const element = parseMarkdown(raw);
-  return { ...state, summary: { raw, element } };
+  return { ...state, summary: { raw } };
 }
 
 function summaryComplete(state) {

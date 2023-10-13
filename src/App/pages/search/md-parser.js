@@ -28,6 +28,15 @@ const extensions = Object.freeze({
 const convertTokens = ({ tokens }, urlResolver) =>
   tokens.map((token, i) => convert(token, `${token.type}-${i}`, urlResolver));
 
+// Java string hash code
+function hashCode(str) {
+  let h = 0;
+  for (let i = 0; i < str.length; i++) {
+    h = h * 31 + (str.charCodeAt(i) & 0xff);
+  }
+  return h;
+}
+
 function resolveUrl(url, options) {
   if (options.baseUrl)
     try {
@@ -45,7 +54,7 @@ function convert(token, key, options) {
       return (
         <CodeHighlight
           styles={{ code: { fontSize: 'var(--mantine-font-size-xs)' } }}
-          key={key}
+          key={key + hashCode(token.text)}
           language={token.lang || undefined}
           code={token.text}
         />
