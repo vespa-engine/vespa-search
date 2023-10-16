@@ -32,7 +32,7 @@ const convertTokens = ({ tokens }, urlResolver) =>
 function hashCode(str) {
   let h = 0;
   for (let i = 0; i < str.length; i++) {
-    h = h * 31 + (str.charCodeAt(i) & 0xff);
+    h = (h * 31 + (str.charCodeAt(i) & 0xff)) | 0;
   }
   return h;
 }
