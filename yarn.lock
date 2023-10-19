@@ -399,9 +399,9 @@
   integrity sha512-OfX7E2oUDYxtBvsuS4e/jSn4Q9Qb6DzgeYtsAdkPZ47znpoNsMgZw0+tVijiv3uGNR6dgNlty6r9rzIzHjtd/A==
 
 "@fontsource/inter@^5":
-  version "5.0.13"
-  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.13.tgz#b106fdc43b8eea8d6f5c0ce55941b1ae577c49e5"
-  integrity sha512-FVIBhP9X/x02blF2VQl2Pji/c3jUjkWEQ9bom4vIrGwO1MlHRDXhXx9iA1hhjpcCIfH3oX68ihIBdYcFnOXhsg==
+  version "5.0.14"
+  resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-5.0.14.tgz#7e5795b4ef685974945a57dc5a582cc6e4994abf"
+  integrity sha512-5H+rWUemTnUrtF5Dov2zDq+RWDIoXCmSrupNIfI5x7udZnoUTNhr+k9sYxtNS22mIngUQHZUPexTMj0/7P0Ucg==
 
 "@fortawesome/fontawesome-common-types@6.4.2":
   version "6.4.2"
