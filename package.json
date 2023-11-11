@@ -39,7 +39,7 @@
     "eslint-plugin-unused-imports": "^3",
     "file-saver": "^2",
     "lodash": "^4",
-    "marked": "^9",
+    "marked": "^10.0.0",
     "postcss": "^8",
     "postcss-preset-mantine": "^1",
     "postcss-simple-vars": "^7",
