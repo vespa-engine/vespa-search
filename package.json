@@ -45,7 +45,7 @@
     "postcss-simple-vars": "^7",
     "prettier": "^3",
     "react-router-dom": "^6",
-    "vite": "^4",
+    "vite": "^5.0.0",
     "vitest": "^0",
     "zustand": "^4"
   }
