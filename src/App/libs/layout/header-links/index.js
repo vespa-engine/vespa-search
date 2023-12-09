@@ -9,7 +9,7 @@ export function HeaderLinks() {
     <Group wrap="nowrap" gap="lg">
       <Link to="https://github.com/vespa-engine/vespa">
         <Icon
-          color="var(--low-contrast-text)"
+          color="var(--header-links)"
           name="github"
           type="brands"
           size="lg"
@@ -17,7 +17,7 @@ export function HeaderLinks() {
       </Link>
       <Link to="http://slack.vespa.ai">
         <Icon
-          color="var(--low-contrast-text)"
+          color="var(--header-links)"
           name="slack"
           type="brands"
           size="lg"

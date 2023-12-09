@@ -3,7 +3,7 @@
 
   @media (max-width: $mantine-breakpoint-sm) {
     height: calc(33vh - (1 * var(--mantine-spacing-md)));
-    background-color: var(--ui-element-background-blue);
+    background-color: var(--ui-element-background-green);
     padding-top: var(--mantine-spacing-sm);
     padding-left: var(--mantine-spacing-sm);
     padding-right: var(--mantine-spacing-sm);

@@ -20,11 +20,11 @@ const properties = [
 const cssVariablesOverrides = (colors) => {
   const result = {};
   for (let colorName in colors) {
-    result['--mantine-color-text'] = 'var(--high-contrast-text-slate)';
-    result['--mantine-color-body'] = 'var(--app-background-slate)';
+    result['--mantine-color-text'] = 'var(--high-contrast-text-sage)';
+    result['--mantine-color-body'] = 'var(--app-background-sage)';
     result['--mantine-color-error'] = 'var(--solid-background-red)';
-    result['--mantine-color-placeholder'] = 'var(--hovered-ui-element-border-slate)';
-    result['--mantine-color-anchor'] = 'var(--solid-background-blue)';
+    result['--mantine-color-placeholder'] = 'var(--hovered-ui-element-border-sage)';
+    result['--mantine-color-anchor'] = 'var(--vespa-color-anchor)';
     result['--mantine-color-dimmed'] = 'var(--solid-background-gray)';
     result[`--mantine-color-${colorName}-filled`] = `var(--solid-background-${colorName})`;
     result[`--mantine-color-${colorName}-filled-hover`] = `var(--hovered-solid-background-${colorName})`;
@@ -69,15 +69,22 @@ export const resolver = (theme) => ({
     '--mantine-primary-color-light': `var(--ui-element-background-${theme.primaryColor})`,
     '--mantine-primary-color-light-hover': `var(--hovered-ui-element-background-${theme.primaryColor})`,
     '--mantine-primary-color-light-color': `var(--low-contrast-text-${theme.primaryColor})`,
+    // brand colors
+    '--vespa-color-rock': '#2E2F27',
+    '--vespa-color-heather': '#61D790',
   },
   light: {
     ...cssVariablesResolver(light),
     ...cssVariablesOverrides(light),
-    ...cssVariablesDefaults('slate'),
+    ...cssVariablesDefaults('sage'),
+    '--vespa-color-anchor': '#0246C9',
+    '--header-links': 'var(--mantine-color-black)',
   },
   dark: {
     ...cssVariablesResolver(dark),
     ...cssVariablesOverrides(dark),
-    ...cssVariablesDefaults('slate'),
+    ...cssVariablesDefaults('sage'),
+    '--vespa-color-anchor': '#5E93FB',
+    '--header-links': 'var(--vespa-color-heather)',
   },
 });

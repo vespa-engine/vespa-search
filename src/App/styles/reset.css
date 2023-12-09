@@ -48,7 +48,7 @@ h6 {
 }
 
 a {
-  color: var(--solid-background-blue);
+  color: var(--vespa-color-anchor);
   cursor: pointer;
   text-decoration: none;
   &:hover {

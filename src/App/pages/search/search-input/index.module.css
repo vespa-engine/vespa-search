@@ -14,7 +14,7 @@
 .dropdown {
   border-bottom-left-radius: var(--mantine-radius-lg);
   border-bottom-right-radius: var(--mantine-radius-lg);
-  border-color: var(--solid-background-blue);
+  border-color: var(--solid-background-green);
   border-top: none;
   overflow: hidden;
   margin-top: -10px;

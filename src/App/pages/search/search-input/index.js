@@ -98,7 +98,6 @@ export function SearchInput({ size = 'md', autofocus = false }) {
               <ActionIcon
                 type="submit"
                 variant="filled"
-                color="blue"
                 radius="xl"
                 size={isMobile ? 'md' : 'lg'}
               >

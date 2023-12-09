@@ -19,14 +19,14 @@ export function AbstractQuestions() {
       </Text>
       <List
         classNames={classNames}
-        icon={<Icon name="magnifying-glass" color="blue" />}
+        icon={<Icon name="magnifying-glass" />}
         type="unordered"
         center
       >
         {questions.map(({ text, url }, i) => (
           <Link className={classNames.link} to={url} key={i}>
             <List.Item>
-              <Text size={isMobile ? 'xs' : 'sm'} c="blue" lh={1} span>
+              <Text size={isMobile ? 'xs' : 'sm'} lh={1} span>
                 {text}
               </Text>
             </List.Item>
