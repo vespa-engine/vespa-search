@@ -20,7 +20,7 @@ export function AbstractTitle() {
           <Text
             style={{ cursor: 'pointer' }}
             size={isMobile ? 'xs' : 'sm'}
-            c="blue"
+            c="var(--vespa-color-anchor)"
           >
             <Icon name="circle-question" type="regular" /> What is this?
           </Text>

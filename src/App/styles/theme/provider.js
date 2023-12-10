@@ -4,10 +4,12 @@ import { ColorSchemeScript, createTheme, MantineProvider } from '@mantine/core';
 import { common, resolver } from 'App/styles/theme';
 import { icons } from 'App/styles/icons';
 import * as components from 'App/styles/theme/default';
+import { variantColorResolver } from 'App/styles/theme/variant';
 
 const theme = createTheme({
   ...common,
   components,
+  variantColorResolver,
 });
 
 export function ThemeProvider({ children }) {

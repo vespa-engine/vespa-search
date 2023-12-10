@@ -1,10 +1,10 @@
 import { rem } from '@mantine/core';
 
 export const common = {
-  black: '#151718',
   defaultRadius: 'xs',
   cursorType: 'pointer',
   fontFamily: 'Inter, sans-serif',
+  primaryColor: 'green',
   spacing: {
     xs: rem(5),
     sm: rem(8),

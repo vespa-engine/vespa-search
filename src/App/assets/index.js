@@ -1,2 +1,2 @@
-export { default as VespaLogoDark } from 'App/assets/img/vespa-logo-dark.svg';
-export { default as VespaLogoWhite } from 'App/assets/img/vespa-logo-white.svg';
+export { default as VespaLogoBlack } from 'App/assets/img/vespa-logo-black.svg';
+export { default as VespaLogoHeather } from 'App/assets/img/vespa-logo-heather.svg';

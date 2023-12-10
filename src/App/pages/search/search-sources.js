@@ -11,7 +11,7 @@ function Source({ id, icon, name }) {
   return (
     <Button
       leftSection={<Icon name={icon} />}
-      color={selected ? 'blue' : 'gray'}
+      color={selected ? 'green' : 'gray'}
       variant={selected ? 'filled' : 'subtle'}
       onClick={() => toggleNamespace(id)}
       size={isMobile ? 'compact-xs' : 'xs'}
