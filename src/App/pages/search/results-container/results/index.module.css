@@ -3,11 +3,11 @@
 }
 
 .titleResult:hover .iconExternal {
-  display: revert;
+  visibility: revert;
 }
 
 .iconExternal {
-  display: none;
+  visibility: hidden;
 }
 
 .spoilerControl {
