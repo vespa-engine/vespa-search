@@ -3,7 +3,6 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { create } from 'zustand';
 import { useConsent } from 'App/pages/search/abstract-container/abstract/use-consent.js';
 import { UrlBuilder } from 'App/utils';
-import { Get } from 'App/libs/fetcher';
 import { createStore } from 'App/libs/provider/reducer';
 import { parseUrlParams, createUrlParams } from 'App/libs/provider/url-params';
 
@@ -56,36 +55,34 @@ export function SearchContext() {
     if (query.length === 0) return;
     const filters = namespaces.map((n) => `+namespace:${n}`).join(' ');
 
+    let cancelled = false;
     const streamUrl = new UrlBuilder(endpoint)
-      .add('stream')
+      .add('sse')
       .queryParam('query', query)
       .queryParam('filters', filters)
-      .queryParam('queryProfile', 'llmsearch')
+      .queryParam('queryProfile', 'ragsearch')
+      .queryParam('llm.includeHits', 'true')
       .toString(true);
     const source = abstractConsent
       ? new EventSource(streamUrl)
       : dummyEventSource;
-    const onMessage = (e) => summaryAppend(e.data);
+    const onToken = (e) => summaryAppend(JSON.parse(e.data).token);
+    const onHits = (e) => {
+      if (!cancelled) {
+        const result = JSON.parse(e.data);
+        setHits({ hits: result.root.children ?? [] });
+      }
+    };
     const onError = () => summaryComplete() || source.close();
-    source.addEventListener('message', onMessage);
+    source.addEventListener('token', onToken);
+    source.addEventListener('hits', onHits);
     source.addEventListener('error', onError);
 
-    let cancelled = false;
-    const searchUrl = new UrlBuilder(endpoint)
-      .add('search')
-      .queryParam('query', query)
-      .queryParam('filters', filters)
-      .queryParam('queryProfile', 'llmsearch')
-      .toString(true);
-    Get(searchUrl)
-      .then(
-        (result) => !cancelled && setHits({ hits: result.root.children ?? [] }),
-      )
-      .catch((error) => !cancelled && setHits({ error }));
     return () => {
       cancelled = true;
       source.close();
-      source.removeEventListener('message', onMessage);
+      source.removeEventListener('token', onToken);
+      source.removeEventListener('hits', onHits);
       source.removeEventListener('error', onError);
     };
   }, [
