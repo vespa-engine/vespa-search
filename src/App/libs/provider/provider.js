@@ -3,16 +3,12 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { create } from 'zustand';
 import { useConsent } from 'App/pages/search/abstract-container/abstract/use-consent.js';
 import { UrlBuilder } from 'App/utils';
+import { Get } from 'App/libs/fetcher';
 import { createStore } from 'App/libs/provider/reducer';
 import { parseUrlParams, createUrlParams } from 'App/libs/provider/url-params';
 
 export const useSearchContext = create(createStore);
 const endpoint = import.meta.env.VITE_ENDPOINT;
-const dummyEventSource = Object.freeze({
-  close: () => {},
-  addEventListener: () => {},
-  removeEventListener: () => {},
-});
 
 export function SearchContext() {
   const location = useLocation();
@@ -56,6 +52,27 @@ export function SearchContext() {
     const filters = namespaces.map((n) => `+namespace:${n}`).join(' ');
 
     let cancelled = false;
+
+    // If the user has not consented to the abstract yet, use regular search
+    if (!abstractConsent) {
+      const searchUrl = new UrlBuilder(endpoint)
+        .add('search')
+        .queryParam('query', query)
+        .queryParam('filters', filters)
+        .queryParam('queryProfile', 'llmsearch')
+        .toString(true);
+      Get(searchUrl)
+        .then(
+          (result) =>
+            !cancelled && setHits({ hits: result.root.children ?? [] }),
+        )
+        .catch((error) => !cancelled && setHits({ error }));
+      return () => {
+        cancelled = true;
+      };
+    }
+
+    // However, if the user has consented, use RAG search
     const streamUrl = new UrlBuilder(endpoint)
       .add('sse')
       .queryParam('query', query)
@@ -63,9 +80,7 @@ export function SearchContext() {
       .queryParam('queryProfile', 'ragsearch')
       .queryParam('llm.includeHits', 'true')
       .toString(true);
-    const source = abstractConsent
-      ? new EventSource(streamUrl)
-      : dummyEventSource;
+    const source = new EventSource(streamUrl);
     const onToken = (e) => summaryAppend(JSON.parse(e.data).token);
     const onHits = (e) => {
       if (!cancelled) {
@@ -77,7 +92,6 @@ export function SearchContext() {
     source.addEventListener('token', onToken);
     source.addEventListener('hits', onHits);
     source.addEventListener('error', onError);
-
     return () => {
       cancelled = true;
       source.close();
