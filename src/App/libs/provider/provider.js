@@ -9,6 +9,11 @@ import { parseUrlParams, createUrlParams } from 'App/libs/provider/url-params';
 
 export const useSearchContext = create(createStore);
 const endpoint = import.meta.env.VITE_ENDPOINT;
+const dummyEventSource = Object.freeze({
+  close: () => {},
+  addEventListener: () => {},
+  removeEventListener: () => {},
+});
 
 export function SearchContext() {
   const location = useLocation();
@@ -51,52 +56,36 @@ export function SearchContext() {
     if (query.length === 0) return;
     const filters = namespaces.map((n) => `+namespace:${n}`).join(' ');
 
-    let cancelled = false;
-
-    // If the user has not consented to the abstract yet, use regular search
-    if (!abstractConsent) {
-      const searchUrl = new UrlBuilder(endpoint)
-        .add('search')
-        .queryParam('query', query)
-        .queryParam('filters', filters)
-        .queryParam('queryProfile', 'llmsearch')
-        .toString(true);
-      Get(searchUrl)
-        .then(
-          (result) =>
-            !cancelled && setHits({ hits: result.root.children ?? [] }),
-        )
-        .catch((error) => !cancelled && setHits({ error }));
-      return () => {
-        cancelled = true;
-      };
-    }
-
-    // However, if the user has consented, use RAG search
     const streamUrl = new UrlBuilder(endpoint)
-      .add('sse')
+      .add('stream')
       .queryParam('query', query)
       .queryParam('filters', filters)
-      .queryParam('queryProfile', 'ragsearch')
-      .queryParam('llm.includeHits', 'true')
+      .queryParam('queryProfile', 'llmsearch')
       .toString(true);
-    const source = new EventSource(streamUrl);
-    const onToken = (e) => summaryAppend(JSON.parse(e.data).token);
-    const onHits = (e) => {
-      if (!cancelled) {
-        const result = JSON.parse(e.data);
-        setHits({ hits: result.root.children ?? [] });
-      }
-    };
+    const source = abstractConsent
+      ? new EventSource(streamUrl)
+      : dummyEventSource;
+    const onMessage = (e) => summaryAppend(e.data);
     const onError = () => summaryComplete() || source.close();
-    source.addEventListener('token', onToken);
-    source.addEventListener('hits', onHits);
+    source.addEventListener('message', onMessage);
     source.addEventListener('error', onError);
+
+    let cancelled = false;
+    const searchUrl = new UrlBuilder(endpoint)
+      .add('search')
+      .queryParam('query', query)
+      .queryParam('filters', filters)
+      .queryParam('queryProfile', 'llmsearch')
+      .toString(true);
+    Get(searchUrl)
+      .then(
+        (result) => !cancelled && setHits({ hits: result.root.children ?? [] }),
+      )
+      .catch((error) => !cancelled && setHits({ error }));
     return () => {
       cancelled = true;
       source.close();
-      source.removeEventListener('token', onToken);
-      source.removeEventListener('hits', onHits);
+      source.removeEventListener('message', onMessage);
       source.removeEventListener('error', onError);
     };
   }, [
