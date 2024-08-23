@@ -8,7 +8,7 @@ export function HeaderLogo() {
   const logo =
     computedColorScheme === 'dark' ? VespaLogoHeather : VespaLogoBlack;
   return (
-    <Link to="/">
+    <Link to="https://vespa.ai/">
       <Image h={27} w="auto" src={logo} />
     </Link>
   );
