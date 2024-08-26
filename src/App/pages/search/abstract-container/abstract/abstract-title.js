@@ -10,7 +10,7 @@ export function AbstractTitle() {
   return (
     <Group pt={isMobile ? 0 : 'md'} justify="space-between">
       <Title order={4} c="var(--high-contrast-text)">
-        Abstract{' '}
+        Answer{' '}
         <Text fw={fontWeightLight} size="sm" span>
           (experimental)
         </Text>
