@@ -1,0 +1,70 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - master
+      - feat-add-deploy-action
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Store build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build
+          path: dist/
+
+  deploy-prod:
+    runs-on: ubuntu-latest
+    needs:
+      - build
+
+    environment:
+      name: "Production"
+      url: ${{ vars.PUBLIC_URL }}
+
+    env:
+      S3_BUCKET: ${{ vars.S3_BUCKET }}
+      CF_DISTRIBUTION_ID: ${{ vars.CF_DISTRIBUTION_ID }}
+
+    steps:
+      # - uses: vespaai/vespa-athenz-action@main
+      #   if: github.ref == 'refs/heads/master'
+      #   with:
+      #     domain: ""
+      #     service: "github"
+      #     dns-domain: ""
+      #     subject-ou: ""
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+
+      - name: Debug build
+        run:
+          ls -la .
+          echo "================================"
+          ls -la dist/
+
+      # - name: Sync to S3
+      #   run: |
+      #     aws s3 sync dist/ "s3://${S3_BUCKET}/frontend/" --exclude "*.map" --no-progress
+
+      # - name: Clear cloudfront cache
+      #   run: |
+      #     aws cloudfront create-invalidation --distribution-id "${CF_DISTRIBUTION_ID}" --paths "/*"
