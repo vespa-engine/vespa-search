@@ -21,6 +21,7 @@ export {
   faExpand,
   faExternalLink,
   faExternalLinkSquare,
+  faCode,
 } from '@fortawesome/free-solid-svg-icons';
 export {
   faClipboard,
