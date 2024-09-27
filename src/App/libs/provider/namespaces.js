@@ -4,6 +4,7 @@ export const ALL_NAMESPACES = Object.freeze([
   { id: 'vespaapps-p', name: 'Sample Apps', icon: 'vial' },
   { id: 'blog-p', name: 'Blog', icon: 'blog' },
   { id: 'pyvespa-p', name: 'PyVespa', icon: 'fab-python' },
+  { id: 'code-p', name: 'Sample Schemas', icon: 'code' },
 ]);
 
 export const NAMESPACES_BY_ID = Object.freeze(
