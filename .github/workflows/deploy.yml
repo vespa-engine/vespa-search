@@ -56,7 +56,7 @@ jobs:
           name: build
 
       - name: Debug build
-        run:
+        run: |
           ls -la .
           echo "================================"
           ls -la dist/
