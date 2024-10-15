@@ -1,0 +1,64 @@
+name: Build & Deploy
+
+permissions:
+  contents: read
+  id-token: write
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
+
+      - name: Store build artifact
+        uses: actions/upload-artifact@v4
+        if: github.ref == 'refs/heads/master'
+        with:
+          name: build
+          path: dist/
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+
+    runs-on: ubuntu-latest
+
+    needs:
+      - build
+
+    environment:
+      name: Production
+      url: ${{ vars.PUBLIC_URL }}
+
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: build
+          path: dist/
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-region: us-east-1
+          role-to-assume: ${{ vars.IAM_ROLE }}
+
+      - name: Deploy
+        run: |
+          aws s3 sync dist/ "s3://${{ vars.S3_BUCKET }}/frontend/" --exclude "*.map" --no-progress
+          aws cloudfront create-invalidation --distribution-id "${{ vars.CF_DISTRIBUTION_ID }}" --paths "/*"
