@@ -10,9 +10,7 @@ function Source({ id, icon, name, selectedTab }) {
   const tabRef = useRef(null);
 
   useEffect(() => {
-    console.log({ selectedTab, id });
     if (selectedTab === id) {
-      console.log('scroll');
       tabRef?.current?.scrollIntoView({
         behavior: 'smooth',
         block: 'center',
@@ -35,7 +33,6 @@ function Source({ id, icon, name, selectedTab }) {
 export function SearchSources() {
   const location = useLocation();
   const { namespaces } = parseUrlParams(location.search);
-  console.log({ namespaces });
   const defaultValue = namespaces?.length === 1 ? namespaces[0] : 'all';
   return (
     <ScrollArea h="40">

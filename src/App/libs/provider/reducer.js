@@ -22,12 +22,6 @@ export function createStore(set) {
   };
 }
 
-function toggleOption(allOptions, current, item) {
-  return allOptions
-    .map(({ id }) => id)
-    .filter((id) => (id === item) !== current.includes(id));
-}
-
 function setFilters(state, filters) {
   return Object.entries(filters).reduce((result, [key, value]) => {
     switch (key) {
@@ -58,13 +52,6 @@ function toggleNamespace(state, namespace) {
     );
   }
   return setNamespaces(state, [namespace]);
-  let namespaces = toggleOption(ALL_NAMESPACES, state.namespaces, namespace);
-  console.log({ namespaces });
-  if (namespaces.length === 0)
-    namespaces = ALL_NAMESPACES.map(({ id }) => id).filter(
-      (id) => id !== namespace,
-    );
-  return setNamespaces(state, namespaces);
 }
 
 function summaryAppend(state, summary) {
