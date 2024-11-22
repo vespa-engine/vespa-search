@@ -22,12 +22,6 @@ export function createStore(set) {
   };
 }
 
-function toggleOption(allOptions, current, item) {
-  return allOptions
-    .map(({ id }) => id)
-    .filter((id) => (id === item) !== current.includes(id));
-}
-
 function setFilters(state, filters) {
   return Object.entries(filters).reduce((result, [key, value]) => {
     switch (key) {
@@ -51,12 +45,13 @@ function setNamespaces(state, namespaces) {
 }
 
 function toggleNamespace(state, namespace) {
-  let namespaces = toggleOption(ALL_NAMESPACES, state.namespaces, namespace);
-  if (namespaces.length === 0)
-    namespaces = ALL_NAMESPACES.map(({ id }) => id).filter(
-      (id) => id !== namespace,
+  if (namespace === 'all') {
+    return setNamespaces(
+      state,
+      ALL_NAMESPACES.map(({ id }) => id),
     );
-  return setNamespaces(state, namespaces);
+  }
+  return setNamespaces(state, [namespace]);
 }
 
 function summaryAppend(state, summary) {

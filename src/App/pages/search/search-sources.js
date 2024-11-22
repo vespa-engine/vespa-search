@@ -1,34 +1,54 @@
-import React from 'react';
-import { Button, Group } from '@mantine/core';
+import React, { useEffect, useRef } from 'react';
+import { ScrollArea, Tabs } from '@mantine/core';
+import { useLocation } from 'react-router-dom';
 import { ALL_NAMESPACES, useSearchContext } from 'App/libs/provider';
 import { Icon } from 'App/components';
-import { useMobile } from 'App/hooks';
+import { parseUrlParams } from 'App/libs/provider/url-params';
 
-function Source({ id, icon, name }) {
+function Source({ id, icon, name, selectedTab }) {
   const toggleNamespace = useSearchContext((ctx) => ctx.toggleNamespace);
-  const selected = useSearchContext((ctx) => ctx.namespaces.includes(id));
-  const isMobile = useMobile();
+  const tabRef = useRef(null);
+
+  useEffect(() => {
+    if (selectedTab === id) {
+      tabRef?.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+    }
+  }, [id, selectedTab]);
+
   return (
-    <Button
-      leftSection={<Icon name={icon} />}
-      color={selected ? 'green' : 'gray'}
-      variant={selected ? 'filled' : 'subtle'}
+    <Tabs.Tab
+      value={id}
       onClick={() => toggleNamespace(id)}
-      size={isMobile ? 'compact-xs' : 'xs'}
-      radius="xl"
+      leftSection={<Icon name={icon} />}
+      ref={tabRef}
     >
       {name}
-    </Button>
+    </Tabs.Tab>
   );
 }
 
 export function SearchSources() {
-  const isMobile = useMobile();
+  const location = useLocation();
+  const { namespaces } = parseUrlParams(location.search);
+  const defaultValue = namespaces?.length === 1 ? namespaces[0] : 'all';
   return (
-    <Group justify="center" gap={isMobile ? 'xs' : 'md'}>
-      {ALL_NAMESPACES.map(({ id, name, icon }) => (
-        <Source key={id} id={id} name={name} icon={icon} />
-      ))}
-    </Group>
+    <ScrollArea h="40">
+      <Tabs defaultValue={defaultValue}>
+        <Tabs.List style={{ flexWrap: 'nowrap' }}>
+          {ALL_NAMESPACES.map(({ id, name, icon }) => (
+            <Source
+              key={id}
+              id={id}
+              name={name}
+              icon={icon}
+              selectedTab={defaultValue}
+            />
+          ))}
+        </Tabs.List>
+      </Tabs>
+    </ScrollArea>
   );
 }
