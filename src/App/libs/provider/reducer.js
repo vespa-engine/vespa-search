@@ -51,7 +51,15 @@ function setNamespaces(state, namespaces) {
 }
 
 function toggleNamespace(state, namespace) {
+  if (namespace === 'all') {
+    return setNamespaces(
+      state,
+      ALL_NAMESPACES.map(({ id }) => id),
+    );
+  }
+  return setNamespaces(state, [namespace]);
   let namespaces = toggleOption(ALL_NAMESPACES, state.namespaces, namespace);
+  console.log({ namespaces });
   if (namespaces.length === 0)
     namespaces = ALL_NAMESPACES.map(({ id }) => id).filter(
       (id) => id !== namespace,
