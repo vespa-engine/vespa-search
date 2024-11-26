@@ -52,7 +52,7 @@ export function AbstractDisclaimer() {
           By showing, you consent to share data with OpenAI. The AI-generated
           abstract may have biases or inaccuracies. See <DisclaimerDetails />{' '}
           for more details. For the traditional search{' '}
-          <Link to="https://docs.vespa.ai">docs.search.ai</Link>.
+          <Link to="https://docs.vespa.ai">docs.vespa.ai</Link>.
         </Text>
       </Stack>
     </Stack>
