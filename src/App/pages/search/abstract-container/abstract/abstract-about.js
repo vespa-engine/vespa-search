@@ -15,23 +15,23 @@ export function AbstractAbout() {
   return (
     <Stack>
       <Text size="sm" c="var(--high-contrast-text)" fw={fontWeightBold}>
-        About the abstract
+        About the answer
       </Text>
       <Text size="sm">
-        This abstract is AI-generated, based on your query and search results.
-        By submitting a query, you agree to share data with OpenAI, governed by
+        This answer is AI-generated, based on your query and search results. By
+        submitting a query, you agree to share data with OpenAI, governed by
         theirs{' '}
         <Link to="https://openai.com/policies/terms-of-use">Terms of Use</Link>{' '}
         and{' '}
         <Link to="https://openai.com/policies/privacy-policy">
           Privacy Policy
         </Link>
-        . Note that abstracts may contain inaccuracies or unintended biases and
+        . Note that answers may contain inaccuracies or unintended biases and
         shouldn&apos;t serve as a substitute for professional advice in medical,
         legal, financial, or other domains.{' '}
         <Text span>
           Click <Anchor onClick={() => setValue(false)}>here</Anchor> to revoke
-          showing the abstract.
+          showing the answer.
         </Text>
       </Text>
     </Stack>

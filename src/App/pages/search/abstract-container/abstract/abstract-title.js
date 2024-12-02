@@ -28,9 +28,9 @@ export function AbstractTitle() {
         <Popover.Dropdown>
           <Container size={isMobile ? '55vw' : 'xs'}>
             <Text size={isMobile ? 'xs' : 'sm'}>
-              The abstract&apos;s accuracy relies on your query and the search
+              The answer&apos;s accuracy relies on your query and the search
               outcome. Irrelevant query context might influence results, and
-              answers vary based on sources used. Abstracts aren&apos;t suitable
+              answers vary based on sources used. Answers aren&apos;t suitable
               for regulatory or legal purposes and shouldn&apos;t replace
               professional advice in medical, legal, or financial areas.
             </Text>
