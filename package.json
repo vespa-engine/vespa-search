@@ -7,7 +7,7 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0"
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
   },
   "dependencies": {
     "react": "^18",
@@ -34,10 +34,11 @@
     "eslint-import-resolver-alias": "^1",
     "eslint-plugin-import": "^2",
     "eslint-plugin-prettier": "^5",
-    "eslint-plugin-react": "^7",
-    "eslint-plugin-react-hooks": "^4",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5",
     "eslint-plugin-unused-imports": "^3",
     "file-saver": "^2",
+    "globals": "^17.3.0",
     "lodash": "^4",
     "marked": "^10.0.0",
     "postcss": "^8",
