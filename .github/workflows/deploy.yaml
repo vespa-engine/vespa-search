@@ -62,5 +62,10 @@ jobs:
 
       - name: Deploy
         run: |
-          aws s3 sync dist/ "s3://${{ vars.S3_BUCKET }}/frontend/" --exclude "*.map" --no-progress
+          aws s3 sync dist/ "s3://${{ vars.S3_BUCKET }}/frontend/" \
+            --exclude "*.map" --exclude "*.html" \
+            --cache-control "public, max-age=31536000, immutable" \
+            --no-progress
+          aws s3 cp dist/index.html "s3://${{ vars.S3_BUCKET }}/frontend/index.html" \
+            --cache-control "public, max-age=300, must-revalidate"
           aws cloudfront create-invalidation --distribution-id "${{ vars.CF_DISTRIBUTION_ID }}" --paths "/*"
